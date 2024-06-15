@@ -17,7 +17,7 @@ const gutter = [20, 20] as Gutter | [Gutter, Gutter]
 
 const Model = ReportModel
 
-const Analytics = () => {
+const Calculations = () => {
   const { currentUser } = useContext(CurrentUserContext)
 
   const [reportResults, setReportResults] = useState<ResultCalculate>(
@@ -66,7 +66,7 @@ const Analytics = () => {
                     title={`${
                       report.initial_data?.sector || 'Без отрасли'
                     } от ${dateFormatter({
-                      date: report?.created_at,
+                      date: report?.created_at || new Date(),
                     })}`}
                     hoverable
                     extra={
@@ -100,4 +100,4 @@ const Analytics = () => {
   )
 }
 
-export default Analytics
+export default Calculations
