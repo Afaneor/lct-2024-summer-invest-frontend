@@ -80,7 +80,13 @@ const PageWrapper: FCC<PageWrapperProps> = ({
             <Col {...colSizes}>{tabsContainer}</Col>
           </Row>
         </Col>
-        <Col xs={24} lg={16}>
+        <Col
+          xs={24}
+          lg={16}
+          style={{
+            padding: '24px 0',
+          }}
+        >
           {children}
         </Col>
       </Row>

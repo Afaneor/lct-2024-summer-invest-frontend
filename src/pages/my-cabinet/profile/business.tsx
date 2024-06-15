@@ -35,8 +35,7 @@ const mapping = [
 ]
 
 const blockStyle = {
-  marginTop: 40,
-  marginBottom: 20,
+  margin: '0 0 20px 0',
 }
 
 const Model = BusinessModel
@@ -144,7 +143,7 @@ const MyProfileBusiness = () => {
                 />
               </Col>
             </Row>
-            <Row style={blockStyle}>
+            <Row>
               <Col span={24}>
                 <BebasNeueTitle title='Ваши организации' level={2} />
               </Col>
