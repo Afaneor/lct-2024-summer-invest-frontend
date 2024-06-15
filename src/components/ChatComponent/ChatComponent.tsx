@@ -17,11 +17,11 @@ interface ChatComponentProps {
 }
 
 const ChatComponent: FCC<ChatComponentProps> = () => {
-  const { setNewFilter, setIsOpen, isOpen } = useContext(ChatContext)
+  const { setNewFilter, setIsOpen, isOpen, filter } = useContext(ChatContext)
   const router = useRouter()
   const handleApplyFilter = (
     key: keyof typeof EntityTypeEnum,
-    filter?: Record<string, any>
+    newFilter?: Record<string, any>
   ) => {
     let url = '/'
     switch (key) {
@@ -37,7 +37,10 @@ const ChatComponent: FCC<ChatComponentProps> = () => {
       default:
         break
     }
-    setNewFilter(filter)
+    setNewFilter({
+      ...filter,
+      [key]: newFilter,
+    })
     router.push(url)
   }
   return (

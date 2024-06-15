@@ -2,6 +2,7 @@ import { List } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 
+import type { EntityKeyEnum } from '@/chat/models/Message'
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { Links } from '@/components/Header/Links'
@@ -39,8 +40,12 @@ const Requests = () => {
   const { setNewFilter } = useContext(ChatContext)
   const { fileDownload, isLoading } = useFileDownload()
 
-  const handleGoShow = (filterObj: Record<string, any>, link: string) => {
-    setNewFilter(filterObj)
+  const handleGoShow = (
+    key: keyof typeof EntityKeyEnum,
+    filterObj: Record<string, any>,
+    link: string
+  ) => {
+    setNewFilter({ [key]: filterObj })
     router.push(link)
   }
 
@@ -50,6 +55,7 @@ const Requests = () => {
       name: 'Заявка на подбор',
     })
   }
+
   return (
     <MyProfileLayout>
       <FetchMoreItemsComponent
@@ -67,14 +73,26 @@ const Requests = () => {
                 isLoadingDownloadReport={isLoading}
                 createdAt={item.created_at.value}
                 onShowInvestmentObjects={() =>
-                  handleGoShow(invesFakeFilter, `${Links.SMART_ASSISTANT.href}`)
+                  handleGoShow(
+                    'investment_object',
+                    invesFakeFilter,
+                    `${Links.SMART_ASSISTANT.href}`
+                  )
                 }
                 onDownloadReport={() => handleDownloadFile(item.id.value)}
                 onShowSupport={() =>
-                  handleGoShow(supportsFakeFilter, `${Links.SUPPORTS.href}`)
+                  handleGoShow(
+                    'service_support',
+                    supportsFakeFilter,
+                    `${Links.SUPPORTS.href}`
+                  )
                 }
                 onShowFAQ={() =>
-                  handleGoShow(faqFakeFilter, `${Links.FAQ.href}`)
+                  handleGoShow(
+                    'category_problem',
+                    faqFakeFilter,
+                    `${Links.FAQ.href}`
+                  )
                 }
               />
             )}

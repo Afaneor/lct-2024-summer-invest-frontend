@@ -9,6 +9,7 @@ import { PageWrapper } from '@/components/PageWrapper'
 import { SearchInput } from '@/components/SearchInput'
 import { SupportCard } from '@/components/SupportCard'
 import { SupportFiltersCard } from '@/components/SupportFiltersCard'
+import { useEntityTypeFilter } from '@/hooks/useEntityTypeFilter'
 import { Meta } from '@/layouts/Meta'
 import type { SupportModelProps } from '@/models'
 import { SupportModel } from '@/models'
@@ -19,6 +20,11 @@ const Model = SupportModel
 
 const Supports = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
+  const { shortFilter, handleSetFilter } = useEntityTypeFilter(
+    'service_support',
+    filter,
+    setChatFilter
+  )
 
   return (
     <Main
@@ -33,9 +39,7 @@ const Supports = () => {
           <Row>
             <Col xs={24}>
               <SearchInput
-                onSearch={(search) => {
-                  setChatFilter({ search })
-                }}
+                onSearch={(searchStr) => handleSetFilter({ search: searchStr })}
               />
             </Col>
           </Row>
@@ -44,18 +48,16 @@ const Supports = () => {
         <Row gutter={[20, 20]}>
           <Col xs={24} md={8}>
             <SupportFiltersCard
-              support_level={filter.support_level}
-              support_type={filter.support_type}
-              msp_roster={filter.msp_roster}
-              economic_activity_name={filter.economic_activity_name}
-              onChange={(obj) => {
-                setChatFilter(obj)
-              }}
+              support_level={shortFilter?.support_level}
+              support_type={shortFilter?.support_type}
+              msp_roster={shortFilter?.msp_roster}
+              economic_activity_name={shortFilter?.economic_activity_name}
+              onChange={handleSetFilter}
             />
           </Col>
           <Col xs={24} md={16}>
             <FetchMoreItemsComponent
-              defFilters={filter}
+              defFilters={shortFilter}
               model={Model}
               renderItems={({ data: rowData }) => (
                 <Row gutter={[20, 20]}>
