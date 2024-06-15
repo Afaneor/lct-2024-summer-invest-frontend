@@ -1,7 +1,6 @@
 import { Col, Row } from 'antd'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 import { BebasNeueTitle } from '@/components'
@@ -15,7 +14,6 @@ import styles from './Header.module.scss'
 import { FirstLineLinks, Links } from './Links'
 
 export const Header: FCC = () => {
-  const router = useRouter()
   const isScrolled = useWindowScroll(50)
   return (
     <header
@@ -28,8 +26,6 @@ export const Header: FCC = () => {
         justify='center'
         style={{
           width: '100%',
-          opacity: isScrolled ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out',
         }}
       >
         <Col
@@ -43,18 +39,13 @@ export const Header: FCC = () => {
         >
           <Row>
             {FirstLineLinks.map((link) => (
-              <div
+              <Link
                 key={link.href}
-                className={`${
-                  router.pathname === link.href || router.asPath === link.href
-                    ? styles.activeLink
-                    : ''
-                } ${styles.navLink}`}
+                className={styles.firstLineLink}
+                href={link.href}
               >
-                <Link className={styles.firstLineLink} href={link.href}>
-                  {link.title}
-                </Link>
-              </div>
+                {link.title}
+              </Link>
             ))}
           </Row>
         </Col>
@@ -74,11 +65,13 @@ export const Header: FCC = () => {
           }}
         >
           <div className={styles.secondLineLinksContainer}>
-            {Links.map((link) => (
-              <Link key={link.href} className={styles.link} href={link.href}>
-                {link.title}
-              </Link>
-            ))}
+            {Object.values(Links)
+              .filter((_l) => _l.isTab)
+              .map((link) => (
+                <Link key={link.href} className={styles.link} href={link.href}>
+                  {link.title}
+                </Link>
+              ))}
             <div className={styles.authIconBtn}>
               <AuthComponent />
             </div>

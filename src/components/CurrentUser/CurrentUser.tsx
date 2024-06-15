@@ -7,8 +7,12 @@ import { Button, Card, Col, Dropdown, Row, Space, Typography } from 'antd'
 import Link from 'next/link'
 import React, { useCallback } from 'react'
 
+import { Links } from '@/components/Header/Links'
+import { IconAsButton } from '@/components/IconAsButton'
 import type { UsersModelProps } from '@/models'
 import { useLogout } from '@/services/auth/hooks'
+
+import styles from './CurrentUser.module.scss'
 
 const { Text } = Typography
 
@@ -38,6 +42,13 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
     () => (
       <Card>
         <Space direction='vertical'>
+          <Link
+            href={`${Links?.MY_PROFILE?.href}${Links?.PROFILE?.href}${Links?.INFO?.href}`}
+          >
+            <Button type='text' icon={<UserOutlined />}>
+              Профиль
+            </Button>
+          </Link>
           <Link href='/calculations'>
             <Button type='text' icon={<PieChartOutlined />}>
               Мои расчеты
@@ -59,16 +70,26 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
     []
   )
   return (
-    <Row gutter={8} data-testid='test-CurrentUser'>
+    <Row>
       <Col xs={0} md={24}>
         <Dropdown
           placement='bottom'
           trigger={['click']}
           dropdownRender={DropdownRender}
         >
-          <Button type='text' onClick={(e) => e.stopPropagation()}>
-            <UserOutlined /> <UserName currentUser={currentUser} />
-          </Button>
+          <Space
+            className={styles.spaceRow}
+            direction='horizontal'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <IconAsButton
+              icon={UserOutlined}
+              style={{
+                fontSize: 16,
+              }}
+            />
+            <UserName currentUser={currentUser} />
+          </Space>
         </Dropdown>
       </Col>
       <Col md={0}>

@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 import React from 'react'
 
 import { Header } from '@/components/Header'
-import { SmoothOpacity } from '@/components/SmoothOpacity'
 
 const { Content } = Layout
 
@@ -24,9 +23,7 @@ const Main = (props: IMainProps) => {
         <Content style={styleContent}>
           <Row justify='center'>
             <Col span={24}>
-              <SmoothOpacity>
-                <main>{props.children}</main>
-              </SmoothOpacity>
+              <main>{props.children}</main>
             </Col>
           </Row>
         </Content>

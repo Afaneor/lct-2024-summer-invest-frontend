@@ -42,6 +42,9 @@
   .authIconBtn {
     color: white !important;
   }
+  span {
+    color: white !important;
+  }
 }
 
 .authSection {
@@ -81,9 +84,10 @@
   font-size: 14px !important;
   box-sizing: inherit !important;
   background-color: transparent !important;
-  color: inherit !important;
+  color: #3a3a3a !important;
   text-decoration: none;
   margin-right: 32px;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .secondLineLinksContainer {
