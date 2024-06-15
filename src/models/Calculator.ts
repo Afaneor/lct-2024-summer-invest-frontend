@@ -1,5 +1,4 @@
 import type { HoveInfoProps } from '@/components/CalcMap/types'
-import type { AreaModelProps } from '@/models/Area'
 import type { BaseModelProps } from '@/models/Base'
 import type { EquipmentModelProps } from '@/models/Equipment'
 import type { OfferModelProps } from '@/models/Offer'
@@ -47,7 +46,6 @@ export interface ResultCalculate extends BaseModelProps {
   user: UsersModelProps
   initial_data: CalculatorModelProps
   context: ResultCalculateContext
-  areas: AreaModelProps[]
   supports: SupportModelProps[]
   offers: OfferModelProps[]
   tags: string[]

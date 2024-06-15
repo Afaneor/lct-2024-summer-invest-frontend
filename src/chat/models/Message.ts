@@ -14,6 +14,17 @@ export interface NewMessageModelProps {
 }
 
 export interface MessageModelProps {
+  id: number | string
+  owner_type: string
+  selection_request?: number
+  text: string
+  parent?: number
+  permission_rules?: string
+  created_at?: string
+  updated_at?: string
+}
+
+export interface MessageModelFilters {
   id: string | number
   created_at?: string
   updated_at?: string
@@ -30,6 +41,10 @@ export interface MessageModelProps {
   text: string
   created_at_date?: string
   updated_at_date?: string
+  ordering?: string
+  search?: string
+  limit?: number
+  offset?: number
 }
 
 export class MessageModel {

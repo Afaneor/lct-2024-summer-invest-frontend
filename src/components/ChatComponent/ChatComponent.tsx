@@ -15,7 +15,16 @@ const ChatComponent: FCC<ChatComponentProps> = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   return (
     <>
-      <MainChatBtn onClick={() => setIsOpen(!isOpen)} isActive={isOpen} />
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+        }}
+      >
+        <MainChatBtn onClick={() => setIsOpen(!isOpen)} isActive={isOpen} />
+      </div>
       {isOpen ? (
         <div className={clsx(styles.container, isOpen && styles.show)}>
           <SmartChat />

@@ -1,5 +1,5 @@
 /**
- * Получаем человекопонятное название чойса
+ * хук для получения опций для полей из API
  */
 import { useQueryCache } from 'src/hooks/useQueryCache'
 
@@ -8,9 +8,28 @@ export interface Choice {
   displayName: string
 }
 
+/**
+ * Получает опции для полей из API
+ * @param from - название модели qKey в кэше реакт-квери
+ * @param mapping - массив названий полей, для которых нужно получить опции, также задает порядок полей
+ */
 export const useApiOptions = (from: string, mapping?: string[]) => {
   const options: Record<string, any> = useQueryCache(`${from}Options`)
-
+  /**
+   * Объединяет опции из API с данными
+   * В результате возвращает объект, где ключи - это названия полей, а значения - объекты данных
+   * {
+   *   field: {
+   *     label: 'field',
+   *     value: 'value'
+   *     max_length: 255,
+   *     read_only: false,
+   *     required: false,
+   *     type: 'string' | 'choice' | 'nested object'
+   *   }
+   * }
+   * @param data
+   */
   const mergeOptionsIntoData = (data: Record<string, any>) => {
     const result = {} as Record<string, any>
     const keys = mapping?.length ? mapping : Object.keys(data)

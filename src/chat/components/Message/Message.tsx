@@ -12,9 +12,6 @@ import { WhoOwnerType } from '@/chat/types'
 import styles from './style.module.scss'
 
 interface MessageProps extends MessageModelProps {
-  id: number | string
-  text: string
-  datetime?: string
   isLoading?: boolean
 }
 

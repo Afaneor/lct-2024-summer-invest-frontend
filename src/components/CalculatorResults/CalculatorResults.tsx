@@ -9,10 +9,9 @@ import {
   Row,
   Spin,
 } from 'antd'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
 import { LoginOrRegisterToGetPersonInfo } from '@/components/LoginOrRegisterToGetPersonInfo'
-import { SpecialForYou } from '@/components/SpecialForYou'
 import { useFileDownload } from '@/hooks/useFileDownload'
 import { useMoneyFormat } from '@/hooks/useMoneyFormat'
 import { useQueryCache } from '@/hooks/useQueryCache'
@@ -50,15 +49,6 @@ export const CalculatorResults: FCC<CalculatorPreviewProps> = ({
       .finally(() => setIsLoading(false))
   }
   const toMillion = (val: number) => val * 1000
-
-  const showSpecialForYou = useMemo(
-    () =>
-      data &&
-      (results.areas?.length ||
-        results.offers?.length ||
-        results?.supports?.length),
-    [results]
-  )
 
   return (
     <Modal
@@ -175,17 +165,6 @@ export const CalculatorResults: FCC<CalculatorPreviewProps> = ({
             )}
           </Descriptions.Item>
         </Descriptions>
-        {showSpecialForYou ? (
-          <Row>
-            <Col span={24}>
-              <SpecialForYou
-                areas={results.areas}
-                offers={results.offers}
-                supports={results.supports}
-              />
-            </Col>
-          </Row>
-        ) : null}
         {!data ? (
           <Row justify='center'>
             <Divider />

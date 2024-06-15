@@ -11,23 +11,25 @@ import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/
 import { PageWrapper } from '@/components/PageWrapper'
 import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
-import type { AreaModelProps } from '@/models'
-import { AreaModel } from '@/models'
+import type { InvestmentObjectsModelProps } from '@/models/InvestmentObjects'
+import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import { Main } from '@/templates/Main'
+import type { ModelOptionProps } from '@/types'
 
 export const ItemsCard = ({ title, preview_image, address, ...rest }: any) => (
   <Card
     cover={<img style={{ height: 300 }} alt={title} src={preview_image} />}
     {...rest}
   >
-    <BebasNeueTitle title={title} level={3} />
+    <BebasNeueTitle title={title} ellipsis level={3} />
 
     <Descriptions column={1}>
       <Descriptions.Item>{address}</Descriptions.Item>
     </Descriptions>
   </Card>
 )
-const Model = AreaModel
+
+const Model = InvestmentObjectsModel
 const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
@@ -59,20 +61,23 @@ const SmartHelper = () => {
           lengthPostfixPlural='площадок'
           renderItems={(rowData) => (
             <Row gutter={[40, 20]}>
-              {rowData?.map((area: AreaModelProps) => (
-                <Col key={area.id} xs={24} md={8}>
-                  <Link target='_blank' href={area.site}>
-                    <ItemsCard
-                      hoverable
-                      title={area.title}
-                      preview_image={area.preview_image}
-                      territorial_location={area.territorial_location}
-                      address={area.address}
-                      text={area.text}
-                    />
-                  </Link>
-                </Col>
-              ))}
+              {rowData?.map(
+                (
+                  investmentObject: ModelOptionProps<InvestmentObjectsModelProps>
+                ) => (
+                  <Col key={investmentObject.id.value} xs={24} md={8}>
+                    <Link target='_blank' href={investmentObject.url.value}>
+                      <ItemsCard
+                        key={investmentObject.id.value}
+                        hoverable
+                        title={investmentObject.name.value}
+                        preview_image={investmentObject.main_photo_url.value}
+                        territorial_location='investmentObject.object_type.value'
+                      />
+                    </Link>
+                  </Col>
+                )
+              )}
             </Row>
           )}
         />

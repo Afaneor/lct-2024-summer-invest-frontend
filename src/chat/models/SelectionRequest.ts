@@ -14,7 +14,7 @@ export interface SelectionRequestActualProps {
   created_at: string
   updated_at: string
 }
-export interface SelectionRequestModelProps {
+export interface SelectionRequestModelFilters {
   id: string | number
   created_at: string
   updated_at: string
@@ -35,6 +35,10 @@ export interface SelectionRequestModelProps {
   is_actual: string
   name: string
   slug: string
+  ordering?: string
+  search?: string
+  limit?: number
+  offset?: number
 }
 
 export class SelectionRequestModel {

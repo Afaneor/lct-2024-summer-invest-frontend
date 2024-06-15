@@ -51,7 +51,12 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
       <Spin spinning={isLoading}>{renderItems(rData)}</Spin>
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
-          <Button type='dashed' loading={isFetching} onClick={fetchNextPage}>
+          <Button
+            type='dashed'
+            danger
+            loading={isFetching}
+            onClick={fetchNextPage}
+          >
             Показать еще
           </Button>
         </Row>
