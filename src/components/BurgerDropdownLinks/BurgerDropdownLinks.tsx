@@ -5,21 +5,25 @@ import Link from 'next/link'
 import React, { useMemo } from 'react'
 import type { FCC } from 'src/types'
 
-import { Links } from '@/components/Header/Links'
+import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
 
 interface BurgerDropdownLinksProps extends ButtonProps {
   dropdownRender?: React.ReactNode
+  links: any[]
 }
 
 export const BurgerDropdownLinks: FCC<BurgerDropdownLinksProps> = ({
   dropdownRender,
+  links,
 }) => {
   const items: MenuProps['items'] = useMemo(
     () =>
-      Object.values(Links)?.map((link) => ({
+      links?.map((link) => ({
         label: (
           <Link href={link.href}>
-            <Button type='link'>{link.title}</Button>
+            <Button type='link'>
+              <BebasNeueTitle level={5} title={link.title} />
+            </Button>
           </Link>
         ),
         key: link.href,
@@ -34,6 +38,7 @@ export const BurgerDropdownLinks: FCC<BurgerDropdownLinksProps> = ({
     >
       <Button
         shape='circle'
+        type='text'
         icon={<MenuOutlined />}
         onClick={(e) => e.preventDefault()}
       />

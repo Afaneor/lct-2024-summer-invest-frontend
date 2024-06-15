@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import clsx from 'clsx'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { BebasNeueTitle } from '@/components'
 import { AuthComponent } from '@/components/AuthComponent'
@@ -15,6 +15,10 @@ import { FirstLineLinks, Links } from './Links'
 
 export const Header: FCC = () => {
   const isScrolled = useWindowScroll(50)
+  const filteredLInks = useMemo(
+    () => Object.values(Links).filter((_l) => _l.isTab),
+    [Links]
+  )
   return (
     <header
       className={clsx(
@@ -50,8 +54,10 @@ export const Header: FCC = () => {
           </Row>
         </Col>
 
-        <Col xl={0}>
-          <BurgerDropdownLinks />
+        <Col xl={0} xs={24}>
+          <Row justify='end'>
+            <BurgerDropdownLinks links={filteredLInks} />
+          </Row>
         </Col>
       </Row>
       <Row justify='center'>
@@ -64,13 +70,11 @@ export const Header: FCC = () => {
           }}
         >
           <div className={styles.secondLineLinksContainer}>
-            {Object.values(Links)
-              .filter((_l) => _l.isTab)
-              .map((link) => (
-                <Link key={link.href} className={styles.link} href={link.href}>
-                  {link.title}
-                </Link>
-              ))}
+            {filteredLInks.map((link) => (
+              <Link key={link.href} className={styles.link} href={link.href}>
+                {link.title}
+              </Link>
+            ))}
 
             <div className={styles.authIconBtn}>
               <AuthComponent />

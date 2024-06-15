@@ -83,7 +83,13 @@ const SmartHelper = () => {
                 </Col>
               ) : null}
               {rowData?.map((investmentObject) => (
-                <Col key={investmentObject.id.value} xs={24} md={12} lg={8}>
+                <Col
+                  key={investmentObject.id.value}
+                  xs={24}
+                  md={12}
+                  lg={12}
+                  xl={8}
+                >
                   <InvestmentItemsCard
                     id={investmentObject.id.value}
                     href={`${Links.SMART_ASSISTANT.href}/${investmentObject.id.value}`}
