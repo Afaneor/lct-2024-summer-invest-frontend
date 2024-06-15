@@ -65,7 +65,7 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
   )
 
   const rData = useMemo(
-    () => rowData.map((item: any) => mergeOptionsIntoData(item)),
+    () => rowData?.map((item: any) => mergeOptionsIntoData(item)),
     [rowData]
   )
   return (

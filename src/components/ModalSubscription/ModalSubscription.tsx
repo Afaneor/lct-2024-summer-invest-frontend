@@ -1,9 +1,10 @@
 import type { ModalProps } from 'antd'
 import { Form, Input, Modal, Select } from 'antd'
-import React from 'react'
+import React, { useContext } from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 import type {
   SubscriptionDataForFilterProps,
   SubscriptionModelProps,
@@ -18,10 +19,13 @@ interface ModalSubscriptionProps extends ModalProps {
   onCancel: () => void
 }
 
+const borderRadiusNoneStyle = { borderRadius: 0 }
+
 const Model = SubscriptionModel
 
 const ModalSubscription: FCC<ModalSubscriptionProps> = ({ open, onCancel }) => {
   const [form] = Form.useForm()
+  const { currentUser } = useContext(CurrentUserContext)
   const {
     data,
   }: {
@@ -64,7 +68,14 @@ const ModalSubscription: FCC<ModalSubscriptionProps> = ({ open, onCancel }) => {
       onCancel={onCancel}
     >
       <BebasNeueTitle level={3} title='Оформление подписки' />
-      <Form form={form} layout='vertical' name='basic'>
+      <Form
+        form={form}
+        initialValues={{
+          email: currentUser?.email,
+        }}
+        layout='vertical'
+        name='basic'
+      >
         <Form.Item
           label='Выберите тип подписки'
           name='subscription_type'
@@ -86,20 +97,30 @@ const ModalSubscription: FCC<ModalSubscriptionProps> = ({ open, onCancel }) => {
           </Select>
         </Form.Item>
         <Form.Item
-          label='Имя пользователя в Telegram'
-          name='telegram_username'
+          label='Электронная почта'
+          name='email'
           rules={[
             {
+              type: 'email',
+              message: 'Введите корректный адрес электронной почты',
+            },
+            {
               required: true,
-              message: 'Пожалуйста, введите имя пользователя в Telegram',
+              message: 'Пожалуйста, введите адрес электронной почты',
             },
           ]}
         >
           <Input
+            style={borderRadiusNoneStyle}
+            placeholder='name@example.ru'
             size='large'
-            style={{
-              borderRadius: 0,
-            }}
+          />
+        </Form.Item>
+        <Form.Item label='Имя пользователя в Telegram' name='telegram_username'>
+          <Input
+            size='large'
+            placeholder='@username'
+            style={borderRadiusNoneStyle}
             onBlur={(e) => {
               const { value } = e.target
               if (value && value[0] !== '@') {

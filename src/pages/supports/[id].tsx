@@ -62,7 +62,7 @@ const SupportItem = () => {
                   },
                 }}
               >
-                <Collapse ghost size='large'>
+                <Collapse ghost size='large' defaultActiveKey={['description']}>
                   <Collapse.Panel
                     header={<BebasNeueTitle level={4} title={value} />}
                     key={key}

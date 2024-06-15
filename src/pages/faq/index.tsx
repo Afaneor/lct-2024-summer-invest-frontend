@@ -17,7 +17,6 @@ const defFilters = { limit: 1000 }
 const Supports = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
 
-  // const [filter, setFilter] = useFilter({ limit: 1000 })
   const { results, isLoading } = useFetchItems({
     model: Model,
     filter: {

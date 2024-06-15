@@ -22,7 +22,7 @@ export interface BusinessModelProps extends BaseModelProps {
   management_position: string // Должность руководителя, только для компании
   full_opf: string // Полное наименование правовой формы
   short_opf: string // Короткое наименование правовой формы
-  okved: string // ОКВЕД
+  okved_code: string // ОКВЕД
   first_name: string // Имя
   last_name: string // Фамилия
   middle_name: string // Отчество
@@ -61,7 +61,7 @@ export class BusinessModel extends BaseModel {
     'phone',
     'site',
     'address',
-    'okved',
+    'okved_code',
     'type_business',
     'region',
     'city_area',

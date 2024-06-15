@@ -94,7 +94,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
 
   return (
     <Row gutter={[10, 10]}>
-      <Col xs={5}>
+      <Col xs={24} md={5}>
         <Card className={styles.card}>
           <List
             loading={isLoading}
@@ -114,7 +114,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Card>
       </Col>
       {problemSubcategories.length > 0 ? (
-        <Col xs={5}>
+        <Col xs={24} md={5}>
           <Card className={styles.card}>
             <List
               dataSource={problemSubcategories}
@@ -137,7 +137,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Col>
       ) : null}
       {problemThemes.length > 0 ? (
-        <Col xs={5}>
+        <Col xs={24} md={5}>
           <Card className={styles.card}>
             <List
               dataSource={problemThemes}
@@ -155,7 +155,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Col>
       ) : null}
       {problems.length > 0 ? (
-        <Col xs={9}>
+        <Col xs={24} md={9}>
           <Card className={styles.card}>
             <Collapse accordion defaultActiveKey={['1']} ghost>
               {problems.map((problem) => (

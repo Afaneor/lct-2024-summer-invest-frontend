@@ -1,5 +1,4 @@
 import { Card } from 'antd'
-import Link from 'next/link'
 import type { CSSProperties } from 'react'
 import React from 'react'
 import type { FCC } from 'src/types'
@@ -13,18 +12,9 @@ interface SupportCardProps {
   style?: CSSProperties
 }
 
-const SupportCard: FCC<SupportCardProps> = ({ href, title, text, style }) => {
+const SupportCard: FCC<SupportCardProps> = ({ title, text, style }) => {
   return (
-    <Card
-      hoverable
-      title={title}
-      style={{ height: '100%', ...style }}
-      extra={
-        <Link target='_blank' href={href}>
-          Подробнее
-        </Link>
-      }
-    >
+    <Card hoverable title={title} style={{ height: '100%', ...style }}>
       <TruncateText text={text} length={150} />
     </Card>
   )

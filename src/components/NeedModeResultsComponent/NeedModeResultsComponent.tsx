@@ -18,7 +18,7 @@ const NeedModeResultsComponent: FCC<NeedModeResultsComponentProps> = ({
         <Alert
           message={
             <BebasNeueTitle
-              title='Вам понравилось то, что вы нашли?'
+              title='Вам понравилось то, что мы нашли?'
               style={{
                 marginBottom: 0,
               }}
