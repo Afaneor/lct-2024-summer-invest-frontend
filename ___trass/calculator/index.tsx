@@ -3,7 +3,6 @@ import { Anchor, Button, Col, Form, Row } from 'antd'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useMemo, useState } from 'react'
-import type { FCC } from 'src/types'
 
 import { FormItem } from '@/components'
 import AccountingFormItem from '@/components/AccountingFormItem/AccountingFormItem'
@@ -32,6 +31,7 @@ import type {
 import { CalculatorModel } from '@/models/Calculator'
 import { useChoices, useCreateItem } from '@/services/base/hooks'
 import { Main } from '@/templates/Main'
+import type { FCC } from '@/types'
 
 const anchorItems = [
   {

@@ -1,5 +1,4 @@
 import {
-  CalculatorOutlined,
   HomeOutlined,
   LaptopOutlined,
   SketchOutlined,
@@ -16,7 +15,6 @@ export interface LinkProps {
 
 export interface LinksKeys {
   HOME: LinkProps
-  CALCULATOR: LinkProps
   SMART_ASSISTANT: LinkProps
   OFFERS: LinkProps
   SUPPORTS: LinkProps
@@ -34,12 +32,6 @@ export const Links: LinksKeys = {
     title: 'Дом',
     href: '/',
     icon: <HomeOutlined />,
-    isTab: true,
-  },
-  CALCULATOR: {
-    title: 'Калькулятор',
-    href: '/calculator',
-    icon: <CalculatorOutlined />,
     isTab: true,
   },
   SMART_ASSISTANT: {
@@ -66,11 +58,6 @@ export const Links: LinksKeys = {
     icon: <SketchOutlined />,
     isTab: true,
   },
-  // ANALYTICS: {
-  //   title: 'Аналитика',
-  //   href: '/analytics',
-  //   icon: <SketchOutlined />,
-  // },
   BLOG: {
     title: 'Блог',
     href: '/blog',
