@@ -46,7 +46,6 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
               Профиль
             </Button>
           </Link>
-
           <ToCompareButtonWithTooltip />
           <Button
             type='text'

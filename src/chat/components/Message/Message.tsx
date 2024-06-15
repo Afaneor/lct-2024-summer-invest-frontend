@@ -32,7 +32,7 @@ export const Message: FCC<MessageProps> = ({
   owner_type,
   isLoading,
   onApplyFilter,
-  filter,
+  bot_filter,
 }) => {
   const { dateFormatter } = useDateTimePrettyStr()
   const currentJustify = useMemo(
@@ -56,9 +56,9 @@ export const Message: FCC<MessageProps> = ({
                 {isLoading ? <Spin size='small' /> : null}
                 <Markdown content={text} />
               </Space>
-              {!isEmpty(filter) ? (
+              {!isEmpty(bot_filter) ? (
                 <Space direction='vertical'>
-                  {Object.entries(filter).map(([key, filterValue]: any) => (
+                  {Object.entries(bot_filter).map(([key, filterValue]: any) => (
                     <Button
                       key={key}
                       danger

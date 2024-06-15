@@ -5,6 +5,7 @@ import CascadeComponent from '@/components/CategoriesCascader/CategoriesCascader
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { PageWrapper } from '@/components/PageWrapper'
 import { SearchInput } from '@/components/SearchInput'
+import { useEntityTypeFilter } from '@/hooks/useEntityTypeFilter'
 import { Meta } from '@/layouts/Meta'
 import { ProblemCategoriesModel } from '@/models/ProblemCategories'
 import { useFetchItems } from '@/services/base/hooks'
@@ -24,6 +25,13 @@ const Supports = () => {
       ...filter,
     },
   })
+
+  const { shortFilter, handleSetFilter } = useEntityTypeFilter(
+    'category_problem',
+    filter,
+    setChatFilter
+  )
+
   return (
     <Main
       meta={
@@ -37,9 +45,9 @@ const Supports = () => {
           <Row>
             <Col xs={24}>
               <SearchInput
-                searchStr={filter?.search}
+                searchStr={shortFilter?.search}
                 onSearch={(search) => {
-                  setChatFilter({ search })
+                  handleSetFilter({ search })
                 }}
               />
             </Col>
@@ -49,7 +57,7 @@ const Supports = () => {
         <CascadeComponent
           data={results}
           isLoading={isLoading}
-          search={filter?.search}
+          search={shortFilter?.search}
         />
       </PageWrapper>
     </Main>

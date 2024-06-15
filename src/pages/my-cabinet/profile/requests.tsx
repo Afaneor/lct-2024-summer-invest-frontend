@@ -2,6 +2,7 @@ import { List } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 
+import type { EntityKeyEnum } from '@/chat/models/Message'
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { Links } from '@/components/Header/Links'
@@ -14,23 +15,6 @@ import withAuth from '@/pages/HOC'
 import MyProfileLayout from '@/templates/MyProfileLayout'
 import type { ModelOptionProps } from '@/types'
 
-const invesFakeFilter = {
-  economic_activity_name: ['Пункты выдачи заказов'],
-  // transaction_form_type: ['Продажа'],
-  // specialized_site_is_free_customs_zone_regime: 'Нет',
-  // object_type: ['land_plot'],
-}
-
-const supportsFakeFilter = {
-  support_type: ['Консультационная поддержка'],
-  support_level: ['Региональные меры'],
-  msp_roster: 'Нет',
-}
-
-const faqFakeFilter = {
-  search: 'предприятие',
-}
-
 const Model = SelectionRequestModel
 const Requests = () => {
   const router = useRouter()
@@ -39,8 +23,12 @@ const Requests = () => {
   const { setNewFilter } = useContext(ChatContext)
   const { fileDownload, isLoading } = useFileDownload()
 
-  const handleGoShow = (filterObj: Record<string, any>, link: string) => {
-    setNewFilter(filterObj)
+  const handleGoShow = (
+    key: keyof typeof EntityKeyEnum,
+    filterObj: Record<string, any> | any,
+    link: string
+  ) => {
+    setNewFilter({ [key]: filterObj })
     router.push(link)
   }
 
@@ -50,6 +38,7 @@ const Requests = () => {
       name: 'Заявка на подбор',
     })
   }
+
   return (
     <MyProfileLayout>
       <FetchMoreItemsComponent
@@ -65,16 +54,33 @@ const Requests = () => {
             ) => (
               <RequestListItem
                 isLoadingDownloadReport={isLoading}
+                hasSupportFilter={!!item.bot_filter?.value?.service_support}
+                hasFAQFilter={!!item.bot_filter?.value?.category_problem}
+                hasInvestmentObjectsFilter={
+                  !!item.bot_filter?.value?.investment_object
+                }
                 createdAt={item.created_at.value}
                 onShowInvestmentObjects={() =>
-                  handleGoShow(invesFakeFilter, `${Links.SMART_ASSISTANT.href}`)
+                  handleGoShow(
+                    'investment_object',
+                    item.bot_filter?.value?.investment_object,
+                    `${Links.SMART_ASSISTANT.href}`
+                  )
                 }
                 onDownloadReport={() => handleDownloadFile(item.id.value)}
                 onShowSupport={() =>
-                  handleGoShow(supportsFakeFilter, `${Links.SUPPORTS.href}`)
+                  handleGoShow(
+                    'service_support',
+                    item.bot_filter?.value?.service_support,
+                    `${Links.SUPPORTS.href}`
+                  )
                 }
                 onShowFAQ={() =>
-                  handleGoShow(faqFakeFilter, `${Links.FAQ.href}`)
+                  handleGoShow(
+                    'category_problem',
+                    item.bot_filter?.value?.category_problem,
+                    `${Links.FAQ.href}`
+                  )
                 }
               />
             )}

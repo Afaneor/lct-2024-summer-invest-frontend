@@ -1,4 +1,4 @@
-import type { MessageModelProps } from '@/chat/models/Message'
+import type { EntityKeyEnum, MessageModelProps } from '@/chat/models/Message'
 import type { UsersModelProps } from '@/models/Users'
 import type { PermissionRulesProps } from '@/services/base/types'
 
@@ -20,6 +20,7 @@ export interface SelectionRequestActualProps {
   permission_rules: PermissionRulesProps
   created_at: string
   updated_at: string
+  bot_filter: typeof EntityKeyEnum
 }
 export interface SelectionRequestModelFilters {
   id: string | number

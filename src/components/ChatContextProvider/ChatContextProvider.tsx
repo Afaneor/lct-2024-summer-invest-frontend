@@ -24,14 +24,7 @@ const ChatContextProvider: React.FC<ChatContextProviderProps> = ({
   defaultFilters,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [filter, setFilter, handleSetNewFilter] = useFilter(defaultFilters)
-  const setChatFilter = (newFilter: any) => {
-    setFilter(newFilter)
-  }
-
-  const setNewFilter = (newFilter: any) => {
-    handleSetNewFilter(newFilter)
-  }
+  const [filter, setChatFilter, setNewFilter] = useFilter(defaultFilters)
 
   const value = useMemo(
     () => ({ filter, setChatFilter, setNewFilter, setIsOpen, isOpen }),
