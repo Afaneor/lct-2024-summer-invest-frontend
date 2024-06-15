@@ -46,8 +46,8 @@ build:
     - eval $(ssh-agent -s)
     - ssh-add <(cat $SSH_PRIVATE_KEY)
   script:
-    - ssh $SSH_HOST "cd $DOCKER_COMPOSE_DIR && docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY &&  docker-compose pull frontend "
-    - ssh $SSH_HOST "cd $DOCKER_COMPOSE_DIR && docker-compose up -d frontend"
+    - ssh $SSH_HOST "cd $DOCKER_COMPOSE_DIR && docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY &&  docker compose pull frontend "
+    - ssh $SSH_HOST "cd $DOCKER_COMPOSE_DIR && docker compose down && docker compose up -d"
 
 deploy:
   extends: .deploy
