@@ -1,5 +1,6 @@
 import type { PermissionRulesProps } from '../../services/base/types'
 import type { OwnerType } from '../types'
+import { BaseModel } from './Base'
 import type { MessageModelProps } from './Message'
 import type { ChatUsersModel } from './Users'
 
@@ -41,7 +42,7 @@ export interface SelectionRequestModelFilters {
   offset?: number
 }
 
-export class SelectionRequestModel {
+export class SelectionRequestModel extends BaseModel {
   static modelName = 'selectionRequest'
 
   static url() {

@@ -1,5 +1,6 @@
 import type { PermissionRulesProps } from '../../services/base/types'
 import type { OwnerType } from '../types'
+import { BaseModel } from './Base'
 
 export enum OwnerTypeEnum {
   USER = 'user',
@@ -47,7 +48,7 @@ export interface MessageModelFilters {
   offset?: number
 }
 
-export class MessageModel {
+export class MessageModel extends BaseModel {
   static modelName = 'message'
 
   static url() {

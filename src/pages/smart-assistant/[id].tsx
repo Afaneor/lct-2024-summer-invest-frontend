@@ -24,7 +24,6 @@ const InvestmentObjectItem = () => {
     model,
     id
   )
-  console.log(response)
 
   return (
     <Main
