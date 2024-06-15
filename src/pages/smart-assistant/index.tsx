@@ -2,7 +2,6 @@ import { Col, Row } from 'antd'
 import React, { useContext } from 'react'
 
 import { useScrollIntoViewOnCall } from '@/chat/hooks/useScrollIntoView'
-import { ChatComponent } from '@/components/ChatComponent'
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { Links } from '@/components/Header/Links'
@@ -38,7 +37,6 @@ const SmartAssistant = () => {
         />
       }
     >
-      <ChatComponent />
       <PageWrapper
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'

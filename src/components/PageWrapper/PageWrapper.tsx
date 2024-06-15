@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import type { FCC } from 'src/types'
 
+import { ChatComponent } from '@/components/ChatComponent'
 import { Links } from '@/components/Header/Links'
 import useSplitPathname from '@/hooks/useSplitPathname'
 
@@ -59,6 +60,8 @@ const PageWrapper: FCC<PageWrapperProps> = ({
 
   return (
     <Row className={styles.container} justify='center'>
+      <ChatComponent />
+
       <Col xs={24} className={styles.headerWrapper}>
         <Row justify='center' className='h100'>
           <Col

@@ -9,7 +9,9 @@ export const ChatContext = React.createContext(
     setChatFilter: (rec: Record<string, any>) => void
     setNewFilter: (rec?: Record<string, any>) => void
     setIsOpen: (isOpen: boolean) => void
+    setIsOpenWithMessage: (_isOpen: boolean, message: string) => void
     isOpen: boolean
+    message?: string
   }
 )
 
@@ -25,9 +27,23 @@ const ChatContextProvider: React.FC<ChatContextProviderProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [filter, setChatFilter, setNewFilter] = useFilter(defaultFilters)
+  const [message, setMessage] = useState('')
+
+  const setIsOpenWithMessage = (show: boolean, msg: string) => {
+    setIsOpen(show)
+    setMessage(msg)
+  }
 
   const value = useMemo(
-    () => ({ filter, setChatFilter, setNewFilter, setIsOpen, isOpen }),
+    () => ({
+      filter,
+      setChatFilter,
+      setNewFilter,
+      setIsOpen,
+      isOpen,
+      setIsOpenWithMessage,
+      message,
+    }),
     [filter, setChatFilter]
   )
 

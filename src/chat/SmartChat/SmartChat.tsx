@@ -41,15 +41,26 @@ const selectionRequestModel = SelectionRequestModel
 const messageModel = MessageModel
 
 interface SmartChatProps {
+  currentUser?: Record<string, any>
+  startUserMessage?: string
   onApplyFilter: (
     key: keyof typeof EntityTypeEnum,
     filter?: Record<string, any>
   ) => void
 }
-export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
+export const SmartChat: FCC<SmartChatProps> = ({
+  onApplyFilter,
+  startUserMessage,
+  currentUser,
+}) => {
   useSessionId()
   const [inputMessageForm] = Form.useForm()
-
+  // Инициализация формы со значением поле ввода
+  // если при открытии чата передано сообщение
+  // метод setIsOpenWithMessage(true, 'Сообщение пользователя')
+  inputMessageForm.setFieldsValue({
+    message: startUserMessage,
+  })
   const {
     data: selectionRequestData,
     isLoading: isLoadingActual,
@@ -147,6 +158,7 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
         <div key='infoMsg' className={styles.cardFooter}>
           <InputMessageContainer
             form={inputMessageForm}
+            isAuthUser={!isEmpty(currentUser)}
             isSaving={isLoadingCompleChat}
             isLoading={isLoadingCreateNewMessage}
             isDisabled={isLoadingCreateNewMessage}

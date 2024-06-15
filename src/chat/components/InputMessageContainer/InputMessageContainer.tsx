@@ -1,16 +1,14 @@
 import { PlusOutlined, SaveOutlined, SendOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd'
 import { Button, Col, Form, Input, Row, Tooltip } from 'antd'
-import { isEmpty } from 'lodash'
-import React, { useContext, useEffect } from 'react'
-
-import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
+import React, { useEffect } from 'react'
 
 import type { FCC } from '../../types'
 
 const { TextArea } = Input
 
 interface InputMessageContainerProps {
+  isAuthUser?: boolean
   isDisabled?: boolean
   isLoading?: boolean
   isSaving?: boolean
@@ -21,6 +19,7 @@ interface InputMessageContainerProps {
 }
 export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSend,
+  isAuthUser,
   isDisabled,
   form,
   isLoading,
@@ -29,7 +28,6 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onNewChat,
 }) => {
   const inputRef = React.useRef<any>(null)
-  const { currentUser } = useContext(CurrentUserContext)
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus() // Устанавливаем фокус на поле ввода
@@ -52,7 +50,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
         <Col span={3}>
           <Form.Item name='save'>
-            {!isEmpty(currentUser) ? (
+            {isAuthUser ? (
               <Tooltip title='Сохранить запрос и начать новый' placement='top'>
                 <Button
                   loading={isSaving}

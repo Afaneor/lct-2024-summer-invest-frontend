@@ -24,8 +24,15 @@ const blockStyle = {
 const Model = BusinessModel
 const MyProfileBusiness = () => {
   const { refetch } = useRefetchInvalidateQuery()
-  const { setIsOpen, isOpen } = useContext(ChatContext)
+  const { setIsOpenWithMessage } = useContext(ChatContext)
+  const [filter] = useFilter()
 
+  const handleSetIsOpenWithMessage = () => {
+    setIsOpenWithMessage(
+      true,
+      'Предложи варианты инвестирования на основе моих бизнесов'
+    )
+  }
   const {
     errors,
     setFormErrors,
@@ -110,8 +117,6 @@ const MyProfileBusiness = () => {
     })
   }
 
-  const [filter] = useFilter()
-
   return (
     <MyProfileLayout>
       <FetchMoreItemsComponent
@@ -131,7 +136,7 @@ const MyProfileBusiness = () => {
                   alertType='error'
                   title='Хотите подобрать индивидуальные ивестиционные предложения на основе вашего бизнеса?'
                   buttonText='Подобрать'
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={handleSetIsOpenWithMessage}
                 />
               </Col>
             </Row>

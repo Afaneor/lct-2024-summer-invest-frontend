@@ -7,6 +7,7 @@ import type { EntityTypeEnum } from '@/chat/models/Message'
 import { EntityKeyEnum } from '@/chat/models/Message'
 import { SmartChat } from '@/chat/SmartChat'
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
+import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 import { Links } from '@/components/Header/Links'
 import { MainChatBtn } from '@/components/MainChatBtn'
 
@@ -17,7 +18,9 @@ interface ChatComponentProps {
 }
 
 const ChatComponent: FCC<ChatComponentProps> = () => {
-  const { setNewFilter, setIsOpen, isOpen, filter } = useContext(ChatContext)
+  const { message, setNewFilter, setIsOpen, isOpen, filter } =
+    useContext(ChatContext)
+  const { currentUser } = useContext(CurrentUserContext)
   const router = useRouter()
   const handleApplyFilter = (
     key: keyof typeof EntityTypeEnum,
@@ -50,7 +53,11 @@ const ChatComponent: FCC<ChatComponentProps> = () => {
       </div>
       {isOpen ? (
         <div className={clsx(styles.container, isOpen && styles.show)}>
-          <SmartChat onApplyFilter={handleApplyFilter} />
+          <SmartChat
+            currentUser={currentUser}
+            startUserMessage={message}
+            onApplyFilter={handleApplyFilter}
+          />
         </div>
       ) : null}
     </>
