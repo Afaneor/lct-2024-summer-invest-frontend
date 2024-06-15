@@ -1,4 +1,3 @@
-import { DollarOutlined } from '@ant-design/icons'
 import { Col, InputNumber, Row } from 'antd'
 import React from 'react'
 
@@ -47,7 +46,7 @@ const FormItemPrice: FCC<SFormItemPriceProps> = ({
               size='large'
               min={0}
               className='w100'
-              addonBefore={<DollarOutlined />}
+              addonBefore='₽'
             />
           </FormItem>
         </Col>
@@ -75,7 +74,7 @@ const FormItemPrice: FCC<SFormItemPriceProps> = ({
               placeholder='1000'
               size='large'
               className='w100'
-              addonBefore={<DollarOutlined />}
+              addonBefore='₽'
             />
           </FormItem>
         </Col>

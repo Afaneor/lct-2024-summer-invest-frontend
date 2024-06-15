@@ -90,13 +90,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         }
       }
     }
-  }, [
-    search,
-    data,
-    handleCategoryClick,
-    handleSubcategoryClick,
-    handleThemeClick,
-  ])
+  }, [search, data])
 
   return (
     <Row gutter={[10, 10]}>

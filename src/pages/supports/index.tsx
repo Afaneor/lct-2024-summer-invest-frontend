@@ -3,8 +3,10 @@ import React from 'react'
 
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { PageWrapper } from '@/components/PageWrapper'
+import { SearchInput } from '@/components/SearchInput'
 import { SupportCard } from '@/components/SupportCard'
 import { SupportFiltersCard } from '@/components/SupportFiltersCard'
+import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
 import type { SupportModelProps } from '@/models'
 import { SupportModel } from '@/models'
@@ -14,6 +16,7 @@ import type { ModelOptionProps } from '@/types'
 const Model = SupportModel
 
 const Supports = () => {
+  const [filter, setFilter] = useFilter({})
   return (
     <Main
       meta={
@@ -23,6 +26,17 @@ const Supports = () => {
       <PageWrapper
         title='Меры поддержки бизнеса'
         subTitle='Здесь собраны все доступные меры поддержки для вашего бизнеса'
+        underTitleContainer={
+          <Row>
+            <Col xs={24}>
+              <SearchInput
+                onSearch={(search) => {
+                  setFilter({ search })
+                }}
+              />
+            </Col>
+          </Row>
+        }
       >
         <Row gutter={[20, 20]}>
           <Col xs={24} md={8}>
@@ -30,6 +44,7 @@ const Supports = () => {
           </Col>
           <Col xs={24} md={16}>
             <FetchMoreItemsComponent
+              defFilters={filter}
               model={Model}
               renderItems={(rowData) => (
                 <Row gutter={[20, 20]}>

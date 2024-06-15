@@ -22,8 +22,8 @@ const Supports = () => {
       }
     >
       <PageWrapper
-        title='Меры поддержки бизнеса'
-        subTitle='Здесь собраны все доступные меры поддержки для вашего бизнеса'
+        title='Ответы на вопросы'
+        subTitle='Собрали все ответы на актуальные вопросы'
         underTitleContainer={
           <Row>
             <Col xs={24}>

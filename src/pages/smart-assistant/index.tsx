@@ -16,6 +16,7 @@ import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
 import type { InvestmentObjectsModelProps } from '@/models/InvestmentObjects'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
+import withAuth from '@/pages/HOC'
 import { Main } from '@/templates/Main'
 import type { ModelOptionProps } from '@/types'
 
@@ -68,17 +69,20 @@ const SmartHelper = () => {
           lengthPostfixPlural='площадок'
           renderItems={(
             rowData: ModelOptionProps<InvestmentObjectsModelProps>[],
-            fetchNextPage: () => void
+            fetchNextPage: () => void,
+            dataCount: number
           ) => (
             <Row gutter={[40, 20]}>
-              <Col span={24}>
-                <NeedModeResultsComponent
-                  onClick={() => {
-                    fetchNextPage?.()
-                    scrollTo()
-                  }}
-                />
-              </Col>
+              {dataCount ? (
+                <Col span={24}>
+                  <NeedModeResultsComponent
+                    onClick={() => {
+                      fetchNextPage?.()
+                      scrollTo()
+                    }}
+                  />
+                </Col>
+              ) : null}
               {rowData?.map((investmentObject) => (
                 <Col key={investmentObject.id.value} xs={24} md={12} lg={8}>
                   <Link
@@ -103,4 +107,4 @@ const SmartHelper = () => {
   )
 }
 
-export default SmartHelper
+export default withAuth(SmartHelper)

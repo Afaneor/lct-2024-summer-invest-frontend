@@ -14,7 +14,11 @@ interface FetchMoreItemsComponentProps {
   model: typeof BaseModel
   defFilters?: Record<string, any>
   options?: Record<string, any>
-  renderItems: (data: any[], fetchNextPage: () => void) => React.ReactNode
+  renderItems: (
+    data: any[],
+    fetchNextPage: () => void,
+    dataCount: number
+  ) => React.ReactNode
   lengthPostfixPlural?: string
   optionsFieldList?: string[]
 }
@@ -49,12 +53,12 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
     <>
       <Row gutter={40}>
         <Col span={24} className={styles.dataLengthContainer}>
-          <Text strong>Найдено {dataCount} </Text>
+          <Text strong>Найдено {dataCount || 0} </Text>
           {lengthPostfixPlural}
         </Col>
       </Row>
       <Spin spinning={isLoading} />
-      {renderItems(rData, fetchNextPage)}
+      {renderItems(rData, fetchNextPage, dataCount)}
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
           <Button
@@ -66,9 +70,8 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
             Показать еще
           </Button>
         </Row>
-      ) : (
-        <Divider>Больше нет</Divider>
-      )}
+      ) : null}
+      {!hasNextPage && dataCount ? <Divider>Больше нет</Divider> : null}
     </>
   )
 }
