@@ -22,7 +22,7 @@ const Registration: FCC = () => {
       .then(() => {
         notification.success({
           message:
-            'Вам отправлено сообщение на почту для подтвеждения регистрации',
+            'Вам отправлено сообщение на почту для подтверждения регистрации',
           duration: 3,
         })
         router.push('/login')
@@ -41,9 +41,16 @@ const Registration: FCC = () => {
     })
   }
   return (
-    <Main meta={<Meta title='Регистрация' description='' />}>
+    <Main
+      meta={
+        <Meta
+          title='Регистрация'
+          description='Регистрация в системе умного помощника'
+        />
+      }
+    >
       <Row justify='center' style={{ padding: '1% 0' }}>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={24} lg={12}>
           <Card hoverable>
             <BebasNeueTitle level={1} title='Регистрация' />
             <Form
@@ -90,33 +97,84 @@ const Registration: FCC = () => {
                     <Input size='large' />
                   </FormItem>
                 </Col>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem
+                    label='ИНН организации'
+                    name='inn'
+                    errors={errors.inn}
+                    rules={[
+                      { required: true, message: 'Пожалуйста, введите ИНН' },
+                    ]}
+                  >
+                    <Input size='large' />
+                  </FormItem>
+                </Col>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem
+                    label='Веб-сайт организации'
+                    name='organization_website'
+                    wrapperCol={{ span: 24 }}
+                    rules={[
+                      { type: 'url', message: 'Введите корректный веб-сайт' },
+                    ]}
+                    errors={errors.organization_website}
+                  >
+                    <Input placeholder='https://example.com' size='large' />
+                  </FormItem>
+                </Col>
               </Row>
-              <FormItem
-                label='ИНН'
-                name='inn'
-                wrapperCol={{ span: 12 }}
-                errors={errors.inn}
-                rules={[{ required: true, message: 'Пожалуйста, введите ИНН' }]}
-              >
-                <Input size='large' />
-              </FormItem>
-              <FormItem
-                label='Электронная почта'
-                name='email'
-                wrapperCol={{ span: 12 }}
-                rules={[
-                  {
-                    type: 'email',
-                    message: 'Введите корректный адрес электронной почты',
-                  },
-                  { required: true, message: 'Пожалуйста, введите email' },
-                ]}
-                errors={errors.email}
-              >
-                <Input placeholder='name@example.ru' size='large' />
-              </FormItem>
               <Row gutter={20}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem
+                    label='Страна'
+                    name='country'
+                    errors={errors.country}
+                  >
+                    <Input size='large' />
+                  </FormItem>
+                </Col>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem label='Город' name='city' errors={errors.city}>
+                    <Input size='large' />
+                  </FormItem>
+                </Col>
+              </Row>
+              <Row gutter={20}>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem
+                    label='Должность'
+                    name='position'
+                    wrapperCol={{ span: 24 }}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Пожалуйста, введите должность',
+                      },
+                    ]}
+                    errors={errors.position}
+                  >
+                    <Input size='large' />
+                  </FormItem>
+                </Col>
+                <Col xs={24} md={24} lg={12}>
+                  <FormItem
+                    label='Электронная почта'
+                    name='email'
+                    rules={[
+                      {
+                        type: 'email',
+                        message: 'Введите корректный адрес электронной почты',
+                      },
+                      { required: true, message: 'Пожалуйста, введите email' },
+                    ]}
+                    errors={errors.email}
+                  >
+                    <Input placeholder='name@example.ru' size='large' />
+                  </FormItem>
+                </Col>
+              </Row>
+              <Row gutter={20}>
+                <Col xs={24} md={24} lg={12}>
                   <FormItem
                     label='Пароль'
                     name='password1'
@@ -129,7 +187,7 @@ const Registration: FCC = () => {
                     <Input.Password size='large' />
                   </FormItem>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={24} lg={12}>
                   <FormItem
                     label='Повторите пароль'
                     name='password2'
