@@ -1,10 +1,11 @@
 import { Col, Row, Spin } from 'antd'
 import type { ItemType } from 'antd/es/breadcrumb/Breadcrumb'
 import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
+import React from 'react'
 import type { FCC } from 'src/types'
 
 import { Links } from '@/components/Header/Links'
+import useSplitPathname from '@/hooks/useSplitPathname'
 
 import BebasNeueTitle from '../BebasNeueTitle/BebasNeueTitle'
 import BreadCrumbsComponent from '../BreadCrumbsComponent/BreadCrumbsComponent'
@@ -15,22 +16,34 @@ interface PageWrapperProps {
   subTitle?: string
   isLoading?: boolean
   breadCrumbs?: ItemType[]
+  tabsContainer?: React.ReactNode
+}
+
+const colSizes = {
+  xs: 24,
+  md: 16,
+  lg: 16,
 }
 const PageWrapper: FCC<PageWrapperProps> = ({
   isLoading,
   breadCrumbs,
   children,
   title,
+  tabsContainer,
 }) => {
-  const { pathname } = useRouter()
+  const router = useRouter()
 
-  const link = useMemo(() => {
-    const res = Links.find((_link) => _link.href === pathname)
+  const links: string[] = useSplitPathname(router.pathname)
 
-    return res
-      ? { href: res.href, title: res.title }
-      : { href: pathname, title: pathname }
-  }, [pathname])
+  const computedCrumbs = links.map((_link: string, index) => {
+    return {
+      title: Object.values(Links).find((route) => route.href === _link)?.title,
+      href:
+        index + 1 !== links.length
+          ? links.slice(0, index + 1).join('')
+          : undefined,
+    }
+  })
 
   return (
     <Spin spinning={!!isLoading}>
@@ -38,20 +51,18 @@ const PageWrapper: FCC<PageWrapperProps> = ({
         <Col xs={24} className={styles.headerWrapper}>
           <Row justify='center' className='h100'>
             <Col
-              xs={24}
-              md={16}
-              lg={16}
+              {...colSizes}
               style={{
                 margin: '24px 0 32px',
               }}
             >
-              <BreadCrumbsComponent breadCrumbs={breadCrumbs || [link]} />
+              <BreadCrumbsComponent
+                breadCrumbs={breadCrumbs || computedCrumbs}
+              />
             </Col>
             {title ? (
               <Col
-                xs={24}
-                md={16}
-                lg={16}
+                {...colSizes}
                 style={{
                   margin: '24px 0 8px',
                   padding: '0 0 8px',
@@ -66,6 +77,7 @@ const PageWrapper: FCC<PageWrapperProps> = ({
                 />
               </Col>
             ) : null}
+            <Col {...colSizes}>{tabsContainer}</Col>
           </Row>
         </Col>
         <Col xs={24} lg={16}>

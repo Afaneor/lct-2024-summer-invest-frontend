@@ -1,0 +1,13 @@
+.tabsContainer {
+  display: flex;
+  width: 100%;
+}
+
+.tabLink {
+  margin: 0 2.3rem 0 0;
+  text-align: center;
+}
+
+.active {
+  border-bottom: 2px solid #ef0f33;
+}

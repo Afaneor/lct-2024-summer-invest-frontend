@@ -16,7 +16,7 @@ export const BurgerDropdownLinks: FCC<BurgerDropdownLinksProps> = ({
 }) => {
   const items: MenuProps['items'] = useMemo(
     () =>
-      Links?.map((link) => ({
+      Object.values(Links)?.map((link) => ({
         label: (
           <Link href={link.href}>
             <Button type='link'>{link.title}</Button>

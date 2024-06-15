@@ -33,28 +33,14 @@ const navLinks = (direction: SpaceProps['direction']) => (
 export const LandingHeader = () => {
   return (
     <Row justify={'end'} className={styles.container} gutter={[20, 20]}>
-      <Col>
+      <Col
+        style={{
+          marginTop: '135px',
+        }}
+      >
         <Space>
           <Col xs={0} md={24}>
             <Row>{navLinks('horizontal')}</Row>
-          </Col>
-          <Col xs={2} md={0}>
-            <Space direction={'horizontal'}>
-              <Link href={'#what'}>
-                <Button
-                  type={'text'}
-                  shape={'round'}
-                  icon={<QuestionCircleOutlined />}
-                >
-                  Для чего?
-                </Button>
-              </Link>
-              <Link href={'#possibilities'}>
-                <Button type={'text'} shape={'round'} icon={<BulbOutlined />}>
-                  Возможности
-                </Button>
-              </Link>
-            </Space>
           </Col>
         </Space>
       </Col>
