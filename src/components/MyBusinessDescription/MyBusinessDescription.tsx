@@ -7,19 +7,27 @@ import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 interface MyBusinessDescriptionProps {
   value?: any
   label?: string
+  renderValue?: React.ReactNode
 }
 
 const MyBusinessDescription: FCC<MyBusinessDescriptionProps> = ({
   label,
   value,
+  renderValue,
 }) => {
   return (
     <Space direction='vertical'>
       <span>{label}</span>
-      {value ? (
-        <BebasNeueTitle title={value} level={4} />
+      {value !== undefined ? (
+        <BebasNeueTitle
+          style={{
+            letterSpacing: '0.01em',
+          }}
+          title={value || 'Не указано'}
+          level={value ? 4 : 5}
+        />
       ) : (
-        <BebasNeueTitle title='Не указано' level={5} />
+        renderValue
       )}
     </Space>
   )

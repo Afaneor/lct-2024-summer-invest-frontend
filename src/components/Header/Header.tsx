@@ -56,7 +56,7 @@ export const Header: FCC = () => {
 
         <Col xl={0} xs={24}>
           <Row justify='end' align='middle'>
-            <Space direction='horizontal'>
+            <Space direction='horizontal' style={{ marginRight: 20 }}>
               <AuthComponent />
               <BurgerDropdownLinks links={filteredLInks} />
             </Space>

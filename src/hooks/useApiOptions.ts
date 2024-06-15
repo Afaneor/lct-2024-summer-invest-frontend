@@ -4,6 +4,8 @@
 import { isObject } from 'lodash'
 import { useQueryCache } from 'src/hooks/useQueryCache'
 
+import { mergeObjects } from '@/utils/mergeObj'
+
 export interface Choice {
   value: string
   displayName: string
@@ -40,7 +42,7 @@ export const useApiOptions = (
     const keys = mapping?.length ? mapping : Object.keys(data)
 
     keys.forEach((mapItem: string | Record<string, string[]>) => {
-      let value = data[mapItem as string]
+      let value = data?.[mapItem as string]
       let mapItemKey = mapItem as string
 
       // если mapItem - объект, то это nested object
@@ -81,5 +83,9 @@ export const useApiOptions = (
     })
     return result
   }
-  return { mergeOptionsIntoData, options }
+
+  const getFullData = (data: Record<string, any>) => {
+    return mergeObjects(options, data)
+  }
+  return { mergeOptionsIntoData, options, getFullData }
 }
