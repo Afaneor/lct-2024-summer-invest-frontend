@@ -1,8 +1,4 @@
-import {
-  LogoutOutlined,
-  PieChartOutlined,
-  UserOutlined,
-} from '@ant-design/icons'
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Dropdown, Row, Space, Typography } from 'antd'
 import Link from 'next/link'
 import React, { useCallback } from 'react'
@@ -47,11 +43,6 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
           >
             <Button type='text' icon={<UserOutlined />}>
               Профиль
-            </Button>
-          </Link>
-          <Link href='/calculations'>
-            <Button type='text' icon={<PieChartOutlined />}>
-              Мои расчеты
             </Button>
           </Link>
           <Button

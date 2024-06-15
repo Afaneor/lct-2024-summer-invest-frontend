@@ -9,6 +9,7 @@ export interface UsersModelProps extends BaseModelProps {
   first_name: string
   last_name: string
   is_active: boolean
+  full_name: string
 }
 
 export class UsersModel extends BaseModel {
