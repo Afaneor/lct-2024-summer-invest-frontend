@@ -1,5 +1,6 @@
 export * from './Area'
 export * from './Base'
+export * from './Business'
 export * from './Calculator'
 export * from './Equipment'
 export * from './Offer'
