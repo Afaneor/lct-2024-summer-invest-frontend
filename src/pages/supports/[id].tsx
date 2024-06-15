@@ -20,7 +20,6 @@ const Model = SupportModel
 const SupportItem = () => {
   const router = useRouter()
   const { id } = router.query
-  console.log('id', id)
 
   const {
     data: response,
