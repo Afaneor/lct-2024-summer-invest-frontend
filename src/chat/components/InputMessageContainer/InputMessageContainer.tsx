@@ -69,7 +69,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
             onDownloadPdf={onDownloadPdf}
           />
         </Col>
-        <Col span={14}>
+        <Col span={17}>
           <Form.Item name='message' required>
             <TextArea
               ref={inputRef}
