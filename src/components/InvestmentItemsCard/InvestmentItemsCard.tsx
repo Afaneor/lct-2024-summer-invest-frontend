@@ -1,4 +1,4 @@
-import { Card, Tooltip } from 'antd'
+import { Card, Tag, Tooltip } from 'antd'
 import Link from 'next/link'
 import React from 'react'
 import type { FCC } from 'src/types'
@@ -13,6 +13,9 @@ interface InvestmentItemsCardProps {
   preview_image: string
   hoverable?: boolean
   id: string | number
+  transaction_form?: string
+  object_type?: string
+  coast?: string
 }
 
 export const InvestmentItemsCard: FCC<InvestmentItemsCardProps> = ({
@@ -21,6 +24,9 @@ export const InvestmentItemsCard: FCC<InvestmentItemsCardProps> = ({
   preview_image,
   hoverable,
   href,
+  object_type,
+  transaction_form,
+  coast,
   ...rest
 }: any) => {
   return (
@@ -39,6 +45,9 @@ export const InvestmentItemsCard: FCC<InvestmentItemsCardProps> = ({
         ]}
       >
         <BebasNeueTitle title={title} ellipsis level={3} />
+        {transaction_form ? <Tag>{transaction_form}</Tag> : null}
+        {object_type ? <Tag>{object_type}</Tag> : null}
+        {coast ? <Tag>{coast}</Tag> : null}
       </Card>
     </Link>
   )

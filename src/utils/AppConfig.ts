@@ -1,8 +1,6 @@
-// FIXME: Update this configuration file based on your project information
-
 export const AppConfig = {
-  site_name: 'Starter',
-  title: 'Nextjs Starter',
-  description: 'Starter code for your Nextjs Boilerplate with Tailwind CSS',
-  locale: 'en',
-};
+  site_name: 'Умный помощник',
+  title: 'Умный помощник по комплексному подбору инвестиционных площадок',
+  description: 'Комплексный подбор инвестиционных площадок',
+  locale: 'ru',
+}

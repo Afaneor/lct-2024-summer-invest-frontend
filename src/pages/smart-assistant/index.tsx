@@ -96,6 +96,11 @@ const SmartHelper = () => {
                     hoverable
                     title={investmentObject.name.value}
                     preview_image={investmentObject.main_photo_url.value}
+                    transaction_form={
+                      investmentObject.transaction_form?.value?.name
+                    }
+                    object_type={investmentObject.object_type?.value}
+                    coast={investmentObject.coast?.value}
                   />
                 </Col>
               ))}
