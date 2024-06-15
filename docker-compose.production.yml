@@ -1,0 +1,20 @@
+version: "3.8"
+
+
+services:
+  frontend:
+    image: ghub.letsnova.com/nova/hackathons/vue-template/ci:main
+    environment:
+      VIRTUAL_HOST: lct.letsnova.ru
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: lct.letsnova.ru
+    networks:
+      - webnet
+      - insgress
+
+networks:
+  # Network for your internals, use it by default:
+  webnet:
+  insgress:
+    external:
+      name: nginx-proxy_default

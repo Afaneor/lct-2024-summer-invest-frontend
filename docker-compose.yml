@@ -1,0 +1,11 @@
+version: "3.8"
+
+
+services:
+  frontend:
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+      target: prod
+    ports:
+      - "80:80"
