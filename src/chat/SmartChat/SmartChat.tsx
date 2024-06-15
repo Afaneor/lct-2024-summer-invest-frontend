@@ -121,7 +121,10 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
       }
     )
   }
-  const messagesEndRef = useScrollIntoView([selectionRequestData])
+  const messagesEndRef = useScrollIntoView([
+    selectionRequestData,
+    isLoadingCreateNewMessage,
+  ])
 
   return (
     <Card
