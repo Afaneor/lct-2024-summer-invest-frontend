@@ -4,7 +4,7 @@ import type { FCC } from 'src/types'
 
 import styles from './style.module.scss'
 
-export interface ApplyClearFilterBtnsProps {
+interface ApplyClearFilterBtnsProps {
   onClear: () => void
   onApply: () => void
   textClearBtn?: string

@@ -6,7 +6,14 @@ import { Main } from '@/templates/Main'
 
 export default function Index() {
   return (
-    <Main meta={<Meta title='Главная' description='Главная страница' />}>
+    <Main
+      meta={
+        <Meta
+          title='Главная'
+          description='Калькулятор инвестиций в развитие промышленного предприятия'
+        />
+      }
+    >
       <Landing />
     </Main>
   )
