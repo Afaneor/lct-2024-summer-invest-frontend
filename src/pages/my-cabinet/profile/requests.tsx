@@ -65,8 +65,7 @@ const Requests = () => {
           <List
             bordered
             itemLayout='horizontal'
-            // убираем из списка заявки, в которых нет фильтра бота
-            dataSource={data?.filter((item) => item.bot_filter.value)}
+            dataSource={data}
             renderItem={(
               item: ModelOptionProps<SelectionRequestActualProps>
             ) => (
