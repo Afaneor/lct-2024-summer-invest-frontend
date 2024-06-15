@@ -2,7 +2,11 @@ import { Card, Form, notification, Spin } from 'antd'
 import { isEmpty } from 'lodash'
 import React from 'react'
 
-import { useCreateItem, useExtraActionsGet } from '../../services/base/hooks'
+import {
+  useCreateItem,
+  useExtraActionsGet,
+  usePostExtraActions,
+} from '../../services/base/hooks'
 import type { FCC } from '../../types'
 import { BebasNeueTitle } from '../components/BebasNeueTitle'
 import { InputMessageContainer } from '../components/InputMessageContainer'
@@ -81,7 +85,10 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
   }
 
   const { mutate: completeChat, isLoading: isLoadingCompleChat } =
-    useCreateItem(SelectionRequestModel)
+    usePostExtraActions(
+      'selectionRequestCompleted',
+      selectionRequestModel.completedUrl()
+    )
 
   const handleCompleteChat = () => {
     completeChat(
