@@ -14,7 +14,7 @@ const Model = ProblemCategoriesModel
 
 const Supports = () => {
   const [filter, setFilter] = useFilter({ limit: 1000 })
-  const { results, isLoading } = useFetchItems(Model, filter)
+  const { results, isLoading } = useFetchItems({ model: Model, filter })
   return (
     <Main
       meta={

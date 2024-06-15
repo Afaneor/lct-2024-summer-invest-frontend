@@ -51,13 +51,19 @@ export const useOptions = (
  * @param options - UseQueryOptions
  * @param resultsKey ключ, по которому получаем результаты
  */
-export const useFetchItems = <T = any>(
-  model: typeof BaseModel,
-  filter?: Record<string, any>,
-  resultsKey?: string,
-  options?: UseQueryOptions,
+export const useFetchItems = <T = any>({
+  model,
+  qKey,
+  resultsKey,
+  options,
+  filter,
+}: {
+  model: typeof BaseModel
+  filter?: Record<string, any>
+  resultsKey?: string
+  options?: UseQueryOptions
   qKey?: string | string[]
-): { results: T; [key: string]: any } => {
+}): { results: T; [key: string]: any } => {
   const queryKey = qKey || model.modelName
   const url = model.url()
 

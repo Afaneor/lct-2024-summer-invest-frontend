@@ -56,7 +56,10 @@ const InvestmentObjectItem = () => {
               />
             </Col>
             <Col xs={24} md={8}>
-              <CompareButton item={response?.data} />
+              <CompareButton
+                entityType={model.modelName}
+                itemId={response?.data?.id}
+              />
             </Col>
             <Col xs={24}>
               {!isEmpty(response?.data?.ready_business) ? (

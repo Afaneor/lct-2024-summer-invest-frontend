@@ -58,7 +58,7 @@ export const CalcMap: FCC<CalcMapProps> = ({
   onCreatePolygon,
 }) => {
   const { results: terrLocData }: { results: TerritorialLocationModelProps[] } =
-    useFetchItems(TLModel, { limit: 15 })
+    useFetchItems({ model: TLModel, filter: { limit: 15 } })
   const [viewState, setViewState] = useState(initialViewState)
   const [features, setFeatures] = useState({})
   const [selectedPolygonsInMeters, setSelectedPolygonsInMeters] = useState(0)

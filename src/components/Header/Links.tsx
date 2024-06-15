@@ -11,6 +11,7 @@ export interface LinkProps {
   href: string
   icon?: React.ReactNode
   isTab?: boolean
+  isProfileTab?: true
 }
 
 export interface LinksKeys {
@@ -26,6 +27,7 @@ export interface LinksKeys {
   BUSINESS: LinkProps
   SEARCH_HISTORY: LinkProps
   FAQ: LinkProps
+  COMPARE: LinkProps
 }
 
 export const Links: LinksKeys = {
@@ -82,12 +84,21 @@ export const Links: LinksKeys = {
     href: '/info',
     icon: <UsergroupAddOutlined />,
     isTab: false,
+    isProfileTab: true,
   },
   BUSINESS: {
     title: 'Мой бизнес',
     href: '/business',
     icon: <UsergroupAddOutlined />,
     isTab: false,
+    isProfileTab: true,
+  },
+  COMPARE: {
+    title: 'Сравнения',
+    href: '/compare',
+    icon: <UsergroupAddOutlined />,
+    isTab: false,
+    isProfileTab: true,
   },
   SEARCH_HISTORY: {
     title: 'История подбора площадок',

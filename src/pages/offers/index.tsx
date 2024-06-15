@@ -13,7 +13,7 @@ import { Main } from '@/templates/Main'
 const Model = OfferModel
 const Offers: FCC = () => {
   const [isSubscribe, setIsSubscribe] = useState(false)
-  const { results } = useFetchItems(Model)
+  const { results } = useFetchItems({ model: Model })
 
   return (
     <Main meta={<Meta title='Предложения от партнеров' description='' />}>

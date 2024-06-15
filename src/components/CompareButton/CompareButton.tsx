@@ -1,20 +1,23 @@
 import { SwapOutlined } from '@ant-design/icons'
 import { Button, Tooltip } from 'antd'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 interface CompareButtonProps {
-  item: any // replace 'any' with the type of your item
+  itemId: string | number
+  entityType: string
 }
 
-const CompareButton: React.FC<CompareButtonProps> = ({ item }) => {
+const CompareButton: React.FC<CompareButtonProps> = ({
+  itemId,
+  entityType,
+}) => {
   const [isInComparison, setIsInComparison] = useState(false)
 
   const handleClick = () => {
     const itemsToCompare: any[] = JSON.parse(
-      localStorage.getItem('itemsToCompare') || '[]'
+      localStorage.getItem(entityType) || '[]'
     )
-    const index = itemsToCompare.findIndex((i) => i.id === item.id)
+    const index = itemsToCompare.indexOf(itemId)
 
     if (index !== -1) {
       // Item is already in the array, remove it
@@ -22,42 +25,40 @@ const CompareButton: React.FC<CompareButtonProps> = ({ item }) => {
       setIsInComparison(false)
     } else {
       // Item is not in the array, add it
-      itemsToCompare.push(item)
+      itemsToCompare.push(itemId)
       setIsInComparison(true)
     }
 
-    localStorage.setItem('itemsToCompare', JSON.stringify(itemsToCompare))
+    localStorage.setItem(entityType, JSON.stringify(itemsToCompare))
   }
 
   const checkItemsToCompare = () => {
     const itemsToCompare: any[] =
       typeof window !== 'undefined'
-        ? JSON.parse(localStorage.getItem('itemsToCompare') || '[]')
+        ? JSON.parse(localStorage.getItem(entityType) || '[]')
         : []
-    setIsInComparison(itemsToCompare.some((i) => i.id === item?.id))
+    setIsInComparison(itemsToCompare.indexOf(itemId) !== -1)
   }
 
   useEffect(() => {
     checkItemsToCompare()
-  }, [item])
+  }, [itemId])
 
   return (
-    <>
-      <Tooltip
-        title={isInComparison ? 'Убрать из сравнения' : 'Добавить в сравнение'}
+    <Tooltip
+      title={isInComparison ? 'Убрать из сравнения' : 'Добавить в сравнение'}
+    >
+      <Button
+        icon={<SwapOutlined />}
+        onClick={(e) => {
+          e.preventDefault()
+          handleClick()
+        }}
+        danger={isInComparison}
       >
-        <Button
-          icon={<SwapOutlined />}
-          onClick={handleClick}
-          danger={isInComparison}
-        />
-      </Tooltip>
-      {isInComparison ? (
-        <Link href='/my-cabinet/profile/compare/'>
-          <Button type='text'>Сравнить</Button>
-        </Link>
-      ) : null}
-    </>
+        {isInComparison ? 'В сравнении' : 'Сравнить'}
+      </Button>
+    </Tooltip>
   )
 }
 

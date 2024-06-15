@@ -1,5 +1,4 @@
 import { Col, Row } from 'antd'
-import Link from 'next/link'
 import React, { useContext } from 'react'
 
 import { useScrollIntoViewOnCall } from '@/chat/hooks/useScrollIntoView'
@@ -81,17 +80,14 @@ const SmartHelper = () => {
               ) : null}
               {rowData?.map((investmentObject) => (
                 <Col key={investmentObject.id.value} xs={24} md={12} lg={8}>
-                  <Link
-                    target='_blank'
+                  <InvestmentItemsCard
+                    id={investmentObject.id.value}
                     href={`${Links.SMART_ASSISTANT.href}/${investmentObject.id.value}`}
-                  >
-                    <InvestmentItemsCard
-                      key={investmentObject.id.value}
-                      hoverable
-                      title={investmentObject.name.value}
-                      preview_image={investmentObject.main_photo_url.value}
-                    />
-                  </Link>
+                    key={investmentObject.id.value}
+                    hoverable
+                    title={investmentObject.name.value}
+                    preview_image={investmentObject.main_photo_url.value}
+                  />
                 </Col>
               ))}
               <div ref={divRef} />

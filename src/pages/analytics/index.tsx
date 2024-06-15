@@ -37,7 +37,7 @@ const amountExcludeList = [
 ]
 const numberIncludeList = ['number_of_reports', 'number_of_business']
 const Analytics = () => {
-  const { data, isLoading } = useFetchItems(Model)
+  const { data, isLoading } = useFetchItems({ model: Model })
   const moneyFormat = useMoneyFormat()
 
   const statistics: StatisticsAllModelProps = data?.data
