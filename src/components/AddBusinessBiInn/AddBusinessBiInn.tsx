@@ -26,7 +26,6 @@ const AddBusinessBiInn: FCC<AddBusinessBiInnProps> = ({
       onAddByInn?.(values)
     })
   }
-  console.log('errors', errors)
   return (
     <PageCardContainer title='Добавьте свой бизнес в нашу систему'>
       <BebasNeueTitle

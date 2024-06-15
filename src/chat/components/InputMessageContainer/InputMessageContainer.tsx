@@ -1,0 +1,108 @@
+import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
+import type { FormInstance } from 'antd'
+import { Button, Col, Form, Input, Row, Upload } from 'antd'
+import React, { useEffect } from 'react'
+
+import type { FCC } from '../../types'
+import { IconAsButton } from '../IconAsButton'
+
+const { TextArea } = Input
+
+interface InputMessageContainerProps {
+  isDisabled?: boolean
+  isLoading?: boolean
+  form: FormInstance
+  onSend: (message: string) => void
+  onUpload?: (file: any) => void
+}
+export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
+  onSend,
+  isDisabled,
+  form,
+  isLoading,
+}) => {
+  const inputRef = React.useRef<any>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus() // Устанавливаем фокус на поле ввода
+    }
+  }, [isDisabled])
+
+  const handleSendClick = () => {
+    form.validateFields().then((values) => {
+      onSend(values.message)
+      // form.resetFields()
+    })
+  }
+
+  const handleUpload = () => {
+    // Здесь вы можете обработать загрузку файла
+  }
+
+  return (
+    <Form
+      form={form}
+      layout='horizontal'
+      disabled={isDisabled}
+      onFinish={handleSendClick}
+    >
+      <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
+        <Col span={3}>
+          <Form.Item name='file'>
+            <Upload beforeUpload={handleUpload} showUploadList={false}>
+              <IconAsButton icon={PaperClipOutlined} />
+            </Upload>
+          </Form.Item>
+        </Col>
+        <Col span={18}>
+          <Form.Item name='message' required>
+            <TextArea
+              ref={inputRef}
+              autoSize={{ minRows: 1, maxRows: 3 }}
+              autoFocus
+              placeholder='Введите сообщение'
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && e.metaKey) {
+                  // Если нажата клавиша Enter с Cmd
+                  e.preventDefault() // Предотвращаем отправку формы
+                  const { value, selectionStart, selectionEnd } =
+                    e.target as HTMLTextAreaElement
+                  const newValue = `${value.substring(
+                    0,
+                    selectionStart
+                  )}\n${value.substring(selectionEnd)}`
+                  form.setFieldsValue({ message: newValue }) // Устанавливаем новое значение с символом новой строки
+                  setTimeout(() => {
+                    ;(e.target as HTMLTextAreaElement).selectionStart =
+                      selectionStart + 1 // Перемещаем курсор на новую строку
+                    ;(e.target as HTMLTextAreaElement).selectionEnd =
+                      selectionStart + 1
+                  }, 0)
+                } else if (e.key === 'Enter' && !e.metaKey) {
+                  // Если нажата клавиша Enter без Cmd
+                  e.preventDefault() // Предотвращаем переход на новую строку
+                  handleSendClick() // Отправляем сообщение
+                }
+              }}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={3}>
+          <Form.Item shouldUpdate>
+            {() => (
+              <Button
+                loading={isLoading}
+                disabled={!form.getFieldValue('message') || isDisabled}
+                htmlType='submit'
+                icon={<SendOutlined />}
+              />
+            )}
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
+  )
+}
+
+export default InputMessageContainer

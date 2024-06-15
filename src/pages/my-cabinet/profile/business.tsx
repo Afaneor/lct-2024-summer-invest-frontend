@@ -6,7 +6,7 @@ import { AddBusinessBiInn } from '@/components/AddBusinessBiInn'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { MyBusinessDescription } from '@/components/MyBusinessDescription'
 import { PageCardContainer } from '@/components/PageCardContainer'
-import { useApiOptions } from '@/hooks/useApiOptions'
+import { useFilter } from '@/hooks/useFilter'
 import type { FormErrorObj, FormErrorsHook } from '@/hooks/useFormErrors'
 import { useFormErrors } from '@/hooks/useFormErrors'
 import { useRefetchInvalidateQuery } from '@/hooks/useRefetchInvalidateQuery'
@@ -125,12 +125,16 @@ const MyProfileBusiness = () => {
       },
     })
   }
-  const { mergeOptionsIntoData } = useApiOptions(Model.modelName, mapping)
+
+  const [filter] = useFilter()
+
   return (
     <MyProfileLayout>
       <FetchMoreItemsComponent
         model={Model}
+        defFilters={filter}
         lengthPostfixPlural='организаций'
+        optionsFieldList={mapping}
         renderItems={(fetchedValues) => (
           <>
             <Row style={blockStyle}>
@@ -150,23 +154,25 @@ const MyProfileBusiness = () => {
             </Row>
             <Row gutter={[20, 20]}>
               {fetchedValues.map((item: any) => {
-                const prepItem = mergeOptionsIntoData(item)
                 return (
                   <Col key={item.id} span={24}>
                     <PageCardContainer
                       isEditable
                       isLoading={isDeleteItem}
                       onRemove={() => handleDelete(item.id)}
-                      onUpdate={() => handleUpdateByInn({ inn: item.inn })}
+                      onUpdate={() =>
+                        handleUpdateByInn({ inn: item.inn.value })
+                      }
                     >
                       <Row gutter={[20, 20]}>
-                        {Object.entries(prepItem).map(([key, options]: any) => {
+                        {Object.entries(item).map(([key, options]: any) => {
                           return (
-                            <MyBusinessDescription
-                              key={key}
-                              label={options.label}
-                              value={options.value}
-                            />
+                            <Col xs={24} md={8} key={key}>
+                              <MyBusinessDescription
+                                label={options.label}
+                                value={options.value}
+                              />
+                            </Col>
                           )
                         })}
                       </Row>

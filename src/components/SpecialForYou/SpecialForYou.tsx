@@ -5,14 +5,12 @@ import type { FCC } from 'src/types'
 
 import { OfferCard } from '@/components/OfferCard'
 import { SupportCard } from '@/components/SupportCard'
-import type { AreaModelProps, SupportModelProps } from '@/models'
+import type { SupportModelProps } from '@/models'
 import type { OfferModelProps } from '@/models/Offer'
-import { AreaCard } from '@/pages/areas'
 
 const { Panel } = Collapse
 const { Text } = Typography
 interface SpecialForYouProps {
-  areas?: AreaModelProps[]
   offers?: OfferModelProps[]
   supports?: SupportModelProps[]
 }
@@ -34,41 +32,11 @@ const ExternalBtnLink = ({ title, site, content }: ExternalBtnLinkProps) => (
   </Popover>
 )
 
-const SpecialForYou: FCC<SpecialForYouProps> = ({
-  areas,
-  offers,
-  supports,
-}) => {
+const SpecialForYou: FCC<SpecialForYouProps> = ({ offers, supports }) => {
   return (
     <>
       <Divider>Подобрали специально для Вас</Divider>
       <Collapse>
-        {areas?.length ? (
-          <Panel
-            header='Промлощадки'
-            key='areas'
-            extra={<Link href='/areas'>Все промлощадки</Link>}
-          >
-            {areas?.map((area) => (
-              <ExternalBtnLink
-                key={area.id}
-                title={area.title}
-                site={area.site}
-                content={
-                  <AreaCard
-                    title={area.title}
-                    preview_image={area.preview_image}
-                    territorial_location={area.territorial_location}
-                    address={area.address}
-                    text={area.text}
-                    bordered={false}
-                    style={{ width: 400 }}
-                  />
-                }
-              />
-            ))}
-          </Panel>
-        ) : null}
         {offers?.length ? (
           <Panel
             header='Предложения по кредитованию'

@@ -82,21 +82,29 @@ export const useFetchItems = <T = any>(
  * @param qKey - ключ сущности из rootReducer и ключ запроса для react-query
  * @param id
  * @param options
+ * @param filters
  */
-export const useFetchOneItem = (
-  model: typeof BaseModel,
-  id: string | number | undefined,
-  options?: UseQueryOptions,
+export const useFetchOneItem = ({
+  model,
+  id,
+  options,
+  filters,
+  qKey,
+}: {
+  model: typeof BaseModel
+  id: string | string[] | number | undefined
+  options?: UseQueryOptions
+  filters?: Record<string, any>
   qKey?: string
-) => {
+}) => {
   const { notifyError } = useNotification()
-  const url = model.url()
-  const queryKey = qKey || model.modelName
+  const url = model?.url()
+  const queryKey = qKey || model?.modelName
   useChoices(queryKey, url)
 
   return useQuery(
     [queryKey, id] as QueryKey,
-    () => BaseServices.fetchOne(url, id),
+    () => BaseServices.fetchOne(url, id, filters),
     {
       onError: () => notifyError({ message: 'Не удалось загрузить данные' }),
       ...options,

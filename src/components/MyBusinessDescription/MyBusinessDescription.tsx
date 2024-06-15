@@ -1,4 +1,4 @@
-import { Col, Space } from 'antd'
+import { Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
@@ -14,16 +14,14 @@ const MyBusinessDescription: FCC<MyBusinessDescriptionProps> = ({
   value,
 }) => {
   return (
-    <Col xs={24} md={8}>
-      <Space direction='vertical'>
-        <span>{label}</span>
-        {value ? (
-          <BebasNeueTitle title={value} level={4} />
-        ) : (
-          <BebasNeueTitle title='Не указано' level={5} />
-        )}
-      </Space>
-    </Col>
+    <Space direction='vertical'>
+      <span>{label}</span>
+      {value ? (
+        <BebasNeueTitle title={value} level={4} />
+      ) : (
+        <BebasNeueTitle title='Не указано' level={5} />
+      )}
+    </Space>
   )
 }
 

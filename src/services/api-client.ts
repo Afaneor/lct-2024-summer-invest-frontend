@@ -19,6 +19,7 @@ const apiClient = () => {
   })
   instance.interceptors.request.use((request) => {
     request.headers['X-CSRFToken'] = Cookie.get('csrftoken')
+    request.headers['Generated-User-Id'] = Cookie.get('GENERATE-USER-ID')
     return request
   })
 

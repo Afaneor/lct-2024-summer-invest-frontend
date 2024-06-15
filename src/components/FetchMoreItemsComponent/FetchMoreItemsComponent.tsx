@@ -1,7 +1,8 @@
 import { Button, Col, Divider, Row, Spin, Typography } from 'antd'
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { FCC } from 'src/types'
 
+import { useApiOptions } from '@/hooks/useApiOptions'
 import type { BaseModel } from '@/models'
 import { useInfinityFetchData } from '@/services/base/useInfinityFetchData'
 
@@ -13,8 +14,9 @@ interface FetchMoreItemsComponentProps {
   model: typeof BaseModel
   defFilters?: Record<string, any>
   options?: Record<string, any>
-  renderItems: (data: any[]) => React.ReactNode
+  renderItems: (data: any[], fetchNextPage: () => void) => React.ReactNode
   lengthPostfixPlural?: string
+  optionsFieldList?: string[]
 }
 
 const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
@@ -23,22 +25,44 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
   renderItems,
   options,
   lengthPostfixPlural,
+  optionsFieldList,
 }) => {
-  const { rowData, fetchNextPage, isLoading, isFetching, hasNextPage }: any =
-    useInfinityFetchData(Model, defFilters, { ...options })
+  const {
+    rowData,
+    fetchNextPage,
+    isLoading,
+    isFetching,
+    hasNextPage,
+    dataCount,
+  }: any = useInfinityFetchData(Model, defFilters, { ...options })
 
+  const { mergeOptionsIntoData } = useApiOptions(
+    Model.modelName,
+    optionsFieldList
+  )
+
+  const rData = useMemo(
+    () => rowData.map((item: any) => mergeOptionsIntoData(item)),
+    [rowData]
+  )
   return (
     <>
       <Row gutter={40}>
         <Col span={24} className={styles.dataLengthContainer}>
-          <Text strong>Найдено {rowData.length} </Text>
+          <Text strong>Найдено {dataCount} </Text>
           {lengthPostfixPlural}
         </Col>
       </Row>
-      <Spin spinning={isLoading}>{renderItems(rowData)}</Spin>
+      <Spin spinning={isLoading} />
+      {renderItems(rData, fetchNextPage)}
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
-          <Button type='dashed' loading={isFetching} onClick={fetchNextPage}>
+          <Button
+            type='dashed'
+            danger
+            loading={isFetching}
+            onClick={fetchNextPage}
+          >
             Показать еще
           </Button>
         </Row>
