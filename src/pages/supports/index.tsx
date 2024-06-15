@@ -1,7 +1,9 @@
 import { Col, Row } from 'antd'
+import Link from 'next/link'
 import React from 'react'
 
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
+import { Links } from '@/components/Header/Links'
 import { PageWrapper } from '@/components/PageWrapper'
 import { SearchInput } from '@/components/SearchInput'
 import { SupportCard } from '@/components/SupportCard'
@@ -60,11 +62,16 @@ const Supports = () => {
                   {rowData?.map(
                     (support: ModelOptionProps<SupportModelProps>) => (
                       <Col key={support.id.value} xs={24} md={24}>
-                        <SupportCard
-                          href={support.url_application_form.value}
-                          title={support.name.value}
-                          text={support.description.value}
-                        />
+                        <Link
+                          href={`${Links.SUPPORTS.href}/${support.id.value}`}
+                          key={support.id.value}
+                        >
+                          <SupportCard
+                            href={support.url_application_form.value}
+                            title={support.name.value}
+                            text={support.description.value}
+                          />
+                        </Link>
                       </Col>
                     )
                   )}

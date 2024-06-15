@@ -12,7 +12,7 @@ interface TruncateTextProps {
 const TruncateText: FCC<TruncateTextProps> = ({ text, length }) => {
   const [isTruncated, setIsTruncated] = useState(true)
 
-  const truncatedText = isTruncated ? `${text.slice(0, length)}...` : text
+  const truncatedText = isTruncated ? `${text?.slice(0, length)}...` : text
 
   const toggleTruncated = () => {
     setIsTruncated(!isTruncated)

@@ -1,10 +1,10 @@
-import { Card, Carousel, Col, Row } from 'antd'
+import { Card, Col, Row } from 'antd'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import React from 'react'
 
+import { CarouselPageComponent } from '@/components/CarouselPageComponent'
 import { CompareButton } from '@/components/CompareButton'
-import { ImageContainer } from '@/components/ImageContainer'
 import { PageWrapper } from '@/components/PageWrapper'
 import { ReadyBusinessDescription } from '@/components/ReadyBusinessDescription'
 import { Meta } from '@/layouts/Meta'
@@ -49,24 +49,11 @@ const InvestmentObjectItem = () => {
         <Card>
           <Row gutter={[20, 20]}>
             <Col xs={24} md={16}>
-              <Carousel arrows>
-                {response?.data?.photo_urls?.length ? (
-                  response?.data?.photo_urls?.map((url: string) => (
-                    <ImageContainer
-                      key={response?.data?.id}
-                      src={url}
-                      alt={response?.data?.name}
-                      height='50vh'
-                    />
-                  ))
-                ) : (
-                  <ImageContainer
-                    src={response?.data?.main_photo_url}
-                    alt={response?.data?.name}
-                    height='50vh'
-                  />
-                )}
-              </Carousel>
+              <CarouselPageComponent
+                photo_urls={response?.data?.photo_urls}
+                main_photo_url={response?.data?.main_photo_url}
+                name={response?.data?.name}
+              />
             </Col>
             <Col xs={24} md={8}>
               <CompareButton item={response?.data} />

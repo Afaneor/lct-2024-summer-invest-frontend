@@ -135,7 +135,7 @@ const MyProfileBusiness = () => {
         defFilters={filter}
         lengthPostfixPlural='организаций'
         optionsFieldList={mapping}
-        renderItems={(fetchedValues) => (
+        renderItems={(fetchedValues, _, dataCount) => (
           <>
             <Row style={blockStyle}>
               <Col span={24}>
@@ -147,13 +147,15 @@ const MyProfileBusiness = () => {
                 />
               </Col>
             </Row>
-            <Row>
-              <Col span={24}>
-                <BebasNeueTitle title='Ваши организации' level={2} />
-              </Col>
-            </Row>
+            {dataCount ? (
+              <Row>
+                <Col span={24}>
+                  <BebasNeueTitle title='Ваши организации' level={2} />
+                </Col>
+              </Row>
+            ) : null}
             <Row gutter={[20, 20]}>
-              {fetchedValues.map((item: any) => {
+              {fetchedValues?.map((item: any) => {
                 return (
                   <Col key={item.id} span={24}>
                     <PageCardContainer
@@ -170,7 +172,7 @@ const MyProfileBusiness = () => {
                             <Col xs={24} md={8} key={key}>
                               <MyBusinessDescription
                                 label={options.label}
-                                value={options.value}
+                                value={JSON.stringify(options.value)}
                               />
                             </Col>
                           )

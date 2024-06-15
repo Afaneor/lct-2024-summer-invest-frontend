@@ -1,8 +1,9 @@
-import { Button, Card, Col, Divider, Form, Row, Select, Space } from 'antd'
+import { Card, Col, Divider, Form, Row, Select, Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components'
+import { ButtonRounded } from '@/components/ButtonRounded'
 import type { SupportModelProps } from '@/models'
 import { SupportModel } from '@/models'
 import { useExtraActionsGet } from '@/services/base/hooks'
@@ -90,7 +91,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
             <Form.Item name='msp_roster' label='Реестр МСП'>
               <Space direction='horizontal'>
                 {data?.data?.msp_roster?.map((roster: string) => (
-                  <Button
+                  <ButtonRounded
                     danger={roster === msp_roster}
                     key={roster}
                     onClick={() => {
@@ -100,7 +101,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
                     }}
                   >
                     {roster}
-                  </Button>
+                  </ButtonRounded>
                 ))}
               </Space>
             </Form.Item>

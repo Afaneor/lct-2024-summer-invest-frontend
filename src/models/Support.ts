@@ -41,6 +41,8 @@ export interface SupportModelProps extends BaseModelProps {
   created_at: string
   updated_at: string
 }
+
+export const CONTENT_TYPE = 43
 export class SupportModel extends BaseModel {
   static modelName = 'serviceSupport'
 

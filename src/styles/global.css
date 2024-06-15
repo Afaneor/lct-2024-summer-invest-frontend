@@ -24,11 +24,11 @@ body {
 img,
 .ant-alert {
   border-radius: 0 !important;
-  border: 1px solid #d1d1d1 !important;
 }
 
-.ant-divider {
-  border-top: 1px solid #d1d1d1 !important;
+.ant-card {
+  border-radius: 0 !important;
+  border: 1px solid #d1d1d1 !important;
 }
 
 /*
@@ -66,7 +66,7 @@ img,
 /*
 Переопределяем цвет кнопки
  */
-.ant-btn-default:not(:disabled):not(.ant-btn-disabled) {
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):not(.ant-btn-text) {
   border-radius: 50px !important;
   &:hover {
     color: #000c17 !important;
