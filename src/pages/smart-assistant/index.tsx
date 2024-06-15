@@ -1,4 +1,4 @@
-import { Card, Col, Descriptions, Row } from 'antd'
+import { Card, Col, Descriptions, Form, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
 import React from 'react'
@@ -35,6 +35,8 @@ const Model = InvestmentObjectsModel
 const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
+  const [form] = Form.useForm()
+
   const [filter, setFilter] = useFilter(defFilters)
   const [divRef, scrollTo] = useScrollIntoViewOnCall()
 
@@ -55,6 +57,7 @@ const SmartHelper = () => {
         тип объекта / ОКВЭД \ Преференциальный режим \ Форма сделки \ Стоимость
         от до \ Муниципальное образование \ Площадь объекта от до
         <CardSearchFilters
+          form={form}
           onChange={(evt: BaseSyntheticEvent) => {
             setFilter({ territorial_location: evt?.target?.value?.id })
           }}

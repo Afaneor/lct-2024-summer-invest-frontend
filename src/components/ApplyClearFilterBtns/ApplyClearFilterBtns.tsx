@@ -2,6 +2,8 @@ import { Button, Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
+import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
+
 import styles from './style.module.scss'
 
 interface ApplyClearFilterBtnsProps {
@@ -18,12 +20,12 @@ export const ApplyClearFilterBtns: FCC<ApplyClearFilterBtnsProps> = ({
 }) => {
   return (
     <Space className={styles.container}>
-      <Button type='link' onClick={onClear}>
+      <Button type='link' danger onClick={onClear}>
         {textClearBtn || 'Очистить'}
       </Button>
-      <Button type='primary' onClick={onApply}>
+      <ButtonPrimaryRed type='primary' onClick={onApply}>
         {textApplyBtn || 'Применить'}
-      </Button>
+      </ButtonPrimaryRed>
     </Space>
   )
 }
