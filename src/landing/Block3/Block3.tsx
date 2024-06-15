@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './Block3.module.scss'
 import { Button, Col, Row, Space, Typography } from 'antd'
-import CalcMap from '../../components/CalcMap/CalcMap'
 import Link from 'next/link'
 const { Title, Text } = Typography
 
@@ -22,9 +21,6 @@ export const Block3 = () => {
             </Text>
           </Space>
         </Col>
-      </Row>
-      <Row>
-        <CalcMap freezeMap />
       </Row>
       <Row justify={'center'} gutter={[20, 20]} style={{ padding: '10px 0' }}>
         <Col>

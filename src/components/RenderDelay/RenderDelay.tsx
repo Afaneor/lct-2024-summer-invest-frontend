@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import type { FCC } from 'src/types'
 
-import { LayoutLoading } from '@/components/LayoutLoading'
-
 // @ts-ignore
 const RenderDelay: FCC = ({ children }) => {
   const [show, setShow] = useState(false)
@@ -13,7 +11,7 @@ const RenderDelay: FCC = ({ children }) => {
     return () => clearTimeout(timer)
   }, [])
 
-  return !show ? <LayoutLoading /> : children
+  return !show ? <span>Загрузка...</span> : children
 }
 
 RenderDelay.displayName = 'RenderDelay'
