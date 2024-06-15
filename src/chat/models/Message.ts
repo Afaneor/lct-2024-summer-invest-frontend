@@ -4,7 +4,7 @@ import { BaseModel } from './Base'
 
 export enum OwnerTypeEnum {
   USER = 'user',
-  BOT = 'bot',
+  ASSISTANT = 'assistant',
 }
 
 export interface NewMessageModelProps {

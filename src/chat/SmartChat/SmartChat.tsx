@@ -149,7 +149,7 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
           id={new Date().toISOString()}
           text='Привет! Чем могу помочь?'
           created_at={new Date().toISOString()}
-          owner_type={OwnerTypeEnum.BOT}
+          owner_type={OwnerTypeEnum.ASSISTANT}
         />
         {selectionRequestData?.data?.messages?.map(
           (item: MessageModelProps) => (
@@ -172,7 +172,7 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
             isLoading
             id='loading-id'
             text='Подготавливаю ответ...'
-            owner_type={OwnerTypeEnum.BOT}
+            owner_type={OwnerTypeEnum.ASSISTANT}
           />
         ) : null}
         <div ref={messagesEndRef} />

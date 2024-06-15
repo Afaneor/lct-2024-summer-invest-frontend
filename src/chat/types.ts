@@ -9,8 +9,8 @@ export type HTMLElementEvent<T extends HTMLElement> = SyntheticEvent & {
 }
 export type RangeValue = [Dayjs | null, Dayjs | null] | null
 
-export type OwnerType = 'user' | 'bot'
+export type OwnerType = 'user' | 'assistant'
 export enum WhoOwnerType {
   USER = 'Вы',
-  BOT = 'Ассистент',
+  ASSISTANT = 'Ассистент',
 }

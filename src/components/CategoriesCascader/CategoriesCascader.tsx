@@ -2,6 +2,7 @@ import { Card, Col, Collapse, Divider, List, Row } from 'antd'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+import { Markdown } from '@/chat/components/Markdown'
 import { ListItemButton } from '@/components/ListItemButton'
 import type {
   ProblemCategoriesModelProps,
@@ -94,7 +95,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
 
   return (
     <Row gutter={[10, 10]}>
-      <Col xs={24} md={5}>
+      <Col xs={24} md={6}>
         <Card className={styles.card}>
           <List
             loading={isLoading}
@@ -114,7 +115,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Card>
       </Col>
       {problemSubcategories.length > 0 ? (
-        <Col xs={24} md={5}>
+        <Col xs={24} md={6} lg={5}>
           <Card className={styles.card}>
             <List
               dataSource={problemSubcategories}
@@ -137,7 +138,7 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Col>
       ) : null}
       {problemThemes.length > 0 ? (
-        <Col xs={24} md={5}>
+        <Col xs={24} md={6} lg={5}>
           <Card className={styles.card}>
             <List
               dataSource={problemThemes}
@@ -155,14 +156,14 @@ const CascadeComponent: React.FC<CascadeComponentProps> = ({
         </Col>
       ) : null}
       {problems.length > 0 ? (
-        <Col xs={24} md={9}>
+        <Col xs={24} md={6} lg={8}>
           <Card className={styles.card}>
             <Collapse accordion defaultActiveKey={['1']} ghost>
               {problems.map((problem) => (
                 <Collapse.Panel key={problem.id} header={problem.name}>
                   <Divider className={styles.divider} />
                   <div className={styles.additionalInfo}>
-                    <span>{problem.additional_info}</span>
+                    <Markdown content={problem.additional_info} />
                     <Link target='_blank' type='primary' href={problem.url}>
                       Перейти
                     </Link>

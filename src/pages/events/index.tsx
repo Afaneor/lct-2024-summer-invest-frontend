@@ -31,7 +31,7 @@ const Events = () => {
               <Col xs={24} md={18}>
                 <Row gutter={[20, 20]}>
                   {rowData.map((item: ModelOptionProps<EventModelProps>) => (
-                    <Col xs={24} md={12} key={item.id.value}>
+                    <Col xs={24} md={24} lg={12} key={item.id.value}>
                       <EventCard
                         name={item.name.value}
                         date={item?.event_datetime?.value}

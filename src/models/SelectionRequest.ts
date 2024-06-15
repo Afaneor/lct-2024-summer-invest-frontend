@@ -4,10 +4,10 @@ import type { PermissionRulesProps } from '@/services/base/types'
 
 import { BaseModel } from './Base'
 
-export type OwnerType = 'user' | 'bot'
+export type OwnerType = 'user' | 'assistant'
 export enum WhoOwnerType {
   USER = 'Вы',
-  BOT = 'Ассистент',
+  ASSISTANT = 'Ассистент',
 }
 
 export interface SelectionRequestActualProps {

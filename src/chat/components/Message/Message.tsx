@@ -21,7 +21,7 @@ interface MessageProps extends MessageModelProps {
 }
 
 const who: Record<string, string> = {
-  [OwnerTypeEnum.BOT]: WhoOwnerType.BOT,
+  [OwnerTypeEnum.ASSISTANT]: WhoOwnerType.ASSISTANT,
   [OwnerTypeEnum.USER]: WhoOwnerType.USER,
 }
 
@@ -47,7 +47,7 @@ export const Message: FCC<MessageProps> = ({
             className={clsx(
               styles.container,
               owner_type === OwnerTypeEnum.USER && styles.user,
-              owner_type === OwnerTypeEnum.BOT && styles.bot
+              owner_type === OwnerTypeEnum.ASSISTANT && styles.bot
             )}
           >
             <Flex vertical>

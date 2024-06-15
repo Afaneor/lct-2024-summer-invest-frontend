@@ -1,9 +1,9 @@
-import { Card } from 'antd'
-import React from 'react'
+import { Button, Card } from 'antd'
+import React, { useState } from 'react'
 import type { FCC } from 'src/types'
 
+import { Markdown } from '@/chat/components/Markdown'
 import { useDateTimePrettyStr } from '@/chat/hooks/useDateTimePrettyStr'
-import { TruncateText } from '@/components/TruncateText'
 
 const { Meta: CardMeta } = Card
 
@@ -16,7 +16,15 @@ interface EventCardProps {
 
 const EventCard: FCC<EventCardProps> = ({ date, name, description, photo }) => {
   const { dateFormatter } = useDateTimePrettyStr()
+  const [isTruncated, setIsTruncated] = useState(true)
+  const replaceNewLine = (text: string) => text.replace(/\\n/g, '\n')
 
+  const truncatedText = isTruncated
+    ? `${replaceNewLine(description?.slice(0, 100))}...`
+    : replaceNewLine(description)
+  const toggleTruncated = () => {
+    setIsTruncated(!isTruncated)
+  }
   return (
     <Card
       style={{
@@ -26,12 +34,23 @@ const EventCard: FCC<EventCardProps> = ({ date, name, description, photo }) => {
         date,
       })}
       hoverable
-      cover={<img alt={name} src={photo || 'https://picsum.photos/200'} />}
+      cover={
+        <img alt={name} key={name} src={photo || 'https://picsum.photos/700'} />
+      }
     >
       <CardMeta
         title={name}
-        description={<TruncateText text={description} length={100} />}
+        description={<Markdown content={truncatedText} />}
       />
+      <Button
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          toggleTruncated()
+        }}
+      >
+        {isTruncated ? 'Еще' : 'Скрыть'}
+      </Button>
     </Card>
   )
 }
