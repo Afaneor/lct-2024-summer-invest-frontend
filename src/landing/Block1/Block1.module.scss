@@ -17,6 +17,10 @@
 
 .subtitle {
   @include anim;
+
+  @media (max-width: 800px) {
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+  }
 }
 
 @keyframes showBlock {
@@ -25,5 +29,11 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+.mainTitle {
+  @media (max-width: 800px) {
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   }
 }

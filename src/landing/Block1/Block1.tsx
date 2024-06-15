@@ -7,7 +7,7 @@ import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import { Links } from '@/components/Header/Links'
 const { Title } = Typography
 
-const btnToCalc = { fontSize: 20, height: 50 }
+const btnToSA = { fontSize: 20, height: 50 }
 
 export const Block1 = () => {
   return (
@@ -17,6 +17,7 @@ export const Block1 = () => {
           <Col md={10} xs={24}>
             <Space direction={'vertical'}>
               <BebasNeueTitle
+                className={styles.mainTitle}
                 title={
                   'Умный помощник по комплексному подбору инвестиционных площадок'
                 }
@@ -29,7 +30,7 @@ export const Block1 = () => {
                   size={'large'}
                   shape={'round'}
                   type={'primary'}
-                  style={btnToCalc}
+                  style={btnToSA}
                 >
                   Воспользоваться ассистентом
                 </ButtonPrimaryRed>

@@ -26,6 +26,8 @@ const AuthCardComponent: FCC = () => {
           // если пользователь не заполнил о бизнесе данные,
           // то переходим на страницу заполнения
           window.location.href = `${Links.MY_CABINET.href}${Links.PROFILE.href}${Links.BUSINESS.href}/`
+        } else if (window.location.pathname.includes('login')) {
+          window.location.href = '/'
         } else {
           window.location.reload()
         }
