@@ -1,21 +1,26 @@
-import { PlusOutlined, SaveOutlined, SendOutlined } from '@ant-design/icons'
+import { SendOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd'
-import { Button, Col, Form, Input, Row, Tooltip } from 'antd'
+import { Button, Col, Form, Input, Row } from 'antd'
 import React, { useEffect } from 'react'
 
 import type { FCC } from '../../types'
+import InputButtons from '../InputButtons/InputButtons'
 
 const { TextArea } = Input
+
+const formStyle = { margin: '8px 24px 0' }
 
 interface InputMessageContainerProps {
   isAuthUser?: boolean
   isDisabled?: boolean
   isLoading?: boolean
+  isLoadingPdf?: boolean
   isSaving?: boolean
   form: FormInstance
   onSend: (message: string) => void
   onSaveRequest?: () => void
   onNewChat?: () => void
+  onDownloadPdf?: () => void
 }
 export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSend,
@@ -26,6 +31,8 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   isSaving,
   onSaveRequest,
   onNewChat,
+  onDownloadPdf,
+  isLoadingPdf,
 }) => {
   const inputRef = React.useRef<any>(null)
   useEffect(() => {
@@ -44,37 +51,22 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
     <Form
       form={form}
       layout='horizontal'
+      wrapperCol={{ span: 24 }}
       disabled={isDisabled}
       onFinish={handleSendClick}
     >
-      <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
-        <Col span={3}>
-          <Form.Item name='save'>
-            {isAuthUser ? (
-              <Tooltip title='Сохранить запрос и начать новый' placement='top'>
-                <Button
-                  loading={isSaving}
-                  type='text'
-                  shape='circle'
-                  size='large'
-                  icon={<SaveOutlined />}
-                  onClick={onSaveRequest}
-                />
-              </Tooltip>
-            ) : (
-              <Tooltip title='Начать новый чат' placement='top'>
-                <Button
-                  loading={isSaving}
-                  type='text'
-                  size='large'
-                  icon={<PlusOutlined />}
-                  onClick={onNewChat}
-                />
-              </Tooltip>
-            )}
-          </Form.Item>
+      <Row align='middle' justify='space-between' style={formStyle}>
+        <Col>
+          <InputButtons
+            isAuthUser={isAuthUser}
+            isSaving={isSaving}
+            isLoadingPdf={isLoadingPdf}
+            onSaveRequest={onSaveRequest}
+            onNewChat={onNewChat}
+            onDownloadPdf={onDownloadPdf}
+          />
         </Col>
-        <Col span={18}>
+        <Col span={14}>
           <Form.Item name='message' required>
             <TextArea
               ref={inputRef}
@@ -107,7 +99,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
             />
           </Form.Item>
         </Col>
-        <Col span={3}>
+        <Col>
           <Form.Item shouldUpdate>
             {() => (
               <Button
@@ -116,7 +108,13 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
                 size='large'
                 disabled={!form.getFieldValue('message') || isDisabled}
                 htmlType='submit'
-                icon={<SendOutlined />}
+                icon={
+                  <SendOutlined
+                    style={{
+                      fontSize: '26px',
+                    }}
+                  />
+                }
               />
             )}
           </Form.Item>

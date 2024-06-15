@@ -56,4 +56,8 @@ export class SelectionRequestModel extends BaseModel {
   static completedUrl() {
     return `${this.url()}/completed/`
   }
+
+  static downloadReportUrl(id: string | number) {
+    return `${this.url()}/${id}/download/`
+  }
 }

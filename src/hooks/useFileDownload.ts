@@ -4,9 +4,6 @@ import BaseServices from '@/services/base/BaseServices'
 
 /**
  * Скачивание файла
- * @param url - URL файла
- * @param params - Параметры запроса
- * @param name - Имя файла
  */
 export const useFileDownload = () => {
   const [isLoading, setIsLoading] = useState(false)

@@ -2,6 +2,8 @@ import { Card, Form, notification, Spin } from 'antd'
 import { isEmpty } from 'lodash'
 import React from 'react'
 
+import { useFileDownload } from '@/hooks/useFileDownload'
+
 import {
   useCreateItem,
   useExtraActionsGet,
@@ -54,6 +56,7 @@ export const SmartChat: FCC<SmartChatProps> = ({
   currentUser,
 }) => {
   useSessionId()
+  const { fileDownload, isLoading } = useFileDownload()
   const [inputMessageForm] = Form.useForm()
   // Инициализация формы со значением поле ввода
   // если при открытии чата передано сообщение
@@ -70,7 +73,7 @@ export const SmartChat: FCC<SmartChatProps> = ({
     isLoading: boolean
     refetch: () => void
   } = useExtraActionsGet({
-    qKey: 'currentScanDates',
+    qKey: 'SelectionRequestActual',
     extraUrl: selectionRequestModel.actualUrl(),
   })
 
@@ -132,6 +135,23 @@ export const SmartChat: FCC<SmartChatProps> = ({
       }
     )
   }
+
+  const handleDownloadFile = (id: string | number) => {
+    fileDownload({
+      url: selectionRequestModel.downloadReportUrl(id),
+      name: 'Заявка на подбор',
+    })
+      .then(() => {
+        notification.success({
+          message: 'Файл успешно скачан',
+        })
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Ошибка при скачивании файла',
+        })
+      })
+  }
   const messagesEndRef = useScrollIntoView([
     selectionRequestData,
     isLoadingCreateNewMessage,
@@ -161,10 +181,14 @@ export const SmartChat: FCC<SmartChatProps> = ({
             isAuthUser={!isEmpty(currentUser)}
             isSaving={isLoadingCompleChat}
             isLoading={isLoadingCreateNewMessage}
+            isLoadingPdf={isLoading}
             isDisabled={isLoadingCreateNewMessage}
             onSend={handleCreateMessage}
             onSaveRequest={() => handleCompleteChat('save')}
             onNewChat={() => handleCompleteChat('new')}
+            onDownloadPdf={() =>
+              handleDownloadFile(selectionRequestData?.data?.id)
+            }
           />
         </div>,
       ]}
