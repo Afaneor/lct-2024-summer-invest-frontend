@@ -23,7 +23,7 @@ export interface MessageModelProps {
   permission_rules?: string
   created_at?: string
   updated_at?: string
-  filter?: BotResponseFilterProps
+  bot_filter?: BotResponseFilterProps
 }
 
 export const EntityKeyEnum = {

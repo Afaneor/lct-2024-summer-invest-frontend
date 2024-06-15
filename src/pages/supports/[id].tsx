@@ -1,19 +1,28 @@
-import { Card, Col, Descriptions, Row } from 'antd'
-import { isEmpty } from 'lodash'
+import { Card, Col, Collapse, Row } from 'antd'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import { CommentsComponent } from '@/components/CommentsComponent'
 import { PageWrapper } from '@/components/PageWrapper'
-import { ReadyBusinessDescription } from '@/components/ReadyBusinessDescription'
-import { TruncateText } from '@/components/TruncateText'
 import { Meta } from '@/layouts/Meta'
 import type { SupportModelProps } from '@/models'
 import { CONTENT_TYPE, SupportModel } from '@/models'
 import { useFetchOneItem } from '@/services/base/hooks'
 import { Main } from '@/templates/Main'
 import type { ReactQueryFetch } from '@/types'
+
+const dataMapping = {
+  description: 'Описание',
+  legal_act:
+    'Название нормативно-правового акта, на основании которого осуществляется поддержка',
+  url_legal_act: 'ссылка на акт',
+  applicant_requirement: 'Требование к заявителю',
+  applicant_procedure: 'Процедура подачи заявки',
+  required_document: 'Необходимые документы',
+}
 
 const Model = SupportModel
 
@@ -43,38 +52,36 @@ const SupportItem = () => {
         title={response?.data?.name}
         lastCrumb={response?.data?.name}
       >
-        <Card>
-          <Row gutter={[20, 20]}>
-            <Col xs={24} md={16}>
-              <Descriptions title='User Info'>
-                <Descriptions.Item label='UserName'>
-                  Zhou Maomao
-                </Descriptions.Item>
-                <Descriptions.Item label='Telephone'>
-                  1810000000
-                </Descriptions.Item>
-                <Descriptions.Item label='Live'>
-                  Hangzhou, Zhejiang
-                </Descriptions.Item>
-                <Descriptions.Item label='Remark'>empty</Descriptions.Item>
-                <Descriptions.Item label='Address'>
-                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-                </Descriptions.Item>
-              </Descriptions>
-              ;
+        <Row gutter={[10, 10]}>
+          {Object.entries(dataMapping).map(([key, value]: any) => (
+            <Col span={24} key={key}>
+              <Card
+                styles={{
+                  body: {
+                    padding: 0,
+                  },
+                }}
+              >
+                <Collapse ghost size='large'>
+                  <Collapse.Panel
+                    header={<BebasNeueTitle level={4} title={value} />}
+                    key={key}
+                  >
+                    {response?.data[key]}
+                  </Collapse.Panel>
+                </Collapse>
+              </Card>
             </Col>
-            <Col>
-              <TruncateText text={response?.data?.description} length={400} />
-            </Col>
-            <Col xs={24}>
-              {!isEmpty(response?.data?.ready_business) ? (
-                <ReadyBusinessDescription
-                  readyBusinessData={response?.data?.ready_business}
-                />
-              ) : null}
-            </Col>
-          </Row>
-        </Card>
+          ))}
+          <Col span={24}>
+            <Link href={response?.data?.url_application_form || ''}>
+              <ButtonPrimaryRed size='large'>
+                Форма подачи заявления
+              </ButtonPrimaryRed>
+            </Link>
+          </Col>
+        </Row>
+
         <Card
           style={{
             marginTop: '20px',

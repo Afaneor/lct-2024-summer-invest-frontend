@@ -124,8 +124,8 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
               key={item.id}
               id={item.id}
               text={item.text}
-              hasFilter={!isEmpty(item.filter)}
-              filter={item.filter}
+              hasFilter={!isEmpty(item.bot_filter)}
+              bot_filter={item.bot_filter}
               created_at={item.created_at}
               owner_type={item.owner_type}
               onApplyFilter={(key, filters) => {
