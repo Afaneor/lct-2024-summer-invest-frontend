@@ -1,4 +1,5 @@
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
+import type { FormInstance } from 'antd'
 import { Button, Col, Form, Input, Row, Upload } from 'antd'
 import React, { useEffect } from 'react'
 
@@ -8,15 +9,18 @@ import { IconAsButton } from '../IconAsButton'
 const { TextArea } = Input
 
 interface InputMessageContainerProps {
+  isDisabled?: boolean
+  isLoading?: boolean
+  form: FormInstance
   onSend: (message: string) => void
   onUpload?: (file: any) => void
-  isDisabled?: boolean
 }
 export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSend,
   isDisabled,
+  form,
+  isLoading,
 }) => {
-  const [form] = Form.useForm()
   const inputRef = React.useRef<any>(null)
 
   useEffect(() => {
@@ -28,7 +32,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   const handleSendClick = () => {
     form.validateFields().then((values) => {
       onSend(values.message)
-      form.resetFields()
+      // form.resetFields()
     })
   }
 
@@ -88,7 +92,8 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
           <Form.Item shouldUpdate>
             {() => (
               <Button
-                disabled={!form.getFieldValue('message')}
+                loading={isLoading}
+                disabled={!form.getFieldValue('message') || isDisabled}
                 htmlType='submit'
                 icon={<SendOutlined />}
               />

@@ -5,31 +5,34 @@ import { Markdown } from 'src/chat/components/Markdown'
 import { useDateTimePrettyStr } from 'src/chat/hooks/useDateTimePrettyStr'
 import type { FCC } from 'src/types'
 
+import type { MessageModelProps } from '@/chat/models/Message'
+import { OwnerTypeEnum } from '@/chat/models/Message'
+import { WhoOwnerType } from '@/chat/types'
+
 import styles from './style.module.scss'
 
-interface MessageProps {
+interface MessageProps extends MessageModelProps {
   id: number | string
   text: string
   datetime?: string
-  type: string
   isLoading?: boolean
 }
 
 const who: Record<string, string> = {
-  assistant: 'Ассистент',
-  user: 'Вы',
+  [OwnerTypeEnum.BOT]: WhoOwnerType.BOT,
+  [OwnerTypeEnum.USER]: WhoOwnerType.USER,
 }
 
 export const Message: FCC<MessageProps> = ({
   text,
-  datetime,
-  type,
+  created_at,
+  owner_type,
   isLoading,
 }) => {
   const { dateFormatter } = useDateTimePrettyStr()
   const currentJustify = useMemo(
-    () => (type === 'user' ? 'end' : 'start'),
-    [type]
+    () => (owner_type === OwnerTypeEnum.USER ? 'end' : 'start'),
+    [owner_type]
   )
   return (
     <Row className={styles.row}>
@@ -38,8 +41,8 @@ export const Message: FCC<MessageProps> = ({
           <Col
             className={clsx(
               styles.container,
-              type === 'user' && styles.user,
-              type === 'assistant' && styles.assistant
+              owner_type === OwnerTypeEnum.USER && styles.user,
+              owner_type === OwnerTypeEnum.BOT && styles.bot
             )}
           >
             <Space direction='horizontal' align='baseline'>
@@ -50,8 +53,8 @@ export const Message: FCC<MessageProps> = ({
           <Col span={24}>
             <Row justify={currentJustify}>
               <h5 className={styles.whoAndDate}>
-                {who[type]}
-                {datetime ? `, ${dateFormatter({ date: datetime })}` : null}
+                {who[owner_type]}
+                {created_at ? `, ${dateFormatter({ date: created_at })}` : null}
               </h5>
             </Row>
           </Col>

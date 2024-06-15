@@ -2,10 +2,10 @@ import { Card, Col, Descriptions, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
 import React from 'react'
-import { SmartChat } from 'src/chat/SmartChat/SmartChat'
 
 import { BebasNeueTitle } from '@/components'
 import { CardSearchFilters } from '@/components/CardSearchFilters/'
+import { ChatComponent } from '@/components/ChatComponent'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/'
 import { PageWrapper } from '@/components/PageWrapper'
@@ -15,12 +15,7 @@ import type { AreaModelProps } from '@/models'
 import { AreaModel } from '@/models'
 import { Main } from '@/templates/Main'
 
-export const SmartAssistantCard = ({
-  title,
-  preview_image,
-  address,
-  ...rest
-}: any) => (
+export const ItemsCard = ({ title, preview_image, address, ...rest }: any) => (
   <Card
     cover={<img style={{ height: 300 }} alt={title} src={preview_image} />}
     {...rest}
@@ -47,20 +42,7 @@ const SmartHelper = () => {
         />
       }
     >
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 100,
-          right: 100,
-          zIndex: 9999,
-          width: 500,
-          height: 600,
-          backgroundColor: 'transparent',
-          borderRadius: 10,
-        }}
-      >
-        <SmartChat />
-      </div>
+      <ChatComponent />
       <PageWrapper
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
@@ -80,7 +62,7 @@ const SmartHelper = () => {
               {rowData?.map((area: AreaModelProps) => (
                 <Col key={area.id} xs={24} md={8}>
                   <Link target='_blank' href={area.site}>
-                    <SmartAssistantCard
+                    <ItemsCard
                       hoverable
                       title={area.title}
                       preview_image={area.preview_image}

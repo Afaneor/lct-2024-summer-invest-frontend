@@ -1,21 +1,21 @@
-import { Card } from 'antd'
-import React, { useEffect, useRef, useState } from 'react'
+import { Card, Form, Spin } from 'antd'
+import React from 'react'
 
+import { useCreateItem, useExtraActionsGet } from '../../services/base/hooks'
 import type { FCC } from '../../types'
 import { BebasNeueTitle } from '../components/BebasNeueTitle'
 import { InputMessageContainer } from '../components/InputMessageContainer'
 import { Message } from '../components/Message'
+import { useScrollIntoView } from '../hooks/useScrollIntoView'
+import useSessionId from '../hooks/useUniqUserIdentifier'
+import type { MessageModelProps, NewMessageModelProps } from '../models/Message'
+import { MessageModel, OwnerTypeEnum } from '../models/Message'
+import type { SelectionRequestActualProps } from '../models/SelectionRequest'
+import { SelectionRequestModel } from '../models/SelectionRequest'
 import styles from './style.module.scss'
 
 interface SmartChatProps {
   isOpen?: boolean
-}
-
-export interface MessageData {
-  id: number | string
-  text: string
-  datetime: string
-  type: string
 }
 
 const bodyStyle = {
@@ -26,62 +26,47 @@ const bodyStyle = {
   msOverflowStyle: 'none',
 } as React.CSSProperties
 
-let sayHello = false
-
 const headStyle = { backgroundColor: '#3A3A3A' } as React.CSSProperties
 
+const selectionRequestModel = SelectionRequestModel
+const messageModel = MessageModel
+
 export const SmartChat: FCC<SmartChatProps> = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [fakeData, setFakeData] = useState([] as MessageData[])
-  const messagesEndRef = useRef<null | HTMLDivElement>(null)
+  useSessionId()
+  const [inputMessageForm] = Form.useForm()
 
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+  const {
+    data: selectionRequestData,
+    isLoading: isLoadingActual,
+    refetch: refetchActual,
+  }: {
+    data: Record<'data', SelectionRequestActualProps> | any
+    isLoading: boolean
+    refetch: () => void
+  } = useExtraActionsGet('currentScanDates', selectionRequestModel.actualUrl())
+
+  const { mutate: createMessage, isLoading: isLoadingCreateNewMessage } =
+    useCreateItem(messageModel)
+
+  const handleCreateMessage = (text: string) => {
+    const msg: NewMessageModelProps = {
+      text,
+      owner_type: OwnerTypeEnum.USER,
+      selection_request: selectionRequestData?.data?.id,
     }
-  }, [fakeData])
-
-  useEffect(() => {
-    if (!sayHello) {
-      sayHello = true
-      setTimeout(() => {
-        setFakeData((prevState) => [
-          ...prevState,
-          {
-            id: `hello-${new Date().getTime()}`,
-            text: '## Привет! Чем могу помочь?',
-            datetime: new Date().toISOString(),
-            type: 'assistant',
-          },
-        ])
-      }, 1000)
-    }
-  }, [])
-
-  const onAddNewMessage = (text: string) => {
-    setFakeData((prevState) => [
-      ...prevState,
-      {
-        id: fakeData.length + 1,
-        text,
-        datetime: new Date().toISOString(),
-        type: 'user',
+    createMessage(msg, {
+      onSuccess: () => {
+        refetchActual()
+        inputMessageForm.resetFields()
       },
-    ])
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setFakeData((prevState) => [
-        ...prevState,
-        {
-          id: fakeData.length + 2,
-          text: 'Вот такой ответ очень длинный и интересный, но не всегда понятный...',
-          datetime: new Date().toISOString(),
-          type: 'assistant',
-        },
-      ])
-    }, 1000)
+      onError: (error: any) => {
+        refetchActual()
+        console.error('error', error)
+      },
+    })
   }
+  const messagesEndRef = useScrollIntoView([selectionRequestData])
+
   return (
     <Card
       bordered={false}
@@ -95,33 +80,49 @@ export const SmartChat: FCC<SmartChatProps> = () => {
         />
       }
       className={styles.container}
-      headStyle={headStyle}
-      bodyStyle={bodyStyle}
+      styles={{
+        header: headStyle,
+        body: bodyStyle,
+      }}
       actions={[
         <div key='infoMsg' className={styles.cardFooter}>
           <InputMessageContainer
-            isDisabled={isLoading}
-            onSend={onAddNewMessage}
+            form={inputMessageForm}
+            isLoading={isLoadingCreateNewMessage}
+            isDisabled={isLoadingCreateNewMessage}
+            onSend={handleCreateMessage}
           />
         </div>,
       ]}
     >
       <div>
-        {fakeData.map((item) => (
+        <Spin spinning={isLoadingActual} />
+        {!selectionRequestData?.data?.messages?.length ? (
           <Message
-            key={item.id}
-            id={item.id}
-            text={item.text}
-            datetime={item.datetime}
-            type={item.type}
+            key='item.id'
+            id='item.id'
+            text='Привет! Чем могу помочь?'
+            created_at={new Date().toISOString()}
+            owner_type={OwnerTypeEnum.BOT}
           />
-        ))}
-        {isLoading ? (
+        ) : null}
+        {selectionRequestData?.data?.messages?.map(
+          (item: MessageModelProps) => (
+            <Message
+              key={item.id}
+              id={item.id}
+              text={item.text}
+              created_at={item.created_at}
+              owner_type={item.owner_type}
+            />
+          )
+        )}
+        {isLoadingCreateNewMessage ? (
           <Message
             isLoading
             id='loading-id'
             text='Подготавливаю ответ...'
-            type='assistant'
+            owner_type={OwnerTypeEnum.BOT}
           />
         ) : null}
         <div ref={messagesEndRef} />
