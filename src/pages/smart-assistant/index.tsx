@@ -1,12 +1,13 @@
 import { Card, Col, Descriptions, Form, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { useScrollIntoViewOnCall } from '@/chat/hooks/useScrollIntoView'
 import { BebasNeueTitle } from '@/components'
 import { CardSearchFilters } from '@/components/CardSearchFilters/'
 import { ChatComponent } from '@/components/ChatComponent'
+import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { Links } from '@/components/Header/Links'
 import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/'
@@ -36,8 +37,9 @@ const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
   const [form] = Form.useForm()
+  const { filter } = useContext(ChatContext)
 
-  const [filter, setFilter] = useFilter(defFilters)
+  const [defFilter, setFilter] = useFilter(defFilters)
   const [divRef, scrollTo] = useScrollIntoViewOnCall()
 
   return (
@@ -64,7 +66,7 @@ const SmartHelper = () => {
         />
         <FetchMoreItemsComponent
           model={Model}
-          defFilters={filter}
+          defFilters={{ ...defFilter, ...filter }}
           lengthPostfixPlural='площадок'
           renderItems={(
             rowData: ModelOptionProps<InvestmentObjectsModelProps>[],

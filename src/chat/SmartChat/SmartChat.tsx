@@ -31,7 +31,10 @@ const headStyle = { backgroundColor: '#3A3A3A' } as React.CSSProperties
 const selectionRequestModel = SelectionRequestModel
 const messageModel = MessageModel
 
-export const SmartChat: FCC<SmartChatProps> = () => {
+interface SmartChatProps {
+  onApplyFilter: (filter?: Record<string, any>) => void
+}
+export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
   useSessionId()
   const [inputMessageForm] = Form.useForm()
 
@@ -97,23 +100,25 @@ export const SmartChat: FCC<SmartChatProps> = () => {
     >
       <div>
         <Spin spinning={isLoadingActual} />
-        {!selectionRequestData?.data?.messages?.length ? (
-          <Message
-            key='item.id'
-            id='item.id'
-            text='Привет! Чем могу помочь?'
-            created_at={new Date().toISOString()}
-            owner_type={OwnerTypeEnum.BOT}
-          />
-        ) : null}
+        <Message
+          key={new Date().toISOString()}
+          id={new Date().toISOString()}
+          text='Привет! Чем могу помочь?'
+          created_at={new Date().toISOString()}
+          owner_type={OwnerTypeEnum.BOT}
+        />
         {selectionRequestData?.data?.messages?.map(
           (item: MessageModelProps) => (
             <Message
               key={item.id}
               id={item.id}
               text={item.text}
+              hasFilter={item.filter !== null}
               created_at={item.created_at}
               owner_type={item.owner_type}
+              onApplyFilter={() => {
+                onApplyFilter(item.filter)
+              }}
             />
           )
         )}

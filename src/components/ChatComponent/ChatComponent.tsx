@@ -1,8 +1,9 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { useContext } from 'react'
 import type { FCC } from 'src/types'
 
 import { SmartChat } from '@/chat/SmartChat'
+import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { MainChatBtn } from '@/components/MainChatBtn'
 
 import styles from './ChatComponent.module.scss'
@@ -13,6 +14,8 @@ interface ChatComponentProps {
 
 const ChatComponent: FCC<ChatComponentProps> = () => {
   const [isOpen, setIsOpen] = React.useState(false)
+  const { setChatFilter } = useContext(ChatContext)
+
   return (
     <>
       <div
@@ -27,7 +30,7 @@ const ChatComponent: FCC<ChatComponentProps> = () => {
       </div>
       {isOpen ? (
         <div className={clsx(styles.container, isOpen && styles.show)}>
-          <SmartChat />
+          <SmartChat onApplyFilter={setChatFilter} />
         </div>
       ) : null}
     </>

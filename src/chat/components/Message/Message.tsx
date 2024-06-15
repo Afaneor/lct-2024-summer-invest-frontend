@@ -1,4 +1,4 @@
-import { Col, Row, Space, Spin } from 'antd'
+import { Button, Col, Flex, Row, Space, Spin } from 'antd'
 import clsx from 'clsx'
 import React, { useMemo } from 'react'
 import { Markdown } from 'src/chat/components/Markdown'
@@ -13,6 +13,8 @@ import styles from './style.module.scss'
 
 interface MessageProps extends MessageModelProps {
   isLoading?: boolean
+  hasFilter?: boolean
+  onApplyFilter?: () => void
 }
 
 const who: Record<string, string> = {
@@ -25,12 +27,15 @@ export const Message: FCC<MessageProps> = ({
   created_at,
   owner_type,
   isLoading,
+  hasFilter,
+  onApplyFilter,
 }) => {
   const { dateFormatter } = useDateTimePrettyStr()
   const currentJustify = useMemo(
     () => (owner_type === OwnerTypeEnum.USER ? 'end' : 'start'),
     [owner_type]
   )
+
   return (
     <Row className={styles.row}>
       <Col span={24}>
@@ -42,10 +47,19 @@ export const Message: FCC<MessageProps> = ({
               owner_type === OwnerTypeEnum.BOT && styles.bot
             )}
           >
-            <Space direction='horizontal' align='baseline'>
-              {isLoading ? <Spin size='small' /> : null}
-              <Markdown content={text} />
-            </Space>
+            <Flex vertical>
+              <Space direction='horizontal' align='baseline'>
+                {isLoading ? <Spin size='small' /> : null}
+                <Markdown content={text} />
+              </Space>
+              <div>
+                {hasFilter ? (
+                  <Button danger onClick={onApplyFilter}>
+                    Посмотреть
+                  </Button>
+                ) : null}
+              </div>
+            </Flex>
           </Col>
           <Col span={24}>
             <Row justify={currentJustify}>

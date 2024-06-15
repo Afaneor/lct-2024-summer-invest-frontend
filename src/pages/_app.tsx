@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import React from 'react'
 
+import ChatContextProvider from '@/components/ChatContextProvider/ChatContextProvider'
 import CurrentUserProvider from '@/components/CurrentUserProvider/CurrentUserProvider'
 import NotificationMessageProvider from '@/components/NotificationMessage/NotificationMessage'
 
@@ -20,7 +21,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <NotificationMessageProvider>
         <CurrentUserProvider>
-          <Component {...pageProps} />
+          <ChatContextProvider>
+            <Component {...pageProps} />
+          </ChatContextProvider>
         </CurrentUserProvider>
       </NotificationMessageProvider>
     </QueryClientProvider>

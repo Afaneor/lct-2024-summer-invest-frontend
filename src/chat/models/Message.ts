@@ -23,6 +23,7 @@ export interface MessageModelProps {
   permission_rules?: string
   created_at?: string
   updated_at?: string
+  filter?: MessageModelFilters
 }
 
 export interface MessageModelFilters {

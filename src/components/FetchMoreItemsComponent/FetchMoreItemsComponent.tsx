@@ -53,7 +53,8 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
           {lengthPostfixPlural}
         </Col>
       </Row>
-      <Spin spinning={isLoading}>{renderItems(rData, fetchNextPage)}</Spin>
+      <Spin spinning={isLoading} />
+      {renderItems(rData, fetchNextPage)}
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
           <Button
