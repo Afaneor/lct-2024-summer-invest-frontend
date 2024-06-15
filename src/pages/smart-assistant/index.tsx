@@ -56,8 +56,6 @@ const SmartHelper = () => {
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
       >
-        тип объекта / ОКВЭД \ Преференциальный режим \ Форма сделки \ Стоимость
-        от до \ Муниципальное образование \ Площадь объекта от до
         <CardSearchFilters
           form={form}
           onChange={(evt: BaseSyntheticEvent) => {
