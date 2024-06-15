@@ -4,11 +4,10 @@ import { isEmpty } from 'lodash'
 import React, { useMemo } from 'react'
 import { Markdown } from 'src/chat/components/Markdown'
 import { useDateTimePrettyStr } from 'src/chat/hooks/useDateTimePrettyStr'
+import type { MessageModelProps } from 'src/chat/models/Message'
+import { EntityTypeEnum, OwnerTypeEnum } from 'src/chat/models/Message'
+import { WhoOwnerType } from 'src/chat/types'
 import type { FCC } from 'src/types'
-
-import type { MessageModelProps } from '@/chat/models/Message'
-import { EntityTypeEnum, OwnerTypeEnum } from '@/chat/models/Message'
-import { WhoOwnerType } from '@/chat/types'
 
 import styles from './style.module.scss'
 
