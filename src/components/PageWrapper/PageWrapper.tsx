@@ -16,7 +16,7 @@ interface PageWrapperProps {
   subTitle?: string
   isLoading?: boolean
   breadCrumbs?: ItemType[]
-  tabsContainer?: React.ReactNode
+  underTitleContainer?: React.ReactNode
   lastCrumb?: string
 }
 
@@ -30,7 +30,7 @@ const PageWrapper: FCC<PageWrapperProps> = ({
   breadCrumbs,
   children,
   title,
-  tabsContainer,
+  underTitleContainer,
   lastCrumb,
 }) => {
   const router = useRouter()
@@ -86,9 +86,9 @@ const PageWrapper: FCC<PageWrapperProps> = ({
               />
             </Col>
           ) : null}
-          <Col {...colSizes}>{tabsContainer}</Col>
+          <Col {...colSizes}>{underTitleContainer}</Col>
         </Row>
-      </Col>{' '}
+      </Col>
       {isLoading ? (
         <Col span={24}>
           <Row justify='center'>

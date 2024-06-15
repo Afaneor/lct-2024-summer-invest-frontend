@@ -56,7 +56,6 @@ export const Header: FCC = () => {
       </Row>
       <Row justify='center'>
         <Col
-          flex='auto'
           xs={0}
           md={0}
           lg={16}

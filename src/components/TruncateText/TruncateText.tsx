@@ -22,7 +22,15 @@ const TruncateText: FCC<TruncateTextProps> = ({ text, length }) => {
     <div className={styles.container} data-testid='test-TruncateText'>
       <p>
         {truncatedText}
-        <Button size='small' type='link' onClick={toggleTruncated}>
+        <Button
+          size='small'
+          type='link'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggleTruncated()
+          }}
+        >
           {isTruncated ? 'Еще' : 'Скрыть'}
         </Button>
       </p>

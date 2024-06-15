@@ -29,7 +29,7 @@ const MyProfileLayout: FCC = ({ children }) => {
       <PageWrapper
         title='Профиль'
         subTitle='Мой профиль'
-        tabsContainer={<LinkedTabs linkedTabs={tabs} />}
+        underTitleContainer={<LinkedTabs linkedTabs={tabs} />}
       >
         {children}
       </PageWrapper>

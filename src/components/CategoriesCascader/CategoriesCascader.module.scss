@@ -1,0 +1,14 @@
+.card {
+  height: 100%;
+}
+
+.additionalInfo {
+  height: 200px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  margin: 0 0 10px 0;
+}

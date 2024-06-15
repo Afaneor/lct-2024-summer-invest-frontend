@@ -1,41 +1,32 @@
-import { Badge, Card, Descriptions, Divider, Tag, Typography } from 'antd'
+import { Card } from 'antd'
+import Link from 'next/link'
 import type { CSSProperties } from 'react'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-const { Text, Title } = Typography
+import TruncateText from '../TruncateText/TruncateText'
 
 interface SupportCardProps {
-  is_actual: boolean
   title: string
   text: string
-  amount: string
+  href: string
   style?: CSSProperties
 }
 
-const SupportCard: FCC<SupportCardProps> = ({
-  is_actual,
-  title,
-  amount,
-  text,
-  style,
-}) => {
+const SupportCard: FCC<SupportCardProps> = ({ href, title, text, style }) => {
   return (
-    <Badge.Ribbon
-      text={is_actual ? 'Актуально' : 'Не актуально'}
-      color={is_actual ? 'blue' : 'red'}
+    <Card
+      hoverable
+      title={title}
+      style={{ height: '100%', ...style }}
+      extra={
+        <Link target='_blank' href={href}>
+          Подробнее
+        </Link>
+      }
     >
-      <Card hoverable style={{ height: '100%', ...style }}>
-        <Title level={5}>{title}</Title>
-        <Divider />
-        <Descriptions column={1}>
-          <Descriptions.Item label='Размер субсидий'>
-            {amount ? <Tag>{amount}</Tag> : '-'}
-          </Descriptions.Item>
-        </Descriptions>
-        <Text type='secondary'>{text}</Text>
-      </Card>
-    </Badge.Ribbon>
+      <TruncateText text={text} length={150} />
+    </Card>
   )
 }
 

@@ -74,14 +74,13 @@ const SpecialForYou: FCC<SpecialForYouProps> = ({ offers, supports }) => {
             {supports?.map((support) => (
               <ExternalBtnLink
                 key={support.id}
-                title={support.title}
-                site={support.site}
+                title={support.name}
+                site={support.url_application_form}
                 content={
                   <SupportCard
-                    title={support.title}
-                    text={support.text}
-                    amount={support.amount}
-                    is_actual={support.is_actual}
+                    href={support.url_application_form}
+                    title={support.name}
+                    text={support.description}
                     style={{ maxWidth: 400 }}
                   />
                 }

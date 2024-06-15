@@ -25,6 +25,7 @@ export interface LinksKeys {
   INFO: LinkProps
   BUSINESS: LinkProps
   SEARCH_HISTORY: LinkProps
+  FAQ: LinkProps
 }
 
 export const Links: LinksKeys = {
@@ -44,7 +45,7 @@ export const Links: LinksKeys = {
     title: 'Предложения от партнеров',
     href: '/offers',
     icon: <UsergroupAddOutlined />,
-    isTab: true,
+    isTab: false,
   },
   SUPPORTS: {
     title: 'Меры поддержки',
@@ -56,13 +57,13 @@ export const Links: LinksKeys = {
     title: 'Промплощадки',
     href: '/areas',
     icon: <SketchOutlined />,
-    isTab: true,
+    isTab: false,
   },
   BLOG: {
     title: 'Блог',
     href: '/blog',
     icon: <LaptopOutlined />,
-    isTab: true,
+    isTab: false,
   },
   MY_PROFILE: {
     title: 'Личный кабинет',
@@ -93,6 +94,12 @@ export const Links: LinksKeys = {
     href: '/search-history',
     icon: <UsergroupAddOutlined />,
     isTab: false,
+  },
+  FAQ: {
+    title: 'Вопросы и ответы',
+    href: '/faq',
+    icon: <UsergroupAddOutlined />,
+    isTab: true,
   },
 }
 
