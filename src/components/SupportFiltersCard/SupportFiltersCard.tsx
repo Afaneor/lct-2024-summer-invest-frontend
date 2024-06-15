@@ -4,6 +4,7 @@ import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components'
 import { ButtonRounded } from '@/components/ButtonRounded'
+import { OkvedSelectModal } from '@/components/OkvedSelectModal'
 import type { SupportModelProps } from '@/models'
 import { SupportModel } from '@/models'
 import { useExtraActionsGet } from '@/services/base/hooks'
@@ -13,6 +14,7 @@ interface SupportFiltersCardProps {
   support_level?: string
   msp_roster?: string
   economic_activity_name?: string
+  economic_activity_code?: string[]
   onChange?: (obj: Record<string, string>) => void
   onReset?: () => void
 }
@@ -25,6 +27,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
   support_level,
   support_type,
   economic_activity_name,
+  economic_activity_code,
 }) => {
   const [form] = Form.useForm()
   const {
@@ -62,6 +65,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
               support_level,
               msp_roster,
               economic_activity_name,
+              economic_activity_code,
             }}
             onValuesChange={handleFormChange}
             layout='vertical'
@@ -134,6 +138,9 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
                   </Select.Option>
                 ))}
               </Select>
+            </Form.Item>
+            <Form.Item name='economic_activity_code' label='ОКВЭД'>
+              <OkvedSelectModal value={data?.data?.economic_activity_code} />
             </Form.Item>
           </Form>
         </Col>

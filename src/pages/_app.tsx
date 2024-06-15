@@ -3,6 +3,8 @@ import '../styles/global.css'
 import '../../public/antd.min.css'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ConfigProvider } from 'antd'
+import ruRU from 'antd/lib/locale/ru_RU'
 import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import React from 'react'
@@ -18,15 +20,17 @@ const qClientConfig = {
 const queryClient = new QueryClient(qClientConfig)
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NotificationMessageProvider>
-        <CurrentUserProvider>
-          <ChatContextProvider>
-            <Component {...pageProps} />
-          </ChatContextProvider>
-        </CurrentUserProvider>
-      </NotificationMessageProvider>
-    </QueryClientProvider>
+    <ConfigProvider locale={ruRU}>
+      <QueryClientProvider client={queryClient}>
+        <NotificationMessageProvider>
+          <CurrentUserProvider>
+            <ChatContextProvider>
+              <Component {...pageProps} />
+            </ChatContextProvider>
+          </CurrentUserProvider>
+        </NotificationMessageProvider>
+      </QueryClientProvider>
+    </ConfigProvider>
   )
 }
 

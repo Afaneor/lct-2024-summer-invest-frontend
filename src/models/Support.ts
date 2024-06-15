@@ -40,6 +40,7 @@ export interface SupportModelProps extends BaseModelProps {
   permission_rules: PermissionRulesProps
   created_at: string
   updated_at: string
+  economic_activity_code: string[]
 }
 
 export const CONTENT_TYPE = 43

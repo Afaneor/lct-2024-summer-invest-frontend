@@ -52,7 +52,16 @@ img,
   border-color: #000c17 !important;
   box-shadow: none !important;
 }
-
+.ant-tree-checkbox:hover .ant-tree-checkbox-inner {
+  border-color: #d9d9d9 !important;
+}
+.ant-tree .ant-tree-checkbox-indeterminate .ant-tree-checkbox-inner:after {
+  background-color: #ef0f33 !important;
+}
+.ant-tree-checkbox-checked .ant-tree-checkbox-inner {
+  border-color: #ef0f33 !important;
+  background-color: #ef0f33 !important;
+}
 .ant-input-outlined .ant-input-disabled {
   color: rgba(0, 0, 0, 0.25) !important;
 }

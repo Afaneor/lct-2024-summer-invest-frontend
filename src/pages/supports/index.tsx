@@ -48,6 +48,7 @@ const Supports = () => {
         <Row gutter={[20, 20]}>
           <Col xs={24} md={8}>
             <SupportFiltersCard
+              economic_activity_code={shortFilter?.economic_activity_code}
               support_level={shortFilter?.support_level}
               support_type={shortFilter?.support_type}
               msp_roster={shortFilter?.msp_roster}
