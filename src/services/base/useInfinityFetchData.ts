@@ -106,7 +106,6 @@ export const useInfinityFetchData = <ModelType>(
       rowData.push(...page.data)
     }
   })
-
   return {
     rowData,
     setFilters,

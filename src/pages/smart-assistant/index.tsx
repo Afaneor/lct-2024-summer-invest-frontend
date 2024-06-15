@@ -1,8 +1,9 @@
 import { Card, Col, Descriptions, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
-import React from 'react'
+import React, { useState } from 'react'
 
+import { useScrollIntoView } from '@/chat/hooks/useScrollIntoView'
 import { BebasNeueTitle } from '@/components'
 import { CardSearchFilters } from '@/components/CardSearchFilters/'
 import { ChatComponent } from '@/components/ChatComponent'
@@ -34,6 +35,8 @@ const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
   const [filter, setFilter] = useFilter(defFilters)
+  const [goTo, setGoTo] = useState(new Date())
+  const messagesEndRef = useScrollIntoView([goTo])
 
   return (
     <Main
@@ -54,30 +57,37 @@ const SmartHelper = () => {
             setFilter({ territorial_location: evt?.target?.value?.id })
           }}
         />
-        <NeedModeResultsComponent />
         <FetchMoreItemsComponent
           model={Model}
           defFilters={filter}
           lengthPostfixPlural='площадок'
-          renderItems={(rowData) => (
+          renderItems={(
+            rowData: ModelOptionProps<InvestmentObjectsModelProps>[],
+            fetchNextPage: () => void
+          ) => (
             <Row gutter={[40, 20]}>
-              {rowData?.map(
-                (
-                  investmentObject: ModelOptionProps<InvestmentObjectsModelProps>
-                ) => (
-                  <Col key={investmentObject.id.value} xs={24} md={8}>
-                    <Link target='_blank' href={investmentObject.url.value}>
-                      <ItemsCard
-                        key={investmentObject.id.value}
-                        hoverable
-                        title={investmentObject.name.value}
-                        preview_image={investmentObject.main_photo_url.value}
-                        territorial_location='investmentObject.object_type.value'
-                      />
-                    </Link>
-                  </Col>
-                )
-              )}
+              <Col span={24}>
+                <NeedModeResultsComponent
+                  onClick={() => {
+                    setGoTo(new Date())
+                    fetchNextPage?.()
+                  }}
+                />
+              </Col>
+              {rowData?.map((investmentObject) => (
+                <Col key={investmentObject.id.value} xs={24} md={12} lg={8}>
+                  <Link target='_blank' href={investmentObject.url.value}>
+                    <ItemsCard
+                      key={investmentObject.id.value}
+                      hoverable
+                      title={investmentObject.name.value}
+                      preview_image={investmentObject.main_photo_url.value}
+                      territorial_location='investmentObject.object_type.value'
+                    />
+                  </Link>
+                </Col>
+              ))}
+              <div ref={messagesEndRef} />
             </Row>
           )}
         />
