@@ -10,9 +10,7 @@ export interface BaseModelProps {
 export class BaseModel {
   static modelName = 'base'
 
-  static baseUrl = '/example'
-
   static url() {
-    return `${this.baseUrl}/${this.modelName}`
+    return ''
   }
 }

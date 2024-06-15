@@ -1,15 +1,62 @@
-import { HomeOutlined, UsergroupAddOutlined } from '@ant-design/icons'
+import {
+  CalculatorOutlined,
+  HomeOutlined,
+  LaptopOutlined,
+  SketchOutlined,
+  UsergroupAddOutlined,
+} from '@ant-design/icons'
 import React from 'react'
 
 export const Links = [
   {
-    text: 'Дом',
+    title: 'Дом',
     href: '/',
     icon: <HomeOutlined />,
   },
   {
-    text: 'Пример страницы',
-    href: '/example',
+    title: 'Калькулятор',
+    href: '/calculator',
+    icon: <CalculatorOutlined />,
+  },
+  {
+    title: 'Умный помощник',
+    href: '/smart-assistant',
     icon: <UsergroupAddOutlined />,
+  },
+  {
+    title: 'Предложения от партнеров',
+    href: '/offers',
+    icon: <UsergroupAddOutlined />,
+  },
+  {
+    title: 'Меры поддержки',
+    href: '/supports',
+    icon: <SketchOutlined />,
+  },
+  {
+    title: 'Промплощадки',
+    href: '/areas',
+    icon: <SketchOutlined />,
+  },
+  // {
+  //   title: 'Аналитика',
+  //   href: '/analytics',
+  //   icon: <SketchOutlined />,
+  // },
+  {
+    title: 'Блог',
+    href: '/blog',
+    icon: <LaptopOutlined />,
+  },
+]
+
+export const FirstLineLinks = [
+  {
+    title: '+7 (495) 123-45-67',
+    href: '/',
+  },
+  {
+    title: 'Единая линия поддержки',
+    href: '/',
   },
 ]

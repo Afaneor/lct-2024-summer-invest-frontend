@@ -1,25 +1,46 @@
 import { UserOutlined } from '@ant-design/icons'
-import { Button, Spin } from 'antd'
-import Link from 'next/link'
-import React, { useContext } from 'react'
+import { Button, Space, Spin } from 'antd'
+import React, { useState } from 'react'
 
-import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
+import type { FCC } from '@/types'
 
-import { CurrentUser } from '../CurrentUser'
+import { AuthModalComponent } from '../AuthModalComponent'
+import { IconAsButton } from '../IconAsButton'
 
-const AuthComponent = () => {
-  const { currentUser } = useContext(CurrentUserContext)
-
-  if (currentUser) {
-    return <CurrentUser currentUser={currentUser} />
-  }
+interface AuthComponentProps {
+  isLoading?: boolean
+  title?: string
+}
+const AuthComponent: FCC<AuthComponentProps> = ({
+  title,
+  isLoading = false,
+}) => {
+  const [open, setOpen] = useState(false)
+  // const { currentUser } = useContext(CurrentUserContext)
+  //
+  // if (currentUser) {
+  //   return <CurrentUser currentUser={currentUser} />
+  // }
 
   return (
-    <Spin spinning={false}>
-      <Link href='/login'>
-        <Button shape='circle' icon={<UserOutlined />} />
-      </Link>
-    </Spin>
+    <Space direction='horizontal'>
+      <AuthModalComponent open={open} onCLose={() => setOpen(false)} />
+      <Spin spinning={isLoading}>
+        {title ? (
+          <Button type='text' onClick={() => setOpen(true)}>
+            {title}
+          </Button>
+        ) : (
+          <IconAsButton
+            icon={UserOutlined}
+            style={{
+              fontSize: 16,
+            }}
+            onClick={() => setOpen(true)}
+          />
+        )}
+      </Spin>
+    </Space>
   )
 }
 

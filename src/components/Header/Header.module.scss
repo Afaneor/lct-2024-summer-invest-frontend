@@ -9,36 +9,88 @@
   font-size: 1.5rem;
 }
 
+.shadowClass {
+  box-shadow: 0 12px 21px -14px #3a3a3a;
+  -webkit-box-shadow: 0 12px 21px -14px #3a3a3a;
+  -moz-box-shadow: 0 12px 21px -14px #3a3a3a;
+}
+
 .headerContainer {
   position: sticky;
   top: 0;
   z-index: 100;
   width: 100%;
   background-color: white;
-  -webkit-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.22);
-  -moz-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.22);
-  box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.22);
+  padding: 0;
+}
+
+.headerContainer:hover {
+  background-color: #3a3a3a !important;
+
+  .link {
+    color: white;
+  }
+
+  .firstLineLink {
+    color: white !important;
+  }
+
+  .subtitleInvest {
+    color: white !important;
+  }
+
+  .authIconBtn {
+    color: white !important;
+  }
 }
 
 .authSection {
   display: flex;
-  justify-content: flex-end;
-}
-.navLink button {
-  color: #2c2c2c;
-}
-.navLink:hover {
-  @include boxShadowBottom;
-  & button {
-    color: #69b1ff;
-  }
+  justify-content: end;
 }
 
-.activeLink {
-  @include boxShadowBottom;
+.link {
+  font-family: Bebas Neue, Bebas-fallback, sans-serif;
+  display: inline-block;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.0151em;
+  text-transform: uppercase;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #3a3a3a;
+}
 
-  & button {
-    font-weight: bold;
-    color: #2c2c2c;
-  }
+.link:hover {
+  border-color: #ffffff;
+}
+
+.subtitleInvest {
+  margin-top: 6px !important;
+  margin-bottom: 10px !important;
+  font-size: 10px !important;
+}
+
+.firstLineLink {
+  font-weight: 100 !important;
+  font-family: 'Roboto', sans-serif !important;
+  text-align: unset !important;
+  line-height: initial !important;
+  font-size: 14px !important;
+  box-sizing: inherit !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  text-decoration: none;
+  margin-right: 32px;
+}
+
+.secondLineLinksContainer {
+  display: flex;
+  border-bottom: 1px solid #ababab;
+}
+
+.authIconBtn {
+  margin-left: auto;
 }

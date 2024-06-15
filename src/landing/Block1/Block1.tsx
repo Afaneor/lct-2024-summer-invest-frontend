@@ -1,7 +1,10 @@
 import React from 'react'
 import styles from './Block1.module.scss'
-import { Col, Row, Space, Typography } from 'antd'
+import { Button, Col, Row, Space, Typography } from 'antd'
+import Link from 'next/link'
 const { Title } = Typography
+
+const btnToCalc = { fontSize: 20, height: 50 }
 
 export const Block1 = () => {
   return (
@@ -10,10 +13,23 @@ export const Block1 = () => {
         <Row gutter={[20, 20]}>
           <Col md={12} xs={24}>
             <Space direction={'vertical'}>
-              <Title className={styles.title}>Название проекта</Title>
-              <Title level={3} className={styles.subtitle}>
-                Второй заголовок
+              <Title className={styles.title}>
+                Калькулятор инвестиций
+                <br />в развитие промышленного предприятия
               </Title>
+              <Title level={3} className={styles.subtitle}>
+                Отправная точка ваших идей
+              </Title>
+              <Link href={'/calculator'}>
+                <Button
+                  size={'large'}
+                  shape={'round'}
+                  type={'primary'}
+                  style={btnToCalc}
+                >
+                  Воспользоваться калькулятором
+                </Button>
+              </Link>
             </Space>
           </Col>
         </Row>

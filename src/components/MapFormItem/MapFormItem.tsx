@@ -2,6 +2,7 @@ import React from 'react'
 
 import type { PropsFormItem } from '@/components'
 import { FormItem } from '@/components'
+import { CalcMap } from '@/components/CalcMap'
 import type { FCC } from '@/types'
 
 interface MapFormItemProps extends PropsFormItem {
@@ -10,15 +11,7 @@ interface MapFormItemProps extends PropsFormItem {
 const MapFormItem: FCC<MapFormItemProps> = ({ onCreatePolygone }) => {
   return (
     <FormItem name='territorial_locations' shouldUpdate>
-      <button
-        type='button'
-        onClick={() => {
-          onCreatePolygone?.(100)
-        }}
-      >
-        Создать полигон
-      </button>
-      Тут будет карта
+      <CalcMap onCreatePolygon={onCreatePolygone} />
     </FormItem>
   )
 }
