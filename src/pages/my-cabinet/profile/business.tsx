@@ -15,25 +15,6 @@ import withAuth from '@/pages/HOC'
 import { useDeleteItem, usePostExtraActions } from '@/services/base/hooks'
 import MyProfileLayout from '@/templates/MyProfileLayout'
 
-const mapping = [
-  'full_business_name',
-  'position',
-  'management_name',
-  'inn',
-  'email',
-  'phone',
-  'site',
-  'address',
-  'okved',
-  'type_business',
-  'region',
-  'city_area',
-  'city_district',
-  'territorial_location',
-  'sector',
-  'sub_sector',
-]
-
 const blockStyle = {
   margin: '0 0 20px 0',
 }
@@ -134,7 +115,7 @@ const MyProfileBusiness = () => {
         model={Model}
         defFilters={filter}
         lengthPostfixPlural='организаций'
-        optionsFieldList={mapping}
+        optionsFieldList={Model.mappingFields}
         renderItems={({ data: fetchedValues, dataCount }) => (
           <>
             <Row style={blockStyle}>
@@ -172,7 +153,7 @@ const MyProfileBusiness = () => {
                             <Col xs={24} md={8} key={key}>
                               <MyBusinessDescription
                                 label={options.label}
-                                value={JSON.stringify(options.value)}
+                                value={options.value}
                               />
                             </Col>
                           )

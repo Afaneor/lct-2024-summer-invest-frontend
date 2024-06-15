@@ -35,7 +35,7 @@ interface FetchMoreItemsComponentProps {
     isFetching: boolean
   }) => React.ReactNode
   lengthPostfixPlural?: string
-  optionsFieldList?: string[]
+  optionsFieldList?: (string | Record<string, string[]>)[]
 }
 
 const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({

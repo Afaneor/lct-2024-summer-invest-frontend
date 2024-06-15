@@ -1,6 +1,7 @@
 /**
  * хук для получения опций для полей из API
  */
+import { isObject } from 'lodash'
 import { useQueryCache } from 'src/hooks/useQueryCache'
 
 export interface Choice {
@@ -13,7 +14,10 @@ export interface Choice {
  * @param from - название модели qKey в кэше реакт-квери
  * @param mapping - массив названий полей, для которых нужно получить опции, также задает порядок полей
  */
-export const useApiOptions = (from: string, mapping?: string[]) => {
+export const useApiOptions = (
+  from: string,
+  mapping?: (string | Record<string, string[]>)[]
+) => {
   const options: Record<string, any> = useQueryCache(`${from}Options`)
   /**
    * Объединяет опции из API с данными
@@ -32,24 +36,45 @@ export const useApiOptions = (from: string, mapping?: string[]) => {
    */
   const mergeOptionsIntoData = (data: Record<string, any>) => {
     const result = {} as Record<string, any>
+
     const keys = mapping?.length ? mapping : Object.keys(data)
-    keys.forEach((key) => {
-      const option = options[key]
-      let value = data[key]
+
+    keys.forEach((mapItem: string | Record<string, string[]>) => {
+      let value = data[mapItem as string]
+      let mapItemKey = mapItem as string
+
+      // если mapItem - объект, то это nested object
+      // в этом случае mapItemKey - объект с ключем и массивом ключей вложенного объекта
+      // например: { territorial_location: ['region', 'city_area', 'city_district'] }
+      // собираем для него строку из значений вложенных ключей
+      if (isObject(mapItem)) {
+        // @ts-ignore
+        const [keyName, nestedKeys]: [string, string[]] =
+          Object.entries(mapItemKey)[0]
+        const nestedData = data[keyName]
+        const lst: string[] = []
+        nestedKeys.forEach((nestedKey: string) => {
+          lst.push(nestedData[nestedKey])
+        })
+        value = lst.join(' ')
+        mapItemKey = keyName
+      }
+      const option = options[mapItemKey]
       if (option) {
         // eslint-disable-next-line no-param-reassign
         if (option.type === 'choice') {
+          // для чойсов возвращаем display_name
           value = option.choices.find(
             (item: Choice) => item.value === value
           )?.display_name
         }
-        result[key] = {
+        result[mapItemKey] = {
           ...option,
           value,
         }
       } else {
-        result[key] = {
-          label: key,
+        result[mapItemKey] = {
+          label: mapItemKey,
           value,
         }
       }

@@ -46,4 +46,28 @@ export class BusinessModel extends BaseModel {
   static createBusinessByInnUrl() {
     return `${this.url()}/create-business-by-inn`
   }
+
+  /**
+   * Поля, которые будут отображаться в FetchMoreItemsComponent
+   * для nested object нужно передать объект с названием поля и массивом ключей
+   *
+   */
+  static mappingFields: (string | { territorial_location: string[] })[] = [
+    'full_business_name',
+    'position',
+    'management_name',
+    'inn',
+    'email',
+    'phone',
+    'site',
+    'address',
+    'okved',
+    'type_business',
+    'region',
+    'city_area',
+    'city_district',
+    { territorial_location: ['short_name'] },
+    'sector',
+    'sub_sector',
+  ]
 }

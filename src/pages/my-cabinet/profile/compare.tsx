@@ -1,5 +1,6 @@
 import { DeleteOutlined } from '@ant-design/icons'
 import {
+  Alert,
   Button,
   Col,
   Collapse,
@@ -158,48 +159,63 @@ const Compare = () => {
   }
   return (
     <MyProfileLayout>
-      <Collapse defaultActiveKey={['mainParams']} ghost>
-        <Collapse.Panel
-          header={<BebasNeueTitle level={4} title='Основные параметры' />}
-          key='mainParams'
-        >
-          <div
-            style={{
-              width: '100%',
-              overflowX: 'auto',
-            }}
+      {items?.length !== 0 ? (
+        <Collapse defaultActiveKey={['mainParams']} ghost>
+          <Collapse.Panel
+            header={<BebasNeueTitle level={4} title='Основные параметры' />}
+            key='mainParams'
           >
-            {fieldsList.map((field: Field) => (
-              <Flex key={field.key}>
-                {results?.map((record: Record<string, any>, fIndex: number) => (
-                  <Col style={colItemStyle} key={record.id} span={6}>
-                    <Row
-                      justify='end'
-                      style={{ height: '100%' }}
-                      gutter={[10, 10]}
-                    >
-                      {fIndex === 0 ? (
-                        <Col span={24}>
-                          <Text type='secondary' title={field.label} ellipsis>
-                            {field?.label?.toUpperCase()}
-                          </Text>
-                        </Col>
-                      ) : null}
-                      <Col span={24}>
-                        {getRender(
-                          field.key,
-                          getFieldValues(record, field),
-                          record.id
-                        )}
+            <div
+              style={{
+                width: '100%',
+                overflowX: 'auto',
+              }}
+            >
+              {fieldsList.map((field: Field) => (
+                <Flex key={field.key}>
+                  {results?.map(
+                    (record: Record<string, any>, fIndex: number) => (
+                      <Col style={colItemStyle} key={record.id} span={6}>
+                        <Row
+                          justify='end'
+                          style={{ height: '100%' }}
+                          gutter={[10, 10]}
+                        >
+                          {fIndex === 0 ? (
+                            <Col span={24}>
+                              <Text
+                                type='secondary'
+                                title={field.label}
+                                ellipsis
+                              >
+                                {field?.label?.toUpperCase()}
+                              </Text>
+                            </Col>
+                          ) : null}
+                          <Col span={24}>
+                            {getRender(
+                              field.key,
+                              getFieldValues(record, field),
+                              record.id
+                            )}
+                          </Col>
+                        </Row>
                       </Col>
-                    </Row>
-                  </Col>
-                ))}
-              </Flex>
-            ))}
-          </div>
-        </Collapse.Panel>
-      </Collapse>
+                    )
+                  )}
+                </Flex>
+              ))}
+            </div>
+          </Collapse.Panel>
+        </Collapse>
+      ) : (
+        <Alert
+          message='Добавьте объекты для сравнения'
+          description='Для сравнения объектов, перейдите на страницу объектов и нажмите на кнопку "Сравнить"'
+          type='info'
+          showIcon
+        />
+      )}
     </MyProfileLayout>
   )
 }
