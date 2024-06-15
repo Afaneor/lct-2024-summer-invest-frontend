@@ -17,7 +17,7 @@ export default class BaseServices {
   static fetchOne(
     url: string,
     id: string | string[] | number | undefined,
-    filter?: any
+    filter?: Record<string, any>
   ): any {
     return new Promise((resolve, reject) => {
       apiClient

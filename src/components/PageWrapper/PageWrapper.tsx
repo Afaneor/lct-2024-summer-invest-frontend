@@ -17,6 +17,7 @@ interface PageWrapperProps {
   isLoading?: boolean
   breadCrumbs?: ItemType[]
   tabsContainer?: React.ReactNode
+  lastCrumb?: string
 }
 
 const colSizes = {
@@ -30,12 +31,13 @@ const PageWrapper: FCC<PageWrapperProps> = ({
   children,
   title,
   tabsContainer,
+  lastCrumb,
 }) => {
   const router = useRouter()
 
   const links: string[] = useSplitPathname(router.pathname)
 
-  const computedCrumbs = useMemo(() => {
+  let computedCrumbs = useMemo(() => {
     return links.map((_link: string, index) => {
       return {
         title: Object.values(Links).find((route) => route.href === _link)
@@ -47,6 +49,13 @@ const PageWrapper: FCC<PageWrapperProps> = ({
       }
     })
   }, [links])
+
+  if (lastCrumb) {
+    computedCrumbs = computedCrumbs.concat({
+      title: lastCrumb,
+      href: undefined,
+    })
+  }
 
   return (
     <Row className={styles.container} justify='center'>

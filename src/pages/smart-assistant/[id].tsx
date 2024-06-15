@@ -1,9 +1,11 @@
 import { Card, Carousel, Col, Row } from 'antd'
+import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 import { ImageContainer } from '@/components/ImageContainer'
 import { PageWrapper } from '@/components/PageWrapper'
+import { ReadyBusinessDescription } from '@/components/ReadyBusinessDescription'
 import { Meta } from '@/layouts/Meta'
 import type { InvestmentObjectsModelProps } from '@/models/InvestmentObjects'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
@@ -20,10 +22,13 @@ const InvestmentObjectItem = () => {
   const {
     data: response,
     isLoading,
-  }: ReactQueryFetch<InvestmentObjectsModelProps> | any = useFetchOneItem(
+  }: ReactQueryFetch<InvestmentObjectsModelProps> | any = useFetchOneItem({
     model,
-    id
-  )
+    id,
+    options: {
+      enabled: !!id,
+    },
+  })
 
   return (
     <Main
@@ -38,20 +43,36 @@ const InvestmentObjectItem = () => {
         isLoading={isLoading}
         title={response?.data?.name}
         subTitle='Поможем найти то, что вам нужно'
+        lastCrumb={response?.data?.name}
       >
         <Card>
-          <Row>
+          <Row gutter={[20, 20]}>
             <Col xs={24} md={16}>
               <Carousel arrows>
-                {response?.data?.photo_urls.map((url: string) => (
+                {response?.data?.photo_urls?.length ? (
+                  response?.data?.photo_urls?.map((url: string) => (
+                    <ImageContainer
+                      key={response?.data?.id}
+                      src={url}
+                      alt={response?.data?.name}
+                      height='50vh'
+                    />
+                  ))
+                ) : (
                   <ImageContainer
-                    key={response?.data?.id}
-                    src={url}
+                    src={response?.data?.main_photo_url}
                     alt={response?.data?.name}
                     height='50vh'
                   />
-                ))}
+                )}
               </Carousel>
+            </Col>
+            <Col xs={24}>
+              {!isEmpty(response?.data?.ready_business) ? (
+                <ReadyBusinessDescription
+                  readyBusinessData={response?.data?.ready_business}
+                />
+              ) : null}
             </Col>
           </Row>
         </Card>

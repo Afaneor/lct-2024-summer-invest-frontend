@@ -167,11 +167,12 @@ const MyProfileBusiness = () => {
                       <Row gutter={[20, 20]}>
                         {Object.entries(item).map(([key, options]: any) => {
                           return (
-                            <MyBusinessDescription
-                              key={key}
-                              label={options.label}
-                              value={options.value}
-                            />
+                            <Col xs={24} md={8} key={key}>
+                              <MyBusinessDescription
+                                label={options.label}
+                                value={options.value}
+                              />
+                            </Col>
                           )
                         })}
                       </Row>
