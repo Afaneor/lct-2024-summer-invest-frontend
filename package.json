@@ -75,7 +75,7 @@
     "@storybook/addon-links": "^7.0.9",
     "@storybook/blocks": "^7.0.9",
     "@storybook/nextjs": "^7.0.9",
-    "@storybook/react": "^7.0.9",
+    "@storybook/react": "^8.1.5",
     "@storybook/test-runner": "^0.10.0",
     "@storybook/testing-library": "^0.1.0",
     "@testing-library/cypress": "^9.0.0",

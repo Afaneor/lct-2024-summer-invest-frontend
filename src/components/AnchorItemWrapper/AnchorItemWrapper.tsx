@@ -4,7 +4,7 @@ import type { FCC } from 'src/types'
 
 import styles from './AnchorItemWrapper.module.scss'
 
-interface AnchorItemWrapperProps {
+export interface AnchorItemWrapperProps {
   title: string
   id: string
   size?: number
