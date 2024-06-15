@@ -1,4 +1,4 @@
-import { Card, Col, Form, Input, notification, Row } from 'antd'
+import { Card, Col, Form, Input, notification, Row, Tooltip } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 import type { FCC } from 'src/types'
@@ -98,18 +98,39 @@ const Registration: FCC = () => {
                   </FormItem>
                 </Col>
                 <Col xs={24} md={24} lg={12}>
+                  <Tooltip
+                    placement='top'
+                    title='Введенные данные позволят автоматически добавить информацию о бизнесе в вашем личном кабинете'
+                  >
+                    <FormItem
+                      label='ИНН организации'
+                      name='inn'
+                      errors={errors.inn}
+                      rules={[
+                        { required: true, message: 'Пожалуйста, введите ИНН' },
+                      ]}
+                    >
+                      <Input size='large' />
+                    </FormItem>
+                  </Tooltip>
+                </Col>
+                <Col xs={24} md={24} lg={12}>
                   <FormItem
-                    label='ИНН организации'
-                    name='inn'
-                    errors={errors.inn}
+                    label='Должность'
+                    name='position'
+                    wrapperCol={{ span: 24 }}
                     rules={[
-                      { required: true, message: 'Пожалуйста, введите ИНН' },
+                      {
+                        required: true,
+                        message: 'Пожалуйста, введите должность',
+                      },
                     ]}
+                    errors={errors.position}
                   >
                     <Input size='large' />
                   </FormItem>
                 </Col>
-                <Col xs={24} md={24} lg={12}>
+                <Col xs={24}>
                   <FormItem
                     label='Веб-сайт организации'
                     name='organization_website'
@@ -140,22 +161,6 @@ const Registration: FCC = () => {
                 </Col>
               </Row>
               <Row gutter={20}>
-                <Col xs={24} md={24} lg={12}>
-                  <FormItem
-                    label='Должность'
-                    name='position'
-                    wrapperCol={{ span: 24 }}
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Пожалуйста, введите должность',
-                      },
-                    ]}
-                    errors={errors.position}
-                  >
-                    <Input size='large' />
-                  </FormItem>
-                </Col>
                 <Col xs={24} md={24} lg={12}>
                   <FormItem
                     label='Электронная почта'
