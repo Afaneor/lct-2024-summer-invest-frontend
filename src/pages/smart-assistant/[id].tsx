@@ -35,9 +35,6 @@ const InvestmentObjectItem = () => {
     options: {
       enabled: !!id,
     },
-    filters: {
-      data_source: 'investmoscow.ru',
-    },
   })
 
   const { getFullData, mergeOptionsIntoData } = useApiOptions(

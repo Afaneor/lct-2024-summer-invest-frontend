@@ -17,7 +17,7 @@ import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import { Main } from '@/templates/Main'
 
 const Model = InvestmentObjectsModel
-const defFilters = { limit: 12, data_source: 'investmoscow.ru' }
+const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
