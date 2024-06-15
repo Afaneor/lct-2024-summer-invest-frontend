@@ -9,43 +9,54 @@ import React from 'react'
 
 export const Links = [
   {
-    text: 'Дом',
+    title: 'Дом',
     href: '/',
     icon: <HomeOutlined />,
   },
   {
-    text: 'Калькулятор',
+    title: 'Калькулятор',
     href: '/calculator',
     icon: <CalculatorOutlined />,
   },
   {
-    text: 'Умный помощник',
+    title: 'Умный помощник',
     href: '/smart-assistant',
     icon: <UsergroupAddOutlined />,
   },
   {
-    text: 'Предложения от партнеров',
+    title: 'Предложения от партнеров',
     href: '/offers',
     icon: <UsergroupAddOutlined />,
   },
   {
-    text: 'Меры поддержки',
+    title: 'Меры поддержки',
     href: '/supports',
     icon: <SketchOutlined />,
   },
   {
-    text: 'Промплощадки',
+    title: 'Промплощадки',
     href: '/areas',
     icon: <SketchOutlined />,
   },
   // {
-  //   text: 'Аналитика',
+  //   title: 'Аналитика',
   //   href: '/analytics',
   //   icon: <SketchOutlined />,
   // },
   {
-    text: 'Блог',
+    title: 'Блог',
     href: '/blog',
     icon: <LaptopOutlined />,
+  },
+]
+
+export const FirstLineLinks = [
+  {
+    title: '+7 (495) 123-45-67',
+    href: '/',
+  },
+  {
+    title: 'Единая линия поддержки',
+    href: '/',
   },
 ]

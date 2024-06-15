@@ -1,10 +1,11 @@
-import { Button, Card, Col, Form, Input, notification, Row } from 'antd'
-import Link from 'next/link'
+import { Card, Col, Form, Input, notification, Row } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 import type { FCC } from 'src/types'
 
 import { FormItem } from '@/components'
+import { AuthComponent } from '@/components/AuthComponent'
+import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import type { FormErrorsHook } from '@/hooks/useFormErrors'
 import { useFormErrors } from '@/hooks/useFormErrors'
 import { Meta } from '@/layouts/Meta'
@@ -41,7 +42,7 @@ const Registration: FCC = () => {
         <Col xs={24} md={12}>
           <Card
             title='Регистрация'
-            extra={<Link href='/login'>Вход</Link>}
+            extra={<AuthComponent title='Вход' />}
             hoverable
           >
             <Form
@@ -157,9 +158,9 @@ const Registration: FCC = () => {
                 </Col>
               </Row>
               <Form.Item>
-                <Button size='large' block type='primary' htmlType='submit'>
+                <ButtonPrimaryRed block size='large' htmlType='submit'>
                   Зарегистрироваться
-                </Button>
+                </ButtonPrimaryRed>
               </Form.Item>
             </Form>
           </Card>

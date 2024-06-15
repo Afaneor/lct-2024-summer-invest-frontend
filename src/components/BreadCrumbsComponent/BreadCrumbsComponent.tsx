@@ -5,7 +5,7 @@ import React from 'react'
 import type { FCC } from 'src/types'
 
 interface BreadCrumbsComponentProps {
-  breadCrumbs: ItemType[]
+  breadCrumbs?: ItemType[]
 }
 
 const homeCrumb = {
@@ -14,7 +14,7 @@ const homeCrumb = {
 }
 
 const BreadCrumbsComponent: FCC<BreadCrumbsComponentProps> = ({
-  breadCrumbs,
+  breadCrumbs = [],
 }) => {
   return <Breadcrumb items={[homeCrumb, ...breadCrumbs]} />
 }
