@@ -3,7 +3,7 @@ import { Button, Modal, Row } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 
 import styles from './ModalWrapper.module.scss'
 

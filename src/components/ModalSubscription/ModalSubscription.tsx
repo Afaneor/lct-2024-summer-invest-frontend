@@ -3,7 +3,7 @@ import { Form, Input, Modal, Select } from 'antd'
 import React, { useContext } from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 import type {
   SubscriptionDataForFilterProps,

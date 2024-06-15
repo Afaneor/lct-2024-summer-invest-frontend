@@ -6,7 +6,7 @@ import {
 import { Alert, Button, Card, Col, Row, Space, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
-import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'

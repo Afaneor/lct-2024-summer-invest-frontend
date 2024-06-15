@@ -5,7 +5,7 @@ import type { ChangeEvent } from 'react'
 import React, { useState } from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import okveds from '@/components/OkvedSelector/okved.json'
 import { OkvedTitleRender } from '@/components/OkvedTitleRender'
 

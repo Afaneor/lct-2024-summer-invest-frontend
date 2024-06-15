@@ -8,7 +8,7 @@ import { Links } from '@/components/Header/Links'
 const ToCompareButtonWithTooltip: React.FC = () => {
   return (
     <Link
-      href={`${Links?.MY_CABINET?.href}${Links?.PROFILE?.href}/${Links.COMPARE.href}`}
+      href={`${Links?.MY_CABINET?.href}${Links?.PROFILE?.href}${Links.COMPARE.href}`}
     >
       <Button icon={<SwapOutlined />} type='text'>
         Сравнения
