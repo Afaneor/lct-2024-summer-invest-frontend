@@ -12,5 +12,5 @@ export type RangeValue = [Dayjs | null, Dayjs | null] | null
 export type OwnerType = 'user' | 'assistant'
 export enum WhoOwnerType {
   USER = 'Вы',
-  ASSISTANT = 'Ассистент',
+  ASSISTANT = 'Помощник',
 }

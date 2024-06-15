@@ -7,7 +7,7 @@ import { BaseModel } from './Base'
 export type OwnerType = 'user' | 'assistant'
 export enum WhoOwnerType {
   USER = 'Вы',
-  ASSISTANT = 'Ассистент',
+  ASSISTANT = 'Помощник',
 }
 
 export interface SelectionRequestActualProps {
