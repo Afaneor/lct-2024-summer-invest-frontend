@@ -1,5 +1,6 @@
-import 'antd/dist/reset.css'
 import '../styles/global.css'
+import '../styles/fonts.css'
+import 'antd/dist/reset.css'
 import '../../public/antd.min.css'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

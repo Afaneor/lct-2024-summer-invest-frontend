@@ -18,7 +18,7 @@ export const Block1 = () => {
             <Space direction={'vertical'}>
               <BebasNeueTitle
                 title={
-                  'Умный ассистент подбора и оценки территорий для вовлечения в хозяйственный оборот'
+                  'Умный помощник по комплексному подбору инвестиционных площадок'
                 }
               />
               <Title level={4} className={styles.subtitle}>

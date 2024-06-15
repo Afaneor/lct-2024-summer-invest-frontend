@@ -1,15 +1,9 @@
-import { CloseCircleOutlined } from '@ant-design/icons'
 import {
-  Alert,
-  Button,
-  Card,
-  Col,
-  Descriptions,
-  Row,
-  Space,
-  Tooltip,
-} from 'antd'
-import DescriptionsItem from 'antd/es/descriptions/Item'
+  CloseCircleOutlined,
+  MailOutlined,
+  SendOutlined,
+} from '@ant-design/icons'
+import { Alert, Button, Card, Col, Row, Space, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
 import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
@@ -98,7 +92,7 @@ const Subscriptions = () => {
                     style={{
                       height: '100%',
                     }}
-                    title={`${item.subscription_type.label}: ${item.subscription_type.value}`}
+                    title={item.subscription_type.value}
                     extra={[
                       <Tooltip title='Удалить подписку' key={item.id.value}>
                         <Button
@@ -110,19 +104,19 @@ const Subscriptions = () => {
                       </Tooltip>,
                     ]}
                   >
-                    <Space>
-                      <Descriptions column={24}>
-                        {item?.email ? (
-                          <DescriptionsItem label='Почта'>
-                            {item.email?.value}
-                          </DescriptionsItem>
-                        ) : null}
-                        {item?.telegram_username ? (
-                          <DescriptionsItem label='Телеграм'>
-                            {item.telegram_username.value}
-                          </DescriptionsItem>
-                        ) : null}
-                      </Descriptions>
+                    <Space direction='vertical'>
+                      {item?.email ? (
+                        <Space>
+                          <MailOutlined />
+                          {item.email?.value}
+                        </Space>
+                      ) : null}
+                      {item?.telegram_username ? (
+                        <Space>
+                          <SendOutlined rotate={315} />
+                          {item.telegram_username.value}
+                        </Space>
+                      ) : null}
                     </Space>
                   </Card>
                 </Col>

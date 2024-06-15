@@ -46,8 +46,10 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   const [form] = Form.useForm()
   const {
     data,
+    isLoading: isLoadingData,
   }: {
     data: Record<'data', any[]> | any
+    isLoading: boolean
   } = useExtraActionsGet({
     qKey: 'investmentObjects',
     extraUrl: Model.dataForFiltersUrl(),
@@ -113,7 +115,6 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
               <Form
                 form={form}
                 initialValues={{
-                  economic_activity_name,
                   preferential_treatment,
                   transaction_form_name,
                   transaction_form_type,
@@ -129,6 +130,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                 <Row gutter={[20, 20]}>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='economic_activity_name'
                       label='Сфера деятельности'
                       value={economic_activity_name}
@@ -139,6 +141,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='preferential_treatment'
                       label='Преференциальный режим'
                       value={preferential_treatment}
@@ -149,6 +152,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='transaction_form_name'
                       label='Форма сделки'
                       value={transaction_form_name}
@@ -159,6 +163,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='transaction_form_type'
                       label='Тип формы сделки'
                       value={transaction_form_type}
@@ -169,6 +174,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='location'
                       label='Местоположение'
                       value={location}
@@ -179,6 +185,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='site_type'
                       label='Тип площадки'
                       value={site_type}
@@ -189,6 +196,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   </Col>
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
+                      isLoading={isLoadingData}
                       name='object_type'
                       label='Тип объекта'
                       value={object_type}

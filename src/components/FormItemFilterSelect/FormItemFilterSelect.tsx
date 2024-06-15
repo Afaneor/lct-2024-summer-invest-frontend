@@ -11,10 +11,12 @@ interface FormItemFilterSelectProps {
   options: string[] | Record<string, string>
   size?: SizeType
   placeholder?: string
+  isLoading?: boolean
   mode?: 'multiple' | 'tags'
 }
 
 const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
+  isLoading,
   value,
   options,
   mode,
@@ -23,7 +25,7 @@ const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
   size = 'large',
   placeholder,
 }) => {
-  if (!options)
+  if (isLoading)
     return <Skeleton.Input active size={size === 'middle' ? 'default' : size} />
 
   return (
@@ -35,7 +37,7 @@ const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
         placeholder={placeholder}
         allowClear
       >
-        {isArray(options)
+        {options && isArray(options)
           ? (options as string[])?.map((option: string) => (
               <Select.Option key={option} value={option}>
                 {option || 'н/д'}
