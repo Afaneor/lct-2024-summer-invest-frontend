@@ -26,6 +26,7 @@
     "prepare": "husky install",
     "postbuild": "next-sitemap",
     "new:component": "hygen new component",
+    "new:model": "hygen new model",
     "predev": "ts-node --project ./tsconfig.node.json src/scripts/genAntdCss.ts",
     "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./src/scripts/genAntdCss.ts"
   },
