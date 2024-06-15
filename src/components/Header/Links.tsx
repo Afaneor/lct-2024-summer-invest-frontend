@@ -1,5 +1,5 @@
 export interface LinkProps {
-  title: string
+  title: string | React.ReactNode
   href: string
   isTab?: boolean
   isProfileTab?: true
@@ -26,7 +26,12 @@ export interface LinksKeys {
 
 export const Links: LinksKeys = {
   HOME: {
-    title: 'Главная',
+    title: (
+      <>
+        Do
+        <span style={{ color: '#EF0F33' }}>lma</span>
+      </>
+    ),
     href: '/',
     isTab: true,
   },

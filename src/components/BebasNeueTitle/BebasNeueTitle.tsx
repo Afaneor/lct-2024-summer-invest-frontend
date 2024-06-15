@@ -7,8 +7,8 @@ import type { FCC } from 'src/types'
 import styles from './BebasNeueTitle.module.scss'
 
 const { Title } = Typography
-interface BebasNeueTitleProps extends TitleProps {
-  title: string
+interface BebasNeueTitleProps extends Omit<TitleProps, 'title'> {
+  title: string | React.ReactNode
   style?: React.CSSProperties
 }
 
