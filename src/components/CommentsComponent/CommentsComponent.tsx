@@ -110,9 +110,7 @@ const CommentsComponent: FCC<CommentsComponentProps> = ({
                       avatar={
                         <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
                       }
-                      title={
-                        <a href='item.href'>{item.user?.value?.username}</a>
-                      }
+                      title={item.user?.value?.username}
                       description={
                         item.created_at?.value
                           ? `${dateFormatter({ date: item.created_at.value })}`
