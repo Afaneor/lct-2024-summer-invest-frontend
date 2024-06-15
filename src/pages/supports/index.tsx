@@ -39,6 +39,7 @@ const Supports = () => {
           <Row>
             <Col xs={24}>
               <SearchInput
+                searchStr={shortFilter?.search}
                 onSearch={(searchStr) => handleSetFilter({ search: searchStr })}
               />
             </Col>

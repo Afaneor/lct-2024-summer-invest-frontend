@@ -33,7 +33,7 @@ export const EntityKeyEnum = {
 }
 export const EntityTypeEnum = {
   [EntityKeyEnum.service_support]: 'Посмотреть меры поддержки',
-  [EntityKeyEnum.category_problem]: 'Посмотреть вопросы и ответы',
+  [EntityKeyEnum.category_problem]: 'Посмотреть ответы на вопросы',
   [EntityKeyEnum.investment_object]: 'Посмотреть объекты инвестирования',
 }
 

@@ -1,7 +1,7 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Form, Input, Space } from 'antd'
 import debounce from 'lodash/debounce'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import type { FCC } from '@/types'
@@ -22,6 +22,13 @@ const SearchInput: FCC<SearchInputProps> = ({ searchStr, onSearch }) => {
     debouncedOnSearch(search)
   }, [form, debouncedOnSearch])
 
+  useEffect(() => {
+    // необходимо для того, чтобы при изменении фильтров,
+    // начальные значения устанавливались заново
+    form.setFieldsValue({
+      search: searchStr,
+    })
+  }, [searchStr])
   return (
     <Form
       form={form}

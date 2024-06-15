@@ -17,19 +17,19 @@ const defFilters = { limit: 1000 }
 const Supports = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
 
-  const { results, isLoading } = useFetchItems({
-    model: Model,
-    filter: {
-      ...defFilters,
-      ...filter,
-    },
-  })
-
   const { shortFilter, handleSetFilter } = useEntityTypeFilter(
     'category_problem',
     filter,
     setChatFilter
   )
+
+  const { results, isLoading } = useFetchItems({
+    model: Model,
+    filter: {
+      ...defFilters,
+      ...shortFilter,
+    },
+  })
 
   return (
     <Main

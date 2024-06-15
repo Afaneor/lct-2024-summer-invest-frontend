@@ -1,5 +1,5 @@
 import { Card, Col, Divider, Form, Row, Select, Space } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components/BebasNeueTitle'
@@ -44,6 +44,16 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
     onChange?.(filterObj)
   }
 
+  useEffect(() => {
+    // необходимо для того, чтобы при изменении фильтров,
+    // начальные значения устанавливались заново
+    form.setFieldsValue({
+      support_type,
+      support_level,
+      msp_roster,
+      economic_activity_code,
+    })
+  }, [support_type, support_level, msp_roster, economic_activity_code])
   return (
     <Card>
       <Row>
