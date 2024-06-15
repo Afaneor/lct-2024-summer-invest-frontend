@@ -35,8 +35,16 @@ const AuthModalComponent: FCC<AuthModalComponentProps> = ({
   const { mutate: login, isLoading: loginIsLoading }: any = useLogin()
   const handleLogin = (credentials: LoginValuesTypes) => {
     login(credentials, {
-      onSuccess: () => {
-        window.location.reload()
+      onSuccess: (
+        data: Record<'data', Record<'is_need_add_info', boolean>>
+      ) => {
+        if (data.data.is_need_add_info) {
+          // если пользователь не заполнил о бизнесе данные,
+          // то переходим на страницу заполнения
+          window.location.href = '/my-cabinet/profile/business/'
+        } else {
+          window.location.reload()
+        }
       },
       onError: (error: any) => {
         setFormErrors(error?.data)

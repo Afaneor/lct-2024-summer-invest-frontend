@@ -66,7 +66,7 @@ export const Links: LinksKeys = {
   },
   MY_PROFILE: {
     title: 'Личный кабинет',
-    href: '/my',
+    href: '/my-cabinet',
     icon: <UsergroupAddOutlined />,
     isTab: false,
   },

@@ -21,8 +21,8 @@ const MyProfileInfo = () => {
             <BebasNeueTitle
               title={
                 currentUser?.full_name ||
-                currentUser.first_name ||
-                currentUser.email
+                currentUser?.first_name ||
+                currentUser?.email
               }
               level={4}
               style={{
