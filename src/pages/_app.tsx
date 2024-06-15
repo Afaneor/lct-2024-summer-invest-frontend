@@ -12,6 +12,7 @@ import React from 'react'
 
 import ChatContextProvider from '@/components/ChatContextProvider/ChatContextProvider'
 import CurrentUserProvider from '@/components/CurrentUserProvider/CurrentUserProvider'
+import Metrika from '@/components/Metrika/Metrika'
 import NotificationMessageProvider from '@/components/NotificationMessage/NotificationMessage'
 
 const qClientConfig = {
@@ -26,6 +27,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <NotificationMessageProvider>
           <CurrentUserProvider>
             <ChatContextProvider>
+              <Metrika />
               <Component {...pageProps} />
             </ChatContextProvider>
           </CurrentUserProvider>
