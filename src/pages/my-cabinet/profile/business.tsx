@@ -9,9 +9,10 @@ import { PageCardContainer } from '@/components/PageCardContainer'
 import { useApiOptions } from '@/hooks/useApiOptions'
 import type { FormErrorObj, FormErrorsHook } from '@/hooks/useFormErrors'
 import { useFormErrors } from '@/hooks/useFormErrors'
+import { useRefetchInvalidateQuery } from '@/hooks/useRefetchInvalidateQuery'
 import { BusinessModel } from '@/models/Business'
 import withAuth from '@/pages/HOC'
-import { usePostExtraActions } from '@/services/base/hooks'
+import { useDeleteItem, usePostExtraActions } from '@/services/base/hooks'
 import MyProfileLayout from '@/templates/MyProfileLayout'
 
 const mapping = [
@@ -40,6 +41,8 @@ const blockStyle = {
 
 const Model = BusinessModel
 const MyProfileBusiness = () => {
+  const { refetch } = useRefetchInvalidateQuery()
+
   const {
     errors,
     setFormErrors,
@@ -53,10 +56,7 @@ const MyProfileBusiness = () => {
     'createByInn',
     Model.createBusinessByInnUrl()
   )
-  const handleCreateByInn = (
-    { inn }: Record<'inn', string>,
-    callback: () => void
-  ) => {
+  const handleCreateByInn = ({ inn }: Record<'inn', string>) => {
     createByInn(
       { inn },
       {
@@ -65,7 +65,30 @@ const MyProfileBusiness = () => {
             message: 'Организация успешно добавлена',
           })
           form.resetFields()
-          callback()
+          refetch('businessesInfinity')
+        },
+        onError: (err: any) => {
+          if (err?.response?.data?.detail) {
+            notification.error({
+              message: err.response.data.detail,
+            })
+          } else {
+            setFormErrors(err.response.data)
+          }
+        },
+      }
+    )
+  }
+  const handleUpdateByInn = ({ inn }: Record<'inn', string>) => {
+    createByInn(
+      { inn },
+      {
+        onSuccess: () => {
+          notification.success({
+            message: 'Организация успешно обновлена',
+          })
+          form.resetFields()
+          refetch('businessesInfinity')
         },
         onError: (err: any) => {
           if (err?.response?.data?.detail) {
@@ -80,8 +103,30 @@ const MyProfileBusiness = () => {
     )
   }
 
-  const { mergeOptionsIntoData } = useApiOptions(Model.modelName, mapping)
+  const {
+    mutate: deleteItem,
+    isLoading: isDeleteItem,
+  }: {
+    mutate: any
+    isLoading: boolean
+  } = useDeleteItem(Model)
 
+  const handleDelete = (id: string) => {
+    deleteItem(id, {
+      onSuccess: () => {
+        notification.success({
+          message: 'Организация успешно удалена',
+        })
+        refetch('businessesInfinity')
+      },
+      onError: (err: any) => {
+        notification.error({
+          message: err.response.data.detail,
+        })
+      },
+    })
+  }
+  const { mergeOptionsIntoData } = useApiOptions(Model.modelName, mapping)
   return (
     <MyProfileLayout>
       <FetchMoreItemsComponent
@@ -95,7 +140,7 @@ const MyProfileBusiness = () => {
                   form={form}
                   errors={errors}
                   isLoading={isLoading}
-                  onAddByInn={(innData) => handleCreateByInn(innData, () => {})}
+                  onAddByInn={handleCreateByInn}
                 />
               </Col>
             </Row>
@@ -109,8 +154,13 @@ const MyProfileBusiness = () => {
                 const prepItem = mergeOptionsIntoData(item)
                 return (
                   <Col key={item.id} span={24}>
-                    <PageCardContainer>
-                      <Row>
+                    <PageCardContainer
+                      isEditable
+                      isLoading={isDeleteItem}
+                      onRemove={() => handleDelete(item.id)}
+                      onUpdate={() => handleUpdateByInn({ inn: item.inn })}
+                    >
+                      <Row gutter={[20, 20]}>
                         {Object.entries(prepItem).map(([key, options]: any) => {
                           return (
                             <MyBusinessDescription

@@ -31,7 +31,7 @@ const AddBusinessBiInn: FCC<AddBusinessBiInnProps> = ({
     <PageCardContainer title='Добавьте свой бизнес в нашу систему'>
       <BebasNeueTitle
         level={4}
-        title='Это улучшить результаты поиска инвестиционных площадок'
+        title='Это улучшит результаты поиска инвестиционных площадок'
       />
       <Row>
         <Col span={24}>
