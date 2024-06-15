@@ -13,7 +13,23 @@ export interface LinkProps {
   icon?: React.ReactNode
   isTab?: boolean
 }
-export const Links: Record<string, LinkProps> = {
+
+export interface LinksKeys {
+  HOME: LinkProps
+  CALCULATOR: LinkProps
+  SMART_ASSISTANT: LinkProps
+  OFFERS: LinkProps
+  SUPPORTS: LinkProps
+  AREAS: LinkProps
+  BLOG: LinkProps
+  MY_PROFILE: LinkProps
+  PROFILE: LinkProps
+  INFO: LinkProps
+  BUSINESS: LinkProps
+  SEARCH_HISTORY: LinkProps
+}
+
+export const Links: LinksKeys = {
   HOME: {
     title: 'Дом',
     href: '/',

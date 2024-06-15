@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from './Block2.module.scss'
-import { Button, Card, Col, Row, Typography } from 'antd'
+import { Card, Col, Row, Typography } from 'antd'
 import Link from 'next/link'
+import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
+import { Links } from '@/components/Header/Links'
 const { Title } = Typography
 
 export const Block2 = () => {
@@ -56,10 +58,14 @@ export const Block2 = () => {
               </Card>
             </Col>
             <Col span={24} style={{ textAlign: 'center', padding: '10px' }}>
-              <Link href={'/calculator'}>
-                <Button size={'large'} shape={'round'} type={'primary'}>
-                  Рассчитать
-                </Button>
+              <Link href={Links.SEARCH_HISTORY.href}>
+                <ButtonPrimaryRed
+                  size={'large'}
+                  shape={'round'}
+                  type={'primary'}
+                >
+                  Попробовать
+                </ButtonPrimaryRed>
               </Link>
             </Col>
           </Row>

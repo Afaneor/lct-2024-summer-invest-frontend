@@ -12,13 +12,19 @@ type IMainProps = {
 }
 const styleContent = {
   padding: 0,
+  backgroundColor: '#f8f8f8',
 } as Record<string, any>
 
 const Main = (props: IMainProps) => {
   return (
     <>
       {props.meta}
-      <Layout className='h100'>
+      <Layout
+        className='h100'
+        style={{
+          backgroundColor: '#fff',
+        }}
+      >
         <Header />
         <Content style={styleContent}>
           <Row justify='center'>
