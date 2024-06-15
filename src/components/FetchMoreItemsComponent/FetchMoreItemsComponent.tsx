@@ -27,9 +27,11 @@ interface FetchMoreItemsComponentProps {
     fetchNextPage,
     isLoading,
     isFetching,
+    refetch,
   }: {
     data: any[]
     fetchNextPage: () => void
+    refetch: () => void
     dataCount: number
     isLoading: boolean
     isFetching: boolean
@@ -54,6 +56,7 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
     isFetching,
     hasNextPage,
     dataCount,
+    refetch,
   }: any = useInfinityFetchData(Model, defFilters, { ...options })
 
   const { mergeOptionsIntoData } = useApiOptions(
@@ -86,6 +89,7 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
         dataCount,
         isFetching,
         isLoading,
+        refetch,
       })}
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>

@@ -1,15 +1,6 @@
-import {
-  HomeOutlined,
-  LaptopOutlined,
-  SketchOutlined,
-  UsergroupAddOutlined,
-} from '@ant-design/icons'
-import React from 'react'
-
 export interface LinkProps {
   title: string
   href: string
-  icon?: React.ReactNode
   isTab?: boolean
   isProfileTab?: true
 }
@@ -29,95 +20,88 @@ export interface LinksKeys {
   FAQ: LinkProps
   COMPARE: LinkProps
   REQUESTS: LinkProps
+  SUBSCRIPTIONS: LinkProps
 }
 
 export const Links: LinksKeys = {
   HOME: {
     title: 'Главная',
     href: '/',
-    icon: <HomeOutlined />,
     isTab: true,
   },
   SMART_ASSISTANT: {
     title: 'Умный помощник',
     href: '/smart-assistant',
-    icon: <UsergroupAddOutlined />,
     isTab: true,
   },
   OFFERS: {
     title: 'Предложения от партнеров',
     href: '/offers',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
   },
   SUPPORTS: {
     title: 'Меры поддержки',
     href: '/supports',
-    icon: <SketchOutlined />,
     isTab: true,
   },
   AREAS: {
     title: 'Промплощадки',
     href: '/areas',
-    icon: <SketchOutlined />,
     isTab: false,
   },
   BLOG: {
     title: 'Блог',
     href: '/blog',
-    icon: <LaptopOutlined />,
     isTab: false,
   },
   MY_CABINET: {
     title: 'Личный кабинет',
     href: '/my-cabinet',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
   },
   PROFILE: {
     title: 'Профиль',
     href: '/profile',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
   },
   INFO: {
     title: 'Общие данные',
     href: '/info',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
     isProfileTab: true,
   },
   BUSINESS: {
     title: 'Мой бизнес',
     href: '/business',
-    icon: <UsergroupAddOutlined />,
-    isTab: false,
-    isProfileTab: true,
-  },
-  COMPARE: {
-    title: 'Сравнения',
-    href: '/compare',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
     isProfileTab: true,
   },
   REQUESTS: {
     title: 'Запросы',
     href: '/requests',
-    icon: <UsergroupAddOutlined />,
+    isTab: false,
+    isProfileTab: true,
+  },
+  SUBSCRIPTIONS: {
+    title: 'Подписки',
+    href: '/subscriptions',
+    isTab: false,
+    isProfileTab: true,
+  },
+  COMPARE: {
+    title: 'Сравнения',
+    href: '/compare',
     isTab: false,
     isProfileTab: true,
   },
   SEARCH_HISTORY: {
     title: 'История подбора площадок',
     href: '/search-history',
-    icon: <UsergroupAddOutlined />,
     isTab: false,
   },
   FAQ: {
     title: 'Вопросы и ответы',
     href: '/faq',
-    icon: <UsergroupAddOutlined />,
     isTab: true,
   },
 }

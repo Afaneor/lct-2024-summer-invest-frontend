@@ -1,4 +1,5 @@
 import type { BaseModelProps } from '@/models/Base'
+import { BaseModel } from '@/models/Base'
 
 export interface PostModelProps extends BaseModelProps {
   preview_image: string
@@ -7,7 +8,7 @@ export interface PostModelProps extends BaseModelProps {
   tags: string[]
   is_published: boolean
 }
-export class PostModel {
+export class PostModel extends BaseModel {
   static modelName = 'post'
 
   static url() {
