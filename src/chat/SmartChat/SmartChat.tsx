@@ -78,6 +78,15 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
         inputMessageForm.resetFields()
       },
       onError: (error: any) => {
+        const defaultErrorText = 'Попробуйте отправить запрос повторно'
+        const errorText = error?.detail || error?.message || defaultErrorText
+
+        notification.error({
+          message: 'Ошибка при отправке сообщения',
+          description: errorText,
+          duration: 10,
+          closable: true,
+        })
         refetchActual()
         console.error('error', error)
       },
