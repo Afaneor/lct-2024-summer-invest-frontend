@@ -30,7 +30,7 @@ const OffersList: FCC<OffersListProps> = ({ model: Model }) => {
         <FetchMoreItemsComponent
           model={Model}
           defFilters={{ limit: 2 }}
-          renderItems={(rowData) =>
+          renderItems={({ data: rowData }) =>
             rowData?.map((item: OfferModelProps) => (
               <List.Item
                 key={item.id}

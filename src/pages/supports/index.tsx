@@ -57,7 +57,7 @@ const Supports = () => {
             <FetchMoreItemsComponent
               defFilters={filter}
               model={Model}
-              renderItems={(rowData) => (
+              renderItems={({ data: rowData }) => (
                 <Row gutter={[20, 20]}>
                   {rowData?.map(
                     (support: ModelOptionProps<SupportModelProps>) => (

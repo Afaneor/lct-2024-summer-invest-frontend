@@ -135,7 +135,7 @@ const MyProfileBusiness = () => {
         defFilters={filter}
         lengthPostfixPlural='организаций'
         optionsFieldList={mapping}
-        renderItems={(fetchedValues, _, dataCount) => (
+        renderItems={({ data: fetchedValues, dataCount }) => (
           <>
             <Row style={blockStyle}>
               <Col span={24}>

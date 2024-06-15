@@ -43,11 +43,10 @@ const CommentsComponent: FCC<CommentsComponentProps> = ({
         })
         refetch('commentsInfinity')
       },
-      onError: (error) => {
+      onError: () => {
         notification.error({
           message: 'Ошибка при добавлении комментария',
         })
-        console.error('error', error)
       },
     })
   }
@@ -98,7 +97,7 @@ const CommentsComponent: FCC<CommentsComponentProps> = ({
       <FetchMoreItemsComponent
         model={Model}
         defFilters={{ object_id, content_type }}
-        renderItems={(fetchedValues) => (
+        renderItems={({ data: fetchedValues }) => (
           <Row gutter={[20, 20]}>
             <Col span={24}>
               <List

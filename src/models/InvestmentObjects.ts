@@ -55,4 +55,8 @@ export class InvestmentObjectsModel extends BaseModel {
   static url() {
     return '/investment-object/investment-objects'
   }
+
+  static dataForFiltersUrl() {
+    return `${this.url()}/data-for-filters`
+  }
 }

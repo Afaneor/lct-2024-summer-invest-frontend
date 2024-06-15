@@ -58,7 +58,7 @@ const Calculations = () => {
           model={Model}
           defFilters={{ user: currentUser?.id }}
           options={{ enabled: !!currentUser?.id }}
-          renderItems={(rowData) => (
+          renderItems={({ data: rowData }) => (
             <Row gutter={gutter}>
               {rowData.map((report: ResultCalculate) => (
                 <Col key={report.id} span={24}>

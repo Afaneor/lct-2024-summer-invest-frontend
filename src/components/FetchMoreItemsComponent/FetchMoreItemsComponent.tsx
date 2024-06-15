@@ -14,11 +14,26 @@ interface FetchMoreItemsComponentProps {
   model: typeof BaseModel
   defFilters?: Record<string, any>
   options?: Record<string, any>
-  renderItems: (
-    data: any[],
-    fetchNextPage: () => void,
+  extra?: ({
+    isLoading,
+    isFetching,
+  }: {
+    isLoading: boolean
+    isFetching: boolean
+  }) => React.ReactNode
+  renderItems: ({
+    data,
+    dataCount,
+    fetchNextPage,
+    isLoading,
+    isFetching,
+  }: {
+    data: any[]
+    fetchNextPage: () => void
     dataCount: number
-  ) => React.ReactNode
+    isLoading: boolean
+    isFetching: boolean
+  }) => React.ReactNode
   lengthPostfixPlural?: string
   optionsFieldList?: string[]
 }
@@ -30,6 +45,7 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
   options,
   lengthPostfixPlural,
   optionsFieldList,
+  extra,
 }) => {
   const {
     rowData,
@@ -53,12 +69,24 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
     <>
       <Row gutter={40}>
         <Col span={24} className={styles.dataLengthContainer}>
-          <Text strong>Найдено {dataCount || 0} </Text>
+          <Text strong>
+            {isLoading ? 'Ищем..' : `Найдено ${dataCount || 0} `}
+          </Text>
           {lengthPostfixPlural}
         </Col>
       </Row>
+      {extra?.({
+        isLoading,
+        isFetching,
+      })}
       <Spin spinning={isLoading} />
-      {renderItems(rData, fetchNextPage, dataCount)}
+      {renderItems({
+        data: rData,
+        fetchNextPage,
+        dataCount,
+        isFetching,
+        isLoading,
+      })}
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
           <Button
