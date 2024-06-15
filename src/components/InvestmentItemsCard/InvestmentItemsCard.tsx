@@ -21,6 +21,7 @@ export const InvestmentItemsCard: FCC<InvestmentItemsCardProps> = ({
     cover={<img style={{ height: 300 }} alt={title} src={preview_image} />}
     {...rest}
   >
+    div
     <BebasNeueTitle title={title} ellipsis level={3} />
   </Card>
 )

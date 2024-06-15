@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Form, Row, Select, Space } from 'antd'
+import { Card, Col, Divider, Form, Row, Space } from 'antd'
 import React, { useState } from 'react'
 import type { FCC } from 'src/types'
 
@@ -8,6 +8,7 @@ import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import { useExtraActionsGet } from '@/services/base/hooks'
 
 import ButtonPrimaryRed from '../ButtonPrimaryRed/ButtonPrimaryRed'
+import FormItemFilterSelect from '../FormItemFilterSelect/FormItemFilterSelect'
 
 interface InvestObjectsFilterCardProps {
   economic_activity_name?: string
@@ -18,6 +19,7 @@ interface InvestObjectsFilterCardProps {
   site_type?: string
   specialized_site_is_free_customs_zone_regime?: string
   real_estate_maip?: string
+  object_type: string
   isLoading?: boolean
   onChange?: (obj: Record<string, string>) => void
 }
@@ -31,6 +33,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   transaction_form_name,
   transaction_form_type,
   location,
+  object_type,
   site_type,
   isLoading,
 }) => {
@@ -61,7 +64,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
     <Card>
       <Row>
         <Col span={24}>
-          <BebasNeueTitle level={4} title='Фильтр' />
+          <BebasNeueTitle level={4} title='Поиск' />
         </Col>
         <Divider
           style={{
@@ -72,121 +75,74 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
           <Form form={form} layout='vertical' onFinish={onChange}>
             <Row gutter={[20, 20]}>
               <Col xs={24} md={8}>
-                <Form.Item
+                <FormItemFilterSelect
                   name='economic_activity_name'
                   label='Сфера деятельности'
-                >
-                  <Select
-                    value={economic_activity_name}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите сферу деятельности'
-                    allowClear
-                  >
-                    {data?.data?.economic_activity_name?.map((name: string) => (
-                      <Select.Option key={name} value={name}>
-                        {name}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                  value={economic_activity_name}
+                  options={data?.data?.economic_activity_name}
+                  mode='multiple'
+                  placeholder='Выберите сферу деятельности'
+                />
               </Col>
               <Col xs={24} md={8}>
-                <Form.Item
+                <FormItemFilterSelect
                   name='preferential_treatment'
                   label='Преференциальный режим'
-                >
-                  <Select
-                    value={preferential_treatment}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите преференциальный режим'
-                    allowClear
-                  >
-                    {data?.data?.preferential_treatment?.map(
-                      (treatment: string) => (
-                        <Select.Option key={treatment} value={treatment}>
-                          {treatment}
-                        </Select.Option>
-                      )
-                    )}
-                  </Select>
-                </Form.Item>
+                  value={preferential_treatment}
+                  options={data?.data?.preferential_treatment}
+                  mode='multiple'
+                  placeholder='Выберите преференциальный режим'
+                />
               </Col>
               <Col xs={24} md={8}>
-                <Form.Item name='transaction_form_name' label='Форма сделки'>
-                  <Select
-                    value={transaction_form_name}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите форму сделки'
-                    allowClear
-                  >
-                    {data?.data?.transaction_form_name?.map(
-                      (formName: string) => (
-                        <Select.Option key={formName} value={formName}>
-                          {formName}
-                        </Select.Option>
-                      )
-                    )}
-                  </Select>
-                </Form.Item>
+                <FormItemFilterSelect
+                  name='transaction_form_name'
+                  label='Форма сделки'
+                  value={transaction_form_name}
+                  options={data?.data?.transaction_form_name}
+                  mode='multiple'
+                  placeholder='Выберите форму сделки'
+                />
               </Col>
               <Col xs={24} md={8}>
-                <Form.Item
+                <FormItemFilterSelect
                   name='transaction_form_type'
                   label='Тип формы сделки'
-                >
-                  <Select
-                    value={transaction_form_type}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите тип формы сделки'
-                    allowClear
-                  >
-                    {data?.data?.transaction_form_type?.map(
-                      (formType: string) => (
-                        <Select.Option key={formType} value={formType}>
-                          {formType}
-                        </Select.Option>
-                      )
-                    )}
-                  </Select>
-                </Form.Item>
+                  value={transaction_form_type}
+                  options={data?.data?.transaction_form_type}
+                  mode='multiple'
+                  placeholder='Выберите тип формы сделки'
+                />
               </Col>
               <Col xs={24} md={8}>
-                <Form.Item name='location' label='Местоположение'>
-                  <Select
-                    value={location}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите местоположение'
-                    allowClear
-                  >
-                    {data?.data?.location?.map((loc: string) => (
-                      <Select.Option key={loc} value={loc}>
-                        {loc}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <FormItemFilterSelect
+                  name='location'
+                  label='Местоположение'
+                  value={location}
+                  options={data?.data?.location}
+                  mode='multiple'
+                  placeholder='Выберите местоположение'
+                />
               </Col>
               <Col xs={24} md={8}>
-                <Form.Item name='site_type' label='Тип площадки'>
-                  <Select
-                    value={site_type}
-                    mode='multiple'
-                    size='large'
-                    placeholder='Выберите тип площадки'
-                    allowClear
-                  >
-                    {data?.data?.site_type?.map((type: string) => (
-                      <Select.Option key={type} value={type}>
-                        {type}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <FormItemFilterSelect
+                  name='site_type'
+                  label='Тип площадки'
+                  value={site_type}
+                  options={data?.data?.site_type}
+                  mode='multiple'
+                  placeholder='Выберите тип площадки'
+                />
+              </Col>
+              <Col xs={24} md={8}>
+                <FormItemFilterSelect
+                  name='object_type'
+                  label='Тип объекта'
+                  value={object_type}
+                  options={data?.data?.object_type}
+                  mode='multiple'
+                  placeholder='Выберите тип объекта'
+                />
               </Col>
               <Col xs={24} md={8}>
                 <Form.Item

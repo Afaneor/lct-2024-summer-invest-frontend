@@ -55,6 +55,7 @@ const SmartHelper = () => {
               <Col span={24}>
                 <InvestObjectsFilterCard
                   isLoading={isLoading || isFetching}
+                  object_type={defFilter?.object_type}
                   specialized_site_is_free_customs_zone_regime={
                     defFilter?.specialized_site_is_free_customs_zone_regime
                   }
