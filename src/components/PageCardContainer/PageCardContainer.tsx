@@ -53,10 +53,15 @@ const PageCardContainer: FCC<PageCardContainerProps> = ({
                 }}
               >
                 <Space direction='horizontal'>
-                  <ButtonRounded type='text' onClick={onUpdate}>
+                  <ButtonRounded size='large' type='text' onClick={onUpdate}>
                     Обновить
                   </ButtonRounded>
-                  <ButtonRounded type='text' danger onClick={onRemove}>
+                  <ButtonRounded
+                    size='large'
+                    type='text'
+                    danger
+                    onClick={onRemove}
+                  >
                     Удалить
                   </ButtonRounded>
                 </Space>

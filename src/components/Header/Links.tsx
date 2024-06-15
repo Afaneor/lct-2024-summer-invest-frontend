@@ -29,7 +29,7 @@ export interface LinksKeys {
 
 export const Links: LinksKeys = {
   HOME: {
-    title: 'Дом',
+    title: 'Главная',
     href: '/',
     icon: <HomeOutlined />,
     isTab: true,
