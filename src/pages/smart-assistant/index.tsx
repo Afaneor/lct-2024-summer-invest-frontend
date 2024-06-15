@@ -36,7 +36,6 @@ const SmartHelper = () => {
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
       >
-        {JSON.stringify(filter)}
         <FetchMoreItemsComponent
           model={Model}
           defFilters={{ ...defFilters, ...filter }}

@@ -14,7 +14,7 @@ interface ChatComponentProps {
 
 const ChatComponent: FCC<ChatComponentProps> = () => {
   const [isOpen, setIsOpen] = React.useState(false)
-  const { filter, setNewFilter } = useContext(ChatContext)
+  const { setNewFilter } = useContext(ChatContext)
 
   return (
     <>
@@ -30,8 +30,6 @@ const ChatComponent: FCC<ChatComponentProps> = () => {
       </div>
       {isOpen ? (
         <div className={clsx(styles.container, isOpen && styles.show)}>
-          {JSON.stringify(filter)}
-
           <SmartChat onApplyFilter={setNewFilter} />
         </div>
       ) : null}
