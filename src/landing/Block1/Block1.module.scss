@@ -7,7 +7,7 @@
   background-image: url('../img/moscow-city-dark.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  margin-top: -135px;
+  margin-top: -131px;
 }
 
 .title {
@@ -18,7 +18,8 @@
 
 .subtitle {
   @include anim;
-  color: #000000 !important;
+  color: #fff !important;
+  text-shadow: 1px 1px #000000;
 }
 
 @keyframes showBlock {

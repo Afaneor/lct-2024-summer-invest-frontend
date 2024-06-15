@@ -21,8 +21,9 @@ export const Block1 = () => {
                   'Умный ассистент подбора и оценки территорий для вовлечения в хозяйственный оборот'
                 }
               />
-              <Title level={3} className={styles.subtitle}>
-                Отправная точка ваших идей
+              <Title level={4} className={styles.subtitle}>
+                '"Умный Ассистент: Территории для вашего бизнеса, оценка и
+                подбор на высшем уровне!"'
               </Title>
               <Link href={Links.SMART_ASSISTANT.href}>
                 <ButtonPrimaryRed
