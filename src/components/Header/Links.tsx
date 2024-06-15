@@ -28,6 +28,7 @@ export interface LinksKeys {
   SEARCH_HISTORY: LinkProps
   FAQ: LinkProps
   COMPARE: LinkProps
+  REQUESTS: LinkProps
 }
 
 export const Links: LinksKeys = {
@@ -96,6 +97,13 @@ export const Links: LinksKeys = {
   COMPARE: {
     title: 'Сравнения',
     href: '/compare',
+    icon: <UsergroupAddOutlined />,
+    isTab: false,
+    isProfileTab: true,
+  },
+  REQUESTS: {
+    title: 'Запросы',
+    href: '/requests',
     icon: <UsergroupAddOutlined />,
     isTab: false,
     isProfileTab: true,

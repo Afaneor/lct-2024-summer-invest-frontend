@@ -22,7 +22,8 @@ body {
 
 .ant-card,
 img,
-.ant-alert {
+.ant-alert,
+.ant-list-bordered {
   border-radius: 0 !important;
 }
 
