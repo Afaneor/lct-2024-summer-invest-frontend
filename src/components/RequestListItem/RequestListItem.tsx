@@ -24,7 +24,6 @@ interface RequestListItemProps {
   onDownloadReport: () => void
   isLoadingDownloadReport?: boolean
 }
-const nodataText = 'Данные находятся в обработке. Ожидайте...'
 const RequestListItem: FCC<RequestListItemProps> = ({
   createdAt,
   onDownloadReport,
@@ -44,43 +43,36 @@ const RequestListItem: FCC<RequestListItemProps> = ({
         <Title level={5}>{dateFormatter({ date: createdAt })}</Title>
       </Space>
       <Space>
-        <Tooltip
-          title={
-            hasInvestmentObjectsFilter
-              ? 'Посмотреть подобранные объекты'
-              : nodataText
-          }
-        >
-          <Button
-            type='text'
-            shape='circle'
-            disabled={!hasInvestmentObjectsFilter}
-            icon={<ShopOutlined />}
-            onClick={onShowInvestmentObjects}
-          />
-        </Tooltip>
-        <Tooltip
-          title={hasSupportFilter ? 'Посмотреть меры поддержки' : nodataText}
-        >
-          <Button
-            type='text'
-            shape='circle'
-            disabled={!hasSupportFilter}
-            icon={<SolutionOutlined />}
-            onClick={onShowSupport}
-          />
-        </Tooltip>
-        <Tooltip
-          title={hasFAQFilter ? 'Часто возникающие вопросы' : nodataText}
-        >
-          <Button
-            type='text'
-            shape='circle'
-            disabled={!hasFAQFilter}
-            icon={<QuestionCircleOutlined />}
-            onClick={onShowFAQ}
-          />
-        </Tooltip>
+        {hasInvestmentObjectsFilter ? (
+          <Tooltip title='Посмотреть подобранные объекты'>
+            <Button
+              type='text'
+              shape='circle'
+              icon={<ShopOutlined />}
+              onClick={onShowInvestmentObjects}
+            />
+          </Tooltip>
+        ) : null}
+        {hasSupportFilter ? (
+          <Tooltip title='Посмотреть меры поддержки'>
+            <Button
+              type='text'
+              shape='circle'
+              icon={<SolutionOutlined />}
+              onClick={onShowSupport}
+            />
+          </Tooltip>
+        ) : null}
+        {hasFAQFilter ? (
+          <Tooltip title='Вопросы и ответы'>
+            <Button
+              type='text'
+              shape='circle'
+              icon={<QuestionCircleOutlined />}
+              onClick={onShowFAQ}
+            />
+          </Tooltip>
+        ) : null}
         {hasInvestmentObjectsFilter ? (
           <Tooltip title='Скачать отчет'>
             <Button

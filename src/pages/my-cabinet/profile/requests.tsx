@@ -1,4 +1,4 @@
-import { List } from 'antd'
+import { List, notification } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 
@@ -21,7 +21,10 @@ const Requests = () => {
 
   const [requestFilter] = useFilter()
   const { setNewFilter } = useContext(ChatContext)
-  const { fileDownload, isLoading } = useFileDownload()
+  const { fileDownload } = useFileDownload()
+  const [isLoadingObj, setIsLoadingObj] = React.useState<
+    Record<string, boolean>
+  >({})
 
   const handleGoShow = (
     key: keyof typeof EntityKeyEnum,
@@ -33,10 +36,24 @@ const Requests = () => {
   }
 
   const handleDownloadFile = (id: string | number) => {
+    setIsLoadingObj({ ...isLoadingObj, [id]: true })
     fileDownload({
       url: Model.downloadReportUrl(id),
       name: 'Заявка на подбор',
     })
+      .then(() => {
+        notification.success({
+          message: 'Файл успешно скачан',
+        })
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Ошибка при скачивании файла',
+        })
+      })
+      .finally(() => {
+        setIsLoadingObj({ ...isLoadingObj, [id]: false })
+      })
   }
 
   return (
@@ -54,7 +71,7 @@ const Requests = () => {
               item: ModelOptionProps<SelectionRequestActualProps>
             ) => (
               <RequestListItem
-                isLoadingDownloadReport={isLoading}
+                isLoadingDownloadReport={isLoadingObj[item.id.value]}
                 hasSupportFilter={!!item.bot_filter?.value?.service_support}
                 hasFAQFilter={!!item.bot_filter?.value?.category_problem}
                 hasInvestmentObjectsFilter={
