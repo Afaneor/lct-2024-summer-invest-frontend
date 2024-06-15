@@ -8,6 +8,7 @@ import { IconAsButton } from '@/components/IconAsButton'
 import type { UsersModelProps } from '@/models'
 import { useLogout } from '@/services/auth/hooks'
 
+import ToCompareButtonWithTooltip from '../ToCompareButtonWithTooltip/ToCompareButtonWithTooltip'
 import styles from './CurrentUser.module.scss'
 
 const { Text } = Typography
@@ -45,6 +46,8 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
               Профиль
             </Button>
           </Link>
+
+          <ToCompareButtonWithTooltip />
           <Button
             type='text'
             icon={<LogoutOutlined />}

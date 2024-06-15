@@ -72,6 +72,7 @@ export const Header: FCC = () => {
                   {link.title}
                 </Link>
               ))}
+
             <div className={styles.authIconBtn}>
               <AuthComponent />
             </div>

@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import React from 'react'
 
+import { CompareButton } from '@/components/CompareButton'
 import { ImageContainer } from '@/components/ImageContainer'
 import { PageWrapper } from '@/components/PageWrapper'
 import { ReadyBusinessDescription } from '@/components/ReadyBusinessDescription'
@@ -66,6 +67,9 @@ const InvestmentObjectItem = () => {
                   />
                 )}
               </Carousel>
+            </Col>
+            <Col xs={24} md={8}>
+              <CompareButton item={response?.data} />
             </Col>
             <Col xs={24}>
               {!isEmpty(response?.data?.ready_business) ? (
