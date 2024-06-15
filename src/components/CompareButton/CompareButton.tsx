@@ -1,5 +1,6 @@
 import { SwapOutlined, UserSwitchOutlined } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
+import { isEmpty } from 'lodash'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -48,7 +49,7 @@ const CompareButton: React.FC<CompareButtonProps> = ({
     checkItemsToCompare()
   }, [itemId])
 
-  if (!currentUser) {
+  if (isEmpty(currentUser)) {
     return (
       <Tooltip
         title='Будет доступно после регистрации и авторизации'
