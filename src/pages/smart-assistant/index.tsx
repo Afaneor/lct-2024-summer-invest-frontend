@@ -13,7 +13,6 @@ import { PageWrapper } from '@/components/PageWrapper'
 import { useEntityTypeFilter } from '@/hooks/useEntityTypeFilter'
 import { Meta } from '@/layouts/Meta'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
-import withAuth from '@/pages/HOC'
 import { Main } from '@/templates/Main'
 
 const Model = InvestmentObjectsModel
@@ -108,4 +107,4 @@ const SmartHelper = () => {
   )
 }
 
-export default withAuth(SmartHelper)
+export default SmartHelper
