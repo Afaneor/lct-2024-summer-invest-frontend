@@ -18,6 +18,7 @@ const invesFakeFilter = {
   economic_activity_name: ['Пункты выдачи заказов'],
   // transaction_form_type: ['Продажа'],
   // specialized_site_is_free_customs_zone_regime: 'Нет',
+  // object_type: ['land_plot'],
 }
 
 const supportsFakeFilter = {

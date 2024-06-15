@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { useFilter } from '@/hooks/useFilter'
 
@@ -8,6 +8,8 @@ export const ChatContext = React.createContext(
     filter: Record<string, any>
     setChatFilter: (rec: Record<string, any>) => void
     setNewFilter: (rec?: Record<string, any>) => void
+    setIsOpen: (isOpen: boolean) => void
+    isOpen: boolean
   }
 )
 
@@ -21,6 +23,7 @@ const ChatContextProvider: React.FC<ChatContextProviderProps> = ({
   children,
   defaultFilters,
 }) => {
+  const [isOpen, setIsOpen] = useState(false)
   const [filter, setFilter, handleSetNewFilter] = useFilter(defaultFilters)
   const setChatFilter = (newFilter: any) => {
     setFilter(newFilter)
@@ -31,7 +34,7 @@ const ChatContextProvider: React.FC<ChatContextProviderProps> = ({
   }
 
   const value = useMemo(
-    () => ({ filter, setChatFilter, setNewFilter }),
+    () => ({ filter, setChatFilter, setNewFilter, setIsOpen, isOpen }),
     [filter, setChatFilter]
   )
 

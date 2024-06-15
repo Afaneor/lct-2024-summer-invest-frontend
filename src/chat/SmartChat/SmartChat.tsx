@@ -1,4 +1,5 @@
 import { Card, Form, Spin } from 'antd'
+import { isEmpty } from 'lodash'
 import React from 'react'
 
 import { useCreateItem, useExtraActionsGet } from '../../services/base/hooks'
@@ -8,7 +9,11 @@ import { InputMessageContainer } from '../components/InputMessageContainer'
 import { Message } from '../components/Message'
 import { useScrollIntoView } from '../hooks/useScrollIntoView'
 import useSessionId from '../hooks/useUniqUserIdentifier'
-import type { MessageModelProps, NewMessageModelProps } from '../models/Message'
+import type {
+  EntityTypeEnum,
+  MessageModelProps,
+  NewMessageModelProps,
+} from '../models/Message'
 import { MessageModel, OwnerTypeEnum } from '../models/Message'
 import type { SelectionRequestActualProps } from '../models/SelectionRequest'
 import { SelectionRequestModel } from '../models/SelectionRequest'
@@ -32,7 +37,10 @@ const selectionRequestModel = SelectionRequestModel
 const messageModel = MessageModel
 
 interface SmartChatProps {
-  onApplyFilter: (filter?: Record<string, any>) => void
+  onApplyFilter: (
+    key: keyof typeof EntityTypeEnum,
+    filter?: Record<string, any>
+  ) => void
 }
 export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
   useSessionId()
@@ -116,11 +124,12 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
               key={item.id}
               id={item.id}
               text={item.text}
-              hasFilter={item.filter !== null}
+              hasFilter={!isEmpty(item.filter)}
+              filter={item.filter}
               created_at={item.created_at}
               owner_type={item.owner_type}
-              onApplyFilter={() => {
-                onApplyFilter({ economic_activity_name: ['Автобизнес'] })
+              onApplyFilter={(key, filters) => {
+                onApplyFilter(key, filters)
               }}
             />
           )

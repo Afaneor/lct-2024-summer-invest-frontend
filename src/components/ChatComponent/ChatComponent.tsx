@@ -1,9 +1,13 @@
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import type { FCC } from 'src/types'
 
+import type { EntityTypeEnum } from '@/chat/models/Message'
+import { EntityKeyEnum } from '@/chat/models/Message'
 import { SmartChat } from '@/chat/SmartChat'
 import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
+import { Links } from '@/components/Header/Links'
 import { MainChatBtn } from '@/components/MainChatBtn'
 
 import styles from './ChatComponent.module.scss'
@@ -13,24 +17,37 @@ interface ChatComponentProps {
 }
 
 const ChatComponent: FCC<ChatComponentProps> = () => {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const { setNewFilter } = useContext(ChatContext)
-
+  const { setNewFilter, setIsOpen, isOpen } = useContext(ChatContext)
+  const router = useRouter()
+  const handleApplyFilter = (
+    key: keyof typeof EntityTypeEnum,
+    filter?: Record<string, any>
+  ) => {
+    let url = '/'
+    switch (key) {
+      case EntityKeyEnum.service_support:
+        url = Links.SUPPORTS.href
+        break
+      case EntityKeyEnum.investment_object:
+        url = Links.SMART_ASSISTANT.href
+        break
+      case EntityKeyEnum.category_problem:
+        url = Links.FAQ.href
+        break
+      default:
+        break
+    }
+    setNewFilter(filter)
+    router.push(url)
+  }
   return (
     <>
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 20,
-          right: 20,
-          zIndex: 1000,
-        }}
-      >
+      <div className={styles.mainBtn}>
         <MainChatBtn onClick={() => setIsOpen(!isOpen)} isActive={isOpen} />
       </div>
       {isOpen ? (
         <div className={clsx(styles.container, isOpen && styles.show)}>
-          <SmartChat onApplyFilter={setNewFilter} />
+          <SmartChat onApplyFilter={handleApplyFilter} />
         </div>
       ) : null}
     </>

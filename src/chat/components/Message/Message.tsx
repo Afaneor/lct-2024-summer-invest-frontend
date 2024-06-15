@@ -1,12 +1,13 @@
 import { Button, Col, Flex, Row, Space, Spin } from 'antd'
 import clsx from 'clsx'
+import { isEmpty } from 'lodash'
 import React, { useMemo } from 'react'
 import { Markdown } from 'src/chat/components/Markdown'
 import { useDateTimePrettyStr } from 'src/chat/hooks/useDateTimePrettyStr'
 import type { FCC } from 'src/types'
 
 import type { MessageModelProps } from '@/chat/models/Message'
-import { OwnerTypeEnum } from '@/chat/models/Message'
+import { EntityTypeEnum, OwnerTypeEnum } from '@/chat/models/Message'
 import { WhoOwnerType } from '@/chat/types'
 
 import styles from './style.module.scss'
@@ -14,7 +15,10 @@ import styles from './style.module.scss'
 interface MessageProps extends MessageModelProps {
   isLoading?: boolean
   hasFilter?: boolean
-  onApplyFilter?: () => void
+  onApplyFilter?: (
+    key: keyof typeof EntityTypeEnum,
+    filters: Record<string, any>
+  ) => void
 }
 
 const who: Record<string, string> = {
@@ -27,8 +31,8 @@ export const Message: FCC<MessageProps> = ({
   created_at,
   owner_type,
   isLoading,
-  hasFilter,
   onApplyFilter,
+  filter,
 }) => {
   const { dateFormatter } = useDateTimePrettyStr()
   const currentJustify = useMemo(
@@ -52,13 +56,19 @@ export const Message: FCC<MessageProps> = ({
                 {isLoading ? <Spin size='small' /> : null}
                 <Markdown content={text} />
               </Space>
-              <div>
-                {hasFilter ? (
-                  <Button danger onClick={onApplyFilter}>
-                    Посмотреть
-                  </Button>
-                ) : null}
-              </div>
+              {!isEmpty(filter) ? (
+                <Space direction='vertical'>
+                  {Object.entries(filter).map(([key, filterValue]: any) => (
+                    <Button
+                      key={key}
+                      danger
+                      onClick={() => onApplyFilter?.(key, filterValue)}
+                    >
+                      {EntityTypeEnum[key as keyof typeof EntityTypeEnum]}
+                    </Button>
+                  ))}
+                </Space>
+              ) : null}
             </Flex>
           </Col>
           <Col span={24}>

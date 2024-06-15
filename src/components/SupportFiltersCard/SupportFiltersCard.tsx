@@ -26,6 +26,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
   support_type,
   economic_activity_name,
 }) => {
+  const [form] = Form.useForm()
   const {
     data,
   }: {
@@ -35,11 +36,11 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
     extraUrl: Model.dataForFiltersUrl(),
   })
   const handleFormChange = (filterObj: Record<string, string>) => {
-    onChange?.(filterObj) // здесь вы можете обработать изменение фильтра
+    onChange?.(filterObj)
   }
 
   const onChangeMspRoster = (filterObj: Record<string, string>) => {
-    onChange?.(filterObj) // здесь вы можете обработать изменение фильтра
+    onChange?.(filterObj)
   }
 
   return (
@@ -55,6 +56,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
         />
         <Col span={24}>
           <Form
+            form={form}
             initialValues={{
               support_type,
               support_level,

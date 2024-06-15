@@ -23,7 +23,22 @@ export interface MessageModelProps {
   permission_rules?: string
   created_at?: string
   updated_at?: string
-  filter?: MessageModelFilters
+  filter?: BotResponseFilterProps
+}
+
+export const EntityKeyEnum = {
+  service_support: 'service_support',
+  category_problem: 'category_problem',
+  investment_object: 'investment_object',
+}
+export const EntityTypeEnum = {
+  [EntityKeyEnum.service_support]: 'Меры поддержки',
+  [EntityKeyEnum.category_problem]: 'Категория проблемы',
+  [EntityKeyEnum.investment_object]: 'Объект инвестирования',
+}
+
+export type BotResponseFilterProps = {
+  [key in keyof typeof EntityKeyEnum]?: string
 }
 
 export interface MessageModelFilters {
