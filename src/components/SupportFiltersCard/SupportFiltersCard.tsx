@@ -54,7 +54,16 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
           }}
         />
         <Col span={24}>
-          <Form onValuesChange={handleFormChange} layout='vertical'>
+          <Form
+            initialValues={{
+              support_type,
+              support_level,
+              msp_roster,
+              economic_activity_name,
+            }}
+            onValuesChange={handleFormChange}
+            layout='vertical'
+          >
             <Form.Item name='support_type' label='Тип поддержки'>
               <Select
                 value={support_type}

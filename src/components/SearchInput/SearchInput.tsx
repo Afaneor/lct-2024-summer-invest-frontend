@@ -9,9 +9,10 @@ import type { FCC } from '@/types'
 import styles from './SearchInput.module.scss'
 
 interface SearchInputProps {
+  searchStr?: string
   onSearch: (value: string) => void
 }
-const SearchInput: FCC<SearchInputProps> = ({ onSearch }) => {
+const SearchInput: FCC<SearchInputProps> = ({ searchStr, onSearch }) => {
   const [form] = Form.useForm()
 
   const debouncedOnSearch = useCallback(debounce(onSearch, 800), [onSearch])
@@ -22,7 +23,14 @@ const SearchInput: FCC<SearchInputProps> = ({ onSearch }) => {
   }, [form, debouncedOnSearch])
 
   return (
-    <Form form={form} layout='inline' className={styles.formContainer}>
+    <Form
+      form={form}
+      initialValues={{
+        search: searchStr,
+      }}
+      layout='inline'
+      className={styles.formContainer}
+    >
       <Space direction='horizontal' size={0}>
         <Form.Item name='search'>
           <Input

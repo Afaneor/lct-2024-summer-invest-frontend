@@ -120,7 +120,7 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
               created_at={item.created_at}
               owner_type={item.owner_type}
               onApplyFilter={() => {
-                onApplyFilter(item.filter)
+                onApplyFilter({ economic_activity_name: ['Автобизнес'] })
               }}
             />
           )

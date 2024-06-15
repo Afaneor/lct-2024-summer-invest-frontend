@@ -1,5 +1,5 @@
 import { Card, Col, Divider, Form, Row, Space } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components'
@@ -36,9 +36,13 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   object_type,
   site_type,
   isLoading,
+  specialized_site_is_free_customs_zone_regime,
+  real_estate_maip,
 }) => {
-  const [regimeC, setRegimeC] = useState('')
-  const [maipC, setMaipC] = useState('')
+  const [regimeC, setRegimeC] = useState<string | undefined>(
+    specialized_site_is_free_customs_zone_regime
+  )
+  const [maipC, setMaipC] = useState(real_estate_maip)
   const [form] = Form.useForm()
   const {
     data,
@@ -52,14 +56,39 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   const handleSetBtnFilter = (
     k: string,
     v: string,
-    c: string,
+    current: string | undefined,
     callback: (v: string) => void
   ) => {
     form.setFieldsValue({
-      [k]: v !== c ? v : '',
+      [k]: v !== current ? v : '',
     })
-    callback(v !== c ? v : '')
+    callback(v !== current ? v : '')
   }
+  useEffect(() => {
+    // необходимо для того, чтобы при изменении фильтров,
+    // начальные значения устанавливались заново
+    form.setFieldsValue({
+      economic_activity_name,
+      preferential_treatment,
+      transaction_form_name,
+      transaction_form_type,
+      location,
+      object_type,
+      site_type,
+      specialized_site_is_free_customs_zone_regime,
+      real_estate_maip,
+    })
+  }, [
+    economic_activity_name,
+    preferential_treatment,
+    transaction_form_name,
+    transaction_form_type,
+    location,
+    object_type,
+    site_type,
+    specialized_site_is_free_customs_zone_regime,
+    real_estate_maip,
+  ])
   return (
     <Card>
       <Row>
@@ -72,7 +101,22 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
           }}
         />
         <Col span={24}>
-          <Form form={form} layout='vertical' onFinish={onChange}>
+          <Form
+            form={form}
+            initialValues={{
+              economic_activity_name,
+              preferential_treatment,
+              transaction_form_name,
+              transaction_form_type,
+              location,
+              site_type,
+              object_type,
+              specialized_site_is_free_customs_zone_regime,
+              real_estate_maip,
+            }}
+            layout='vertical'
+            onFinish={onChange}
+          >
             <Row gutter={[20, 20]}>
               <Col xs={24} md={8}>
                 <FormItemFilterSelect

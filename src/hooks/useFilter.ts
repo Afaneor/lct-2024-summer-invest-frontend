@@ -8,6 +8,12 @@ import { useState } from 'react'
 export const useFilter = (initValue: any = {}) => {
   const [value, setValue] = useState(initValue)
 
+  /**
+   * Обработка фильтра
+   * Если значение пустое, то удаляет ключ из объекта
+   * Если значение не пустое, то добавляет ключ в объект
+   * @param filter
+   */
   const handleFilter = (filter: Record<string, any>) => {
     const filterFieldsWithValue = {} as Record<string, any>
 
@@ -27,5 +33,14 @@ export const useFilter = (initValue: any = {}) => {
     })
   }
 
-  return [value, handleFilter]
+  /**
+   * Установка нового фильтра
+   * Полностью заменяет старый фильтр на новый
+   * @param newFilter
+   */
+  const handleSetNewFilter = (newFilter: Record<string, any>) => {
+    setValue(newFilter)
+  }
+
+  return [value, handleFilter, handleSetNewFilter]
 }

@@ -1,5 +1,6 @@
-import { Form, Select } from 'antd'
-import { isObject } from 'lodash'
+import { Form, Select, Skeleton } from 'antd'
+import type { SizeType } from 'antd/es/config-provider/SizeContext'
+import { isArray } from 'lodash'
 import React from 'react'
 import type { FCC } from 'src/types'
 
@@ -8,7 +9,7 @@ interface FormItemFilterSelectProps {
   label: string
   value?: string
   options: string[] | Record<string, string>
-  size?: 'large' | 'middle' | 'small'
+  size?: SizeType
   placeholder?: string
   mode?: 'multiple' | 'tags'
 }
@@ -19,9 +20,12 @@ const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
   mode,
   name,
   label,
-  size,
+  size = 'large',
   placeholder,
 }) => {
+  if (!options)
+    return <Skeleton.Input active size={size === 'middle' ? 'default' : size} />
+
   return (
     <Form.Item name={name} label={label}>
       <Select
@@ -31,15 +35,15 @@ const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
         placeholder={placeholder}
         allowClear
       >
-        {!isObject(options)
+        {isArray(options)
           ? (options as string[])?.map((option: string) => (
               <Select.Option key={option} value={option}>
-                {option}
+                {option || 'н/д'}
               </Select.Option>
             ))
           : Object.entries(options).map(([k, v]) => (
               <Select.Option key={k} value={k}>
-                {v}
+                {v || 'н/д'}
               </Select.Option>
             ))}
       </Select>

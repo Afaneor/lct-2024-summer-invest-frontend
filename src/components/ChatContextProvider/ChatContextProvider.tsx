@@ -4,7 +4,11 @@ import { useFilter } from '@/hooks/useFilter'
 
 // Создаем контекст с начальным значением
 export const ChatContext = React.createContext(
-  {} as { filter: Record<string, any>; setChatFilter: (x: any) => void }
+  {} as {
+    filter: Record<string, any>
+    setChatFilter: (rec: Record<string, any>) => void
+    setNewFilter: (rec?: Record<string, any>) => void
+  }
 )
 
 interface ChatContextProviderProps {
@@ -17,13 +21,17 @@ const ChatContextProvider: React.FC<ChatContextProviderProps> = ({
   children,
   defaultFilters,
 }) => {
-  const [filter, setFilter] = useFilter(defaultFilters)
+  const [filter, setFilter, handleSetNewFilter] = useFilter(defaultFilters)
   const setChatFilter = (newFilter: any) => {
     setFilter(newFilter)
   }
 
+  const setNewFilter = (newFilter: any) => {
+    handleSetNewFilter(newFilter)
+  }
+
   const value = useMemo(
-    () => ({ filter, setChatFilter }),
+    () => ({ filter, setChatFilter, setNewFilter }),
     [filter, setChatFilter]
   )
 

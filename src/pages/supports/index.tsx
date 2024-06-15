@@ -1,14 +1,14 @@
 import { Col, Row } from 'antd'
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 
+import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { Links } from '@/components/Header/Links'
 import { PageWrapper } from '@/components/PageWrapper'
 import { SearchInput } from '@/components/SearchInput'
 import { SupportCard } from '@/components/SupportCard'
 import { SupportFiltersCard } from '@/components/SupportFiltersCard'
-import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
 import type { SupportModelProps } from '@/models'
 import { SupportModel } from '@/models'
@@ -18,7 +18,7 @@ import type { ModelOptionProps } from '@/types'
 const Model = SupportModel
 
 const Supports = () => {
-  const [filter, setFilter] = useFilter({})
+  const { filter, setChatFilter } = useContext(ChatContext)
 
   return (
     <Main
@@ -34,7 +34,7 @@ const Supports = () => {
             <Col xs={24}>
               <SearchInput
                 onSearch={(search) => {
-                  setFilter({ search })
+                  setChatFilter({ search })
                 }}
               />
             </Col>
@@ -49,7 +49,7 @@ const Supports = () => {
               msp_roster={filter.msp_roster}
               economic_activity_name={filter.economic_activity_name}
               onChange={(obj) => {
-                setFilter(obj)
+                setChatFilter(obj)
               }}
             />
           </Col>

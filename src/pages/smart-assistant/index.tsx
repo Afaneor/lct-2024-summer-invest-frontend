@@ -10,7 +10,6 @@ import { InvestmentItemsCard } from '@/components/InvestmentItemsCard'
 import { InvestObjectsFilterCard } from '@/components/InvestObjectsFilterCard'
 import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/'
 import { PageWrapper } from '@/components/PageWrapper'
-import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import withAuth from '@/pages/HOC'
@@ -20,9 +19,7 @@ const Model = InvestmentObjectsModel
 const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
-  const { filter } = useContext(ChatContext)
-
-  const [defFilter, setFilter] = useFilter(defFilters)
+  const { filter, setChatFilter } = useContext(ChatContext)
   const [divRef, scrollTo] = useScrollIntoViewOnCall()
 
   return (
@@ -39,9 +36,10 @@ const SmartHelper = () => {
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
       >
+        {JSON.stringify(filter)}
         <FetchMoreItemsComponent
           model={Model}
-          defFilters={{ ...defFilter, ...filter }}
+          defFilters={{ ...defFilters, ...filter }}
           lengthPostfixPlural='площадок'
           renderItems={({
             data: rowData,
@@ -54,18 +52,18 @@ const SmartHelper = () => {
               <Col span={24}>
                 <InvestObjectsFilterCard
                   isLoading={isLoading || isFetching}
-                  object_type={defFilter?.object_type}
+                  object_type={filter?.object_type}
                   specialized_site_is_free_customs_zone_regime={
-                    defFilter?.specialized_site_is_free_customs_zone_regime
+                    filter?.specialized_site_is_free_customs_zone_regime
                   }
-                  real_estate_maip={defFilter?.real_estate_maip}
-                  location={defFilter?.location}
-                  transaction_form_type={defFilter?.transaction_form_type}
-                  transaction_form_name={defFilter?.transaction_form_name}
-                  site_type={defFilter?.site_type}
-                  economic_activity_name={defFilter?.economic_activity_name}
-                  preferential_treatment={defFilter?.preferential_treatment}
-                  onChange={setFilter}
+                  real_estate_maip={filter?.real_estate_maip}
+                  location={filter?.location}
+                  transaction_form_type={filter?.transaction_form_type}
+                  transaction_form_name={filter?.transaction_form_name}
+                  site_type={filter?.site_type}
+                  economic_activity_name={filter?.economic_activity_name}
+                  preferential_treatment={filter?.preferential_treatment}
+                  onChange={setChatFilter}
                 />
               </Col>
               {dataCount ? (

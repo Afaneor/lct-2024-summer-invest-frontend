@@ -1,9 +1,15 @@
+import { useState } from 'react'
+
 import BaseServices from '@/services/base/BaseServices'
 
 /**
- * Хук для скачивания файлов
+ * Скачивание файла
+ * @param url - URL файла
+ * @param params - Параметры запроса
+ * @param name - Имя файла
  */
 export const useFileDownload = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const fileDownload = async ({
     url,
     params,
@@ -13,6 +19,7 @@ export const useFileDownload = () => {
     params?: any
     name: string
   }) => {
+    setIsLoading(true)
     try {
       if (url.startsWith('http')) {
         window.open(url)
@@ -41,7 +48,9 @@ export const useFileDownload = () => {
       }, 200)
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
-  return fileDownload
+  return { fileDownload, isLoading }
 }

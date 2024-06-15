@@ -1,10 +1,10 @@
 import { Col, Row } from 'antd'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import CascadeComponent from '@/components/CategoriesCascader/CategoriesCascader'
+import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { PageWrapper } from '@/components/PageWrapper'
 import { SearchInput } from '@/components/SearchInput'
-import { useFilter } from '@/hooks/useFilter'
 import { Meta } from '@/layouts/Meta'
 import { ProblemCategoriesModel } from '@/models/ProblemCategories'
 import { useFetchItems } from '@/services/base/hooks'
@@ -12,9 +12,18 @@ import { Main } from '@/templates/Main'
 
 const Model = ProblemCategoriesModel
 
+const defFilters = { limit: 1000 }
 const Supports = () => {
-  const [filter, setFilter] = useFilter({ limit: 1000 })
-  const { results, isLoading } = useFetchItems({ model: Model, filter })
+  const { filter, setChatFilter } = useContext(ChatContext)
+
+  // const [filter, setFilter] = useFilter({ limit: 1000 })
+  const { results, isLoading } = useFetchItems({
+    model: Model,
+    filter: {
+      ...defFilters,
+      ...filter,
+    },
+  })
   return (
     <Main
       meta={
@@ -28,8 +37,9 @@ const Supports = () => {
           <Row>
             <Col xs={24}>
               <SearchInput
+                searchStr={filter?.search}
                 onSearch={(search) => {
-                  setFilter({ search })
+                  setChatFilter({ search })
                 }}
               />
             </Col>

@@ -15,9 +15,21 @@ import styles from './RequestListItem.module.scss'
 const { Title } = Typography
 interface RequestListItemProps {
   createdAt: string
+  onShowInvestmentObjects: () => void
+  onShowSupport: () => void
+  onShowFAQ: () => void
+  onDownloadReport: () => void
+  isLoadingDownloadReport?: boolean
 }
 
-const RequestListItem: FCC<RequestListItemProps> = ({ createdAt }) => {
+const RequestListItem: FCC<RequestListItemProps> = ({
+  createdAt,
+  onDownloadReport,
+  onShowInvestmentObjects,
+  onShowFAQ,
+  onShowSupport,
+  isLoadingDownloadReport,
+}) => {
   const { dateFormatter } = useDateTimePrettyStr()
   return (
     <List.Item className={styles.container}>
@@ -26,17 +38,21 @@ const RequestListItem: FCC<RequestListItemProps> = ({ createdAt }) => {
         <Title level={5}>{dateFormatter({ date: createdAt })}</Title>
       </Space>
       <Space>
-        <Tooltip title='Подобранные объекты'>
-          <Button icon={<ShopOutlined />} />
+        <Tooltip title='Посмотреть подобранные объекты'>
+          <Button icon={<ShopOutlined />} onClick={onShowInvestmentObjects} />
         </Tooltip>
-        <Tooltip title='Меры поддержки'>
-          <Button icon={<SolutionOutlined />} />
+        <Tooltip title='Посмотреть меры поддержки'>
+          <Button icon={<SolutionOutlined />} onClick={onShowSupport} />
         </Tooltip>
         <Tooltip title='Часто возникающие проблемы'>
-          <Button icon={<QuestionCircleOutlined />} />
+          <Button icon={<QuestionCircleOutlined />} onClick={onShowFAQ} />
         </Tooltip>
         <Tooltip title='Скачать отчет'>
-          <Button icon={<DownloadOutlined />} />
+          <Button
+            loading={isLoadingDownloadReport}
+            icon={<DownloadOutlined />}
+            onClick={onDownloadReport}
+          />
         </Tooltip>
       </Space>
     </List.Item>

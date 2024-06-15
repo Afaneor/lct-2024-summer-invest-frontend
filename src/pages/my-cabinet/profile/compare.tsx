@@ -79,7 +79,7 @@ const Compare = () => {
     setItems(JSON.parse(localStorageItems || '[]'))
   }, [])
 
-  const { results, refetch, isLoading } = useFetchItems({
+  const { results, refetch } = useFetchItems({
     model: Model,
     filter: {
       id: items,
@@ -157,7 +157,6 @@ const Compare = () => {
     }
     return record[field.key]
   }
-  if (isLoading) return <MyProfileLayout>Загружаем...</MyProfileLayout>
   return (
     <MyProfileLayout>
       {items?.length !== 0 ? (
