@@ -22,8 +22,7 @@ export const Block1 = () => {
                 }
               />
               <Title level={4} className={styles.subtitle}>
-                '"Умный Ассистент: Территории для вашего бизнеса, оценка и
-                подбор на высшем уровне!"'
+                Ваш надежный путь к успешным инвестициям
               </Title>
               <Link href={Links.SMART_ASSISTANT.href}>
                 <ButtonPrimaryRed

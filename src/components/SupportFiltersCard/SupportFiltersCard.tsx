@@ -13,7 +13,6 @@ interface SupportFiltersCardProps {
   support_type?: string
   support_level?: string
   msp_roster?: string
-  economic_activity_name?: string
   economic_activity_code?: string[]
   onChange?: (obj: Record<string, string>) => void
   onReset?: () => void
@@ -26,7 +25,6 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
   msp_roster,
   support_level,
   support_type,
-  economic_activity_name,
   economic_activity_code,
 }) => {
   const [form] = Form.useForm()
@@ -36,7 +34,7 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
     data: Record<'data', SupportModelProps[]> | any
   } = useExtraActionsGet({
     qKey: 'supports',
-    extraUrl: Model.dataForFiltersUrl(),
+    extraUrl: Model.additionalDataUrl(),
   })
   const handleFormChange = (filterObj: Record<string, string>) => {
     onChange?.(filterObj)
@@ -64,7 +62,6 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
               support_type,
               support_level,
               msp_roster,
-              economic_activity_name,
               economic_activity_code,
             }}
             onValuesChange={handleFormChange}
@@ -119,25 +116,6 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
                   </ButtonRounded>
                 ))}
               </Space>
-            </Form.Item>
-
-            <Form.Item
-              name='economic_activity_name'
-              label='Экономическая деятельность'
-            >
-              <Select
-                value={economic_activity_name}
-                mode='multiple'
-                placeholder='Выберите экономическую деятельность'
-                allowClear
-                size='large'
-              >
-                {data?.data?.economic_activity_name?.map((name: string) => (
-                  <Select.Option key={name} value={name}>
-                    {name}
-                  </Select.Option>
-                ))}
-              </Select>
             </Form.Item>
             <Form.Item name='economic_activity_code' label='ОКВЭД'>
               <OkvedSelectModal value={data?.data?.economic_activity_code} />

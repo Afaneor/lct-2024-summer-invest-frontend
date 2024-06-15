@@ -4,12 +4,13 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { Markdown } from '@/chat/components/Markdown'
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import { CommentsComponent } from '@/components/CommentsComponent'
 import { PageWrapper } from '@/components/PageWrapper'
 import { Meta } from '@/layouts/Meta'
 import type { SupportModelProps } from '@/models'
-import { CONTENT_TYPE, SupportModel } from '@/models'
+import { SupportModel } from '@/models'
 import { useFetchOneItem } from '@/services/base/hooks'
 import { Main } from '@/templates/Main'
 import type { ReactQueryFetch } from '@/types'
@@ -67,7 +68,7 @@ const SupportItem = () => {
                     header={<BebasNeueTitle level={4} title={value} />}
                     key={key}
                   >
-                    {response?.data[key]}
+                    <Markdown content={response?.data[key]} />
                   </Collapse.Panel>
                 </Collapse>
               </Card>
@@ -94,7 +95,10 @@ const SupportItem = () => {
             level={3}
             title='Комментарии'
           />
-          <CommentsComponent object_id={id} content_type={CONTENT_TYPE} />
+          <CommentsComponent
+            object_id={id}
+            content_type={response?.data?.content_type_id}
+          />
         </Card>
       </PageWrapper>
     </Main>

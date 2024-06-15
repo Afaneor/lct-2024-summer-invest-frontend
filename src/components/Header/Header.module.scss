@@ -18,6 +18,7 @@
   width: 100%;
   padding: 0;
   background-color: transparent;
+  transition: background-color 0.9s ease;
 }
 
 .headerContainer:hover {
@@ -69,7 +70,9 @@
 .subtitleInvest {
   margin-top: 6px !important;
   margin-bottom: 10px !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
+  font-weight: 100 !important;
+  letter-spacing: 0.02em !important;
 }
 
 .firstLineLink {

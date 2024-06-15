@@ -37,7 +37,7 @@ const ModalSubscription: FCC<ModalSubscriptionProps> = ({ open, onCancel }) => {
       | any
   } = useExtraActionsGet({
     qKey: 'subscriptionsFilterData',
-    extraUrl: Model.dataForFiltersUrl(),
+    extraUrl: Model.additionalDataUrl(),
   })
 
   const { mutate: createItem, isLoading } = useCreateItem(Model)

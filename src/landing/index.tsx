@@ -6,7 +6,6 @@ const Landing = () => (
   <div>
     <Block1 />
     <Block2 />
-    {/*<Block3 />*/}
     <LandingFooter />
   </div>
 )

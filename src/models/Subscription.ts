@@ -22,7 +22,7 @@ export class SubscriptionModel extends BaseModel {
     return '/personal-cabinet/subscriptions'
   }
 
-  static dataForFiltersUrl() {
-    return `${this.url()}/data-for-filters`
+  static additionalDataUrl() {
+    return `${this.url()}/additional-data`
   }
 }

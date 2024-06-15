@@ -80,7 +80,7 @@ const Subscriptions = () => {
                 <Alert message='У вас еще нет подписок' type='info' showIcon />
               </Col>
             ) : (
-              data.map((item: ModelOptionProps<SubscriptionModelProps>) => (
+              data?.map((item: ModelOptionProps<SubscriptionModelProps>) => (
                 <Col xs={24} md={6} key={item.id.value}>
                   <ConfirmModal
                     open={openConfirmModal}
@@ -105,13 +105,13 @@ const Subscriptions = () => {
                     ]}
                   >
                     <Space direction='vertical'>
-                      {item?.email ? (
+                      {item?.email.value ? (
                         <Space>
                           <MailOutlined />
                           {item.email?.value}
                         </Space>
                       ) : null}
-                      {item?.telegram_username ? (
+                      {item?.telegram_username.value ? (
                         <Space>
                           <SendOutlined rotate={315} />
                           {item.telegram_username.value}

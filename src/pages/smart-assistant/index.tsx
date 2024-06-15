@@ -17,7 +17,7 @@ import withAuth from '@/pages/HOC'
 import { Main } from '@/templates/Main'
 
 const Model = InvestmentObjectsModel
-const defFilters = { limit: 12 }
+const defFilters = { limit: 12, data_source: 'investmoscow.ru' }
 
 const SmartHelper = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
@@ -67,7 +67,6 @@ const SmartHelper = () => {
                   transaction_form_type={shortFilter?.transaction_form_type}
                   transaction_form_name={shortFilter?.transaction_form_name}
                   site_type={shortFilter?.site_type}
-                  economic_activity_name={shortFilter?.economic_activity_name}
                   preferential_treatment={shortFilter?.preferential_treatment}
                   onChange={handleSetFilter}
                 />

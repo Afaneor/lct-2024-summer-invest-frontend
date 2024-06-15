@@ -5,7 +5,7 @@ import type { FCC } from 'src/types'
 import { useDateTimePrettyStr } from '@/chat/hooks/useDateTimePrettyStr'
 import { TruncateText } from '@/components/TruncateText'
 
-const { Meta: CardMete } = Card
+const { Meta: CardMeta } = Card
 
 interface EventCardProps {
   date: string
@@ -28,7 +28,7 @@ const EventCard: FCC<EventCardProps> = ({ date, name, description, photo }) => {
       hoverable
       cover={<img alt={name} src={photo || 'https://picsum.photos/200'} />}
     >
-      <CardMete
+      <CardMeta
         title={name}
         description={<TruncateText text={description} length={100} />}
       />

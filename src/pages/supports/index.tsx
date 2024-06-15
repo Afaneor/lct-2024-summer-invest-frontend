@@ -52,7 +52,6 @@ const Supports = () => {
               support_level={shortFilter?.support_level}
               support_type={shortFilter?.support_type}
               msp_roster={shortFilter?.msp_roster}
-              economic_activity_name={shortFilter?.economic_activity_name}
               onChange={handleSetFilter}
             />
           </Col>

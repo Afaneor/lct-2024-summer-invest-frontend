@@ -43,7 +43,6 @@ export interface SupportModelProps extends BaseModelProps {
   economic_activity_code: string[]
 }
 
-export const CONTENT_TYPE = 43
 export class SupportModel extends BaseModel {
   static modelName = 'serviceSupport'
 
@@ -51,7 +50,7 @@ export class SupportModel extends BaseModel {
     return '/support/service-supports'
   }
 
-  static dataForFiltersUrl() {
-    return `${this.url()}/data-for-filters`
+  static additionalDataUrl() {
+    return `${this.url()}/additional-data`
   }
 }

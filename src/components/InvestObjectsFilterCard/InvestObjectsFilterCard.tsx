@@ -11,7 +11,6 @@ import ButtonPrimaryRed from '../ButtonPrimaryRed/ButtonPrimaryRed'
 import FormItemFilterSelect from '../FormItemFilterSelect/FormItemFilterSelect'
 
 interface InvestObjectsFilterCardProps {
-  economic_activity_name?: string
   preferential_treatment?: string
   transaction_form_name?: string
   transaction_form_type?: string
@@ -28,7 +27,6 @@ const Model = InvestmentObjectsModel
 
 const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   onChange,
-  economic_activity_name,
   preferential_treatment,
   transaction_form_name,
   transaction_form_type,
@@ -52,7 +50,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
     isLoading: boolean
   } = useExtraActionsGet({
     qKey: 'investmentObjects',
-    extraUrl: Model.dataForFiltersUrl(),
+    extraUrl: Model.additionalDataUrl(),
   })
 
   const handleSetBtnFilter = (
@@ -70,7 +68,6 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
     // необходимо для того, чтобы при изменении фильтров,
     // начальные значения устанавливались заново
     form.setFieldsValue({
-      economic_activity_name,
       preferential_treatment,
       transaction_form_name,
       transaction_form_type,
@@ -81,7 +78,6 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
       real_estate_maip,
     })
   }, [
-    economic_activity_name,
     preferential_treatment,
     transaction_form_name,
     transaction_form_type,
@@ -131,12 +127,34 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                   <Col xs={24} md={8}>
                     <FormItemFilterSelect
                       isLoading={isLoadingData}
-                      name='economic_activity_name'
-                      label='Сфера деятельности'
-                      value={economic_activity_name}
-                      options={data?.data?.economic_activity_name}
+                      name='location'
+                      label='Местоположение'
+                      value={location}
+                      options={data?.data?.location}
                       mode='multiple'
-                      placeholder='Выберите сферу деятельности'
+                      placeholder='Выберите местоположение'
+                    />
+                  </Col>
+                  <Col xs={24} md={8}>
+                    <FormItemFilterSelect
+                      isLoading={isLoadingData}
+                      name='site_type'
+                      label='Тип площадки'
+                      value={site_type}
+                      options={data?.data?.site_type}
+                      mode='multiple'
+                      placeholder='Выберите тип площадки'
+                    />
+                  </Col>
+                  <Col xs={24} md={8}>
+                    <FormItemFilterSelect
+                      isLoading={isLoadingData}
+                      name='object_type'
+                      label='Тип объекта'
+                      value={object_type}
+                      options={data?.data?.object_type}
+                      mode='multiple'
+                      placeholder='Выберите тип объекта'
                     />
                   </Col>
                   <Col xs={24} md={8}>
@@ -170,39 +188,6 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                       options={data?.data?.transaction_form_type}
                       mode='multiple'
                       placeholder='Выберите тип формы сделки'
-                    />
-                  </Col>
-                  <Col xs={24} md={8}>
-                    <FormItemFilterSelect
-                      isLoading={isLoadingData}
-                      name='location'
-                      label='Местоположение'
-                      value={location}
-                      options={data?.data?.location}
-                      mode='multiple'
-                      placeholder='Выберите местоположение'
-                    />
-                  </Col>
-                  <Col xs={24} md={8}>
-                    <FormItemFilterSelect
-                      isLoading={isLoadingData}
-                      name='site_type'
-                      label='Тип площадки'
-                      value={site_type}
-                      options={data?.data?.site_type}
-                      mode='multiple'
-                      placeholder='Выберите тип площадки'
-                    />
-                  </Col>
-                  <Col xs={24} md={8}>
-                    <FormItemFilterSelect
-                      isLoading={isLoadingData}
-                      name='object_type'
-                      label='Тип объекта'
-                      value={object_type}
-                      options={data?.data?.object_type}
-                      mode='multiple'
-                      placeholder='Выберите тип объекта'
                     />
                   </Col>
                   <Col xs={24} md={8}>

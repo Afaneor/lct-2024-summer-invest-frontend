@@ -27,28 +27,31 @@ const FormItemFilterSelect: FCC<FormItemFilterSelectProps> = ({
 }) => {
   if (isLoading)
     return <Skeleton.Input active size={size === 'middle' ? 'default' : size} />
-
   return (
     <Form.Item name={name} label={label}>
-      <Select
-        value={value}
-        mode={mode}
-        size={size}
-        placeholder={placeholder}
-        allowClear
-      >
-        {options && isArray(options)
-          ? (options as string[])?.map((option: string) => (
-              <Select.Option key={option} value={option}>
-                {option || 'н/д'}
-              </Select.Option>
-            ))
-          : Object.entries(options).map(([k, v]) => (
-              <Select.Option key={k} value={k}>
-                {v || 'н/д'}
-              </Select.Option>
-            ))}
-      </Select>
+      {options ? (
+        <Select
+          value={value}
+          mode={mode}
+          size={size}
+          placeholder={placeholder}
+          allowClear
+        >
+          {options && isArray(options)
+            ? (options as string[])?.map((option: string) => (
+                <Select.Option key={option} value={option}>
+                  {option || 'н/д'}
+                </Select.Option>
+              ))
+            : Object.entries(options).map(([k, v]) => (
+                <Select.Option key={k} value={k}>
+                  {v || 'н/д'}
+                </Select.Option>
+              ))}
+        </Select>
+      ) : (
+        'н/д'
+      )}
     </Form.Item>
   )
 }

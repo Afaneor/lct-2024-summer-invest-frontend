@@ -83,7 +83,7 @@ export const Header: FCC = () => {
         </Col>
         <Col xs={0} md={0} lg={16}>
           <BebasNeueTitle
-            title='Инвестиционный портал города Москвы'
+            title='Умный инвестиционный портал'
             className={styles.subtitleInvest}
           />
         </Col>
