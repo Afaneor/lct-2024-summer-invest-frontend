@@ -13,7 +13,6 @@ import styles from './style.module.scss'
 
 interface MessageProps extends MessageModelProps {
   isLoading?: boolean
-  hasFilter?: boolean
   onApplyFilter?: (
     key: keyof typeof EntityTypeEnum,
     filters: Record<string, any>

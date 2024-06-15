@@ -25,10 +25,6 @@ import type { SelectionRequestActualProps } from '../models/SelectionRequest'
 import { SelectionRequestModel } from '../models/SelectionRequest'
 import styles from './style.module.scss'
 
-interface SmartChatProps {
-  isOpen?: boolean
-}
-
 const bodyStyle = {
   padding: 8,
   height: '100%',
@@ -209,7 +205,6 @@ export const SmartChat: FCC<SmartChatProps> = ({
               key={item.id}
               id={item.id}
               text={item.text}
-              hasFilter={!isEmpty(item.bot_filter)}
               bot_filter={item.bot_filter}
               created_at={item.created_at}
               owner_type={item.owner_type}
