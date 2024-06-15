@@ -3,7 +3,6 @@ import { Button, Space, Spin } from 'antd'
 import React, { useContext, useState } from 'react'
 
 import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
-import type { UsersModelProps } from '@/models'
 import type { FCC } from '@/types'
 
 import { AuthModalComponent } from '../AuthModalComponent'
@@ -22,20 +21,7 @@ const AuthComponent: FCC<AuthComponentProps> = ({
   const { currentUser } = useContext(CurrentUserContext)
 
   if (currentUser) {
-    return (
-      <CurrentUser
-        currentUser={
-          {
-            username: 'test',
-            email: 'test@test.ru',
-            first_name: 'test',
-            last_name: 'test',
-            is_active: true,
-            avatar: 'test',
-          } as UsersModelProps
-        }
-      />
-    )
+    return <CurrentUser currentUser={currentUser} />
   }
 
   return (

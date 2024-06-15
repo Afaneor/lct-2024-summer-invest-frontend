@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { FormItem } from '@/components'
-import { AuthComponent } from '@/components/AuthComponent'
+import { BebasNeueTitle, FormItem } from '@/components'
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import type { FormErrorsHook } from '@/hooks/useFormErrors'
 import { useFormErrors } from '@/hooks/useFormErrors'
@@ -15,8 +14,10 @@ import { Main } from '@/templates/Main'
 const Registration: FCC = () => {
   const { errors, setFormErrors } = useFormErrors() as FormErrorsHook
   const router = useRouter()
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const onFinish = (data: any) => {
+    setIsLoading(true)
     AuthServices.register(data)
       .then(() => {
         notification.success({
@@ -29,6 +30,9 @@ const Registration: FCC = () => {
       .catch((error: { data: Object }) => {
         setFormErrors(error.data)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
   const onFinishFailed = () => {
     notification.error({
@@ -40,11 +44,8 @@ const Registration: FCC = () => {
     <Main meta={<Meta title='Регистрация' description='' />}>
       <Row justify='center' style={{ padding: '1% 0' }}>
         <Col xs={24} md={12}>
-          <Card
-            title='Регистрация'
-            extra={<AuthComponent title='Вход' />}
-            hoverable
-          >
+          <Card hoverable>
+            <BebasNeueTitle level={1} title='Регистрация' />
             <Form
               layout='vertical'
               wrapperCol={{ span: 24 }}
@@ -158,7 +159,12 @@ const Registration: FCC = () => {
                 </Col>
               </Row>
               <Form.Item>
-                <ButtonPrimaryRed block size='large' htmlType='submit'>
+                <ButtonPrimaryRed
+                  loading={isLoading}
+                  block
+                  size='large'
+                  htmlType='submit'
+                >
                   Зарегистрироваться
                 </ButtonPrimaryRed>
               </Form.Item>

@@ -9,7 +9,6 @@ import {
   Row,
 } from 'antd'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React from 'react'
 import type { FCC } from 'src/types'
 
@@ -32,13 +31,12 @@ const AuthModalComponent: FCC<AuthModalComponentProps> = ({
 }) => {
   const [loginForm] = Form.useForm()
   const { errors, setFormErrors } = useFormErrors() as FormErrorsHook
-  const router = useRouter()
 
   const { mutate: login, isLoading: loginIsLoading }: any = useLogin()
   const handleLogin = (credentials: LoginValuesTypes) => {
     login(credentials, {
       onSuccess: () => {
-        router.push('/calculator')
+        window.location.reload()
       },
       onError: (error: any) => {
         setFormErrors(error?.data)
