@@ -1,25 +1,27 @@
-import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
+import { SaveOutlined, SendOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd'
-import { Button, Col, Form, Input, Row, Upload } from 'antd'
+import { Button, Col, Form, Input, Row, Tooltip } from 'antd'
 import React, { useEffect } from 'react'
 
 import type { FCC } from '../../types'
-import { IconAsButton } from '../IconAsButton'
 
 const { TextArea } = Input
 
 interface InputMessageContainerProps {
   isDisabled?: boolean
   isLoading?: boolean
+  isSaving?: boolean
   form: FormInstance
   onSend: (message: string) => void
-  onUpload?: (file: any) => void
+  onSaveRequest?: () => void
 }
 export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSend,
   isDisabled,
   form,
   isLoading,
+  isSaving,
+  onSaveRequest,
 }) => {
   const inputRef = React.useRef<any>(null)
 
@@ -32,12 +34,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   const handleSendClick = () => {
     form.validateFields().then((values) => {
       onSend(values.message)
-      // form.resetFields()
     })
-  }
-
-  const handleUpload = () => {
-    // Здесь вы можете обработать загрузку файла
   }
 
   return (
@@ -50,9 +47,16 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
         <Col span={3}>
           <Form.Item name='file'>
-            <Upload beforeUpload={handleUpload} showUploadList={false}>
-              <IconAsButton icon={PaperClipOutlined} />
-            </Upload>
+            <Tooltip title='Сохранить запрос и начать новый' placement='top'>
+              <Button
+                loading={isSaving}
+                type='text'
+                shape='circle'
+                size='large'
+                icon={<SaveOutlined />}
+                onClick={onSaveRequest}
+              />
+            </Tooltip>
           </Form.Item>
         </Col>
         <Col span={18}>
@@ -60,6 +64,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
             <TextArea
               ref={inputRef}
               autoSize={{ minRows: 1, maxRows: 3 }}
+              // style={{ borderRadius: 50 }}
               autoFocus
               placeholder='Введите сообщение'
               onKeyDown={(e) => {
@@ -93,6 +98,8 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
             {() => (
               <Button
                 loading={isLoading}
+                type='text'
+                size='large'
                 disabled={!form.getFieldValue('message') || isDisabled}
                 htmlType='submit'
                 icon={<SendOutlined />}

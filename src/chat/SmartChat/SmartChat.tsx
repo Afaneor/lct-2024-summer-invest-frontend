@@ -1,4 +1,4 @@
-import { Card, Form, Spin } from 'antd'
+import { Card, Form, notification, Spin } from 'antd'
 import { isEmpty } from 'lodash'
 import React from 'react'
 
@@ -79,6 +79,30 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
       },
     })
   }
+
+  const { mutate: completeChat, isLoading: isLoadingCompleChat } =
+    useCreateItem(SelectionRequestModel)
+
+  const handleCompleteChat = () => {
+    completeChat(
+      {},
+      {
+        onSuccess: () => {
+          notification.success({
+            message: 'Запрос успешно сохранен',
+            description:
+              'Вы можете посмотреть историю запросов в профиле, в разделе "Запросы"',
+            duration: 10,
+            closable: true,
+          })
+          refetchActual()
+        },
+        onError: (error: any) => {
+          console.error('error', error)
+        },
+      }
+    )
+  }
   const messagesEndRef = useScrollIntoView([selectionRequestData])
 
   return (
@@ -102,9 +126,11 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
         <div key='infoMsg' className={styles.cardFooter}>
           <InputMessageContainer
             form={inputMessageForm}
+            isSaving={isLoadingCompleChat}
             isLoading={isLoadingCreateNewMessage}
             isDisabled={isLoadingCreateNewMessage}
             onSend={handleCreateMessage}
+            onSaveRequest={handleCompleteChat}
           />
         </div>,
       ]}

@@ -1,4 +1,8 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  LogoutOutlined,
+  MessageOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 import { Button, Card, Col, Dropdown, Row, Space, Typography } from 'antd'
 import Link from 'next/link'
 import React, { useCallback } from 'react'
@@ -44,6 +48,13 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
           >
             <Button type='text' icon={<UserOutlined />}>
               Профиль
+            </Button>
+          </Link>
+          <Link
+            href={`${Links?.MY_CABINET?.href}${Links?.PROFILE?.href}${Links?.REQUESTS?.href}`}
+          >
+            <Button type='text' icon={<MessageOutlined />}>
+              Запросы
             </Button>
           </Link>
           <ToCompareButtonWithTooltip />

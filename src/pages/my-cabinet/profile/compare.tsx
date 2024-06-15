@@ -159,7 +159,7 @@ const Compare = () => {
   }
   return (
     <MyProfileLayout>
-      {items?.length !== 0 ? (
+      {items?.length !== 0 && results?.length !== 0 ? (
         <Collapse defaultActiveKey={['mainParams']} ghost>
           <Collapse.Panel
             header={<BebasNeueTitle level={4} title='Основные параметры' />}
