@@ -2,6 +2,7 @@ import { Card, Col, Descriptions, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
 import React from 'react'
+import { SmartChat } from 'src/chat/SmartChat/SmartChat'
 
 import { BebasNeueTitle } from '@/components'
 import { CardSearchFilters } from '@/components/CardSearchFilters/'
@@ -46,6 +47,7 @@ const SmartHelper = () => {
         />
       }
     >
+      <SmartChat />
       <PageWrapper
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
