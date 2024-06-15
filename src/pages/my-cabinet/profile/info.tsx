@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import { BebasNeueTitle } from '@/components'
 import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 import { PageCardContainer } from '@/components/PageCardContainer'
+import withAuth from '@/pages/HOC'
 import MyProfileLayout from '@/templates/MyProfileLayout'
 
 const iconsStyle = {
@@ -42,4 +43,4 @@ const MyProfileInfo = () => {
   )
 }
 
-export default MyProfileInfo
+export default withAuth(MyProfileInfo)

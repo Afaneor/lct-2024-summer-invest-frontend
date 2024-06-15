@@ -14,7 +14,7 @@ const MyProfileBusiness = () => {
         model={Model}
         noDataText='Вы прочитали весь блог! 😎'
         renderList={(fetchedValues) => (
-          <PageCardContainer title='Ваши персональные данные'>
+          <PageCardContainer title='Ваши организации'>
             {JSON.stringify(fetchedValues)}
           </PageCardContainer>
         )}

@@ -1,7 +1,6 @@
-import type { LoginValuesTypes } from 'src/services/auth/types'
+import type { IRegister, LoginValuesTypes } from 'src/services/auth/types'
 
 import apiClient from '../api-client'
-import { IRegister } from 'src/services/auth/types'
 
 const userApi = 'user/users'
 const usersProfileApi = 'user/users'
@@ -31,7 +30,7 @@ export default class AuthServices {
       }
       return res
     } catch (error: any) {
-      return error.data
+      return error.response
     }
   }
 

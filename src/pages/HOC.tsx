@@ -10,18 +10,17 @@ const withAuth = <P extends object>(
 ): ComponentType<P> => {
   // eslint-disable-next-line react/display-name
   return (props: P) => {
-    const { currentUser } = useContext(CurrentUserContext)
-
+    const { currentUser, isLoading } = useContext(CurrentUserContext)
     const router = useRouter()
 
     useEffect(() => {
-      if (isEmpty(currentUser)) {
-        router.replace('/') // перенаправляем на страницу логина, если пользователь не авторизован
+      if (isEmpty(currentUser) && !isLoading) {
+        router.replace('/')
       }
     }, [currentUser])
 
-    if (!currentUser) {
-      return null // можно вернуть спиннер или null, пока идет проверка
+    if (!isLoading) {
+      return null
     }
 
     return <WrappedComponent {...props} />
