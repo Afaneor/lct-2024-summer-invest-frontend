@@ -37,7 +37,14 @@ export const Header: FCC = () => {
                 } ${styles.navLink}`}
               >
                 <Link href={link.href}>
-                  <Button color='black' type='link'>
+                  <Button
+                    color='black'
+                    type='link'
+                    style={{
+                      padding: 0,
+                      marginRight: 10,
+                    }}
+                  >
                     {link.text}
                   </Button>
                 </Link>
