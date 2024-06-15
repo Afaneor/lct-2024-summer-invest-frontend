@@ -46,7 +46,10 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
     data: Record<'data', SelectionRequestActualProps> | any
     isLoading: boolean
     refetch: () => void
-  } = useExtraActionsGet('currentScanDates', selectionRequestModel.actualUrl())
+  } = useExtraActionsGet({
+    qKey: 'currentScanDates',
+    extraUrl: selectionRequestModel.actualUrl(),
+  })
 
   const { mutate: createMessage, isLoading: isLoadingCreateNewMessage } =
     useCreateItem(messageModel)

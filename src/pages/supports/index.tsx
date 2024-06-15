@@ -17,6 +17,7 @@ const Model = SupportModel
 
 const Supports = () => {
   const [filter, setFilter] = useFilter({})
+
   return (
     <Main
       meta={
@@ -40,7 +41,15 @@ const Supports = () => {
       >
         <Row gutter={[20, 20]}>
           <Col xs={24} md={8}>
-            <SupportFiltersCard />
+            <SupportFiltersCard
+              support_level={filter.support_level}
+              support_type={filter.support_type}
+              msp_roster={filter.msp_roster}
+              economic_activity_name={filter.economic_activity_name}
+              onChange={(obj) => {
+                setFilter(obj)
+              }}
+            />
           </Col>
           <Col xs={24} md={16}>
             <FetchMoreItemsComponent

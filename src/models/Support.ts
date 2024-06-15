@@ -12,6 +12,12 @@ interface RestrictionProps {
   id: number
   name: string
 }
+export interface SupportFiltersData {
+  support_type: string[]
+  support_level: string[]
+  msp_roster: string[]
+  economic_activity_name: string[]
+}
 
 export interface SupportModelProps extends BaseModelProps {
   id: number
@@ -40,5 +46,9 @@ export class SupportModel extends BaseModel {
 
   static url() {
     return '/support/service-supports'
+  }
+
+  static dataForFiltersUrl() {
+    return `${this.url()}/data-for-filters`
   }
 }

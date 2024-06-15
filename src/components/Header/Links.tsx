@@ -20,7 +20,7 @@ export interface LinksKeys {
   SUPPORTS: LinkProps
   AREAS: LinkProps
   BLOG: LinkProps
-  MY_PROFILE: LinkProps
+  MY_CABINET: LinkProps
   PROFILE: LinkProps
   INFO: LinkProps
   BUSINESS: LinkProps
@@ -65,7 +65,7 @@ export const Links: LinksKeys = {
     icon: <LaptopOutlined />,
     isTab: false,
   },
-  MY_PROFILE: {
+  MY_CABINET: {
     title: 'Личный кабинет',
     href: '/my-cabinet',
     icon: <UsergroupAddOutlined />,

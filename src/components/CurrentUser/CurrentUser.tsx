@@ -40,7 +40,7 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
       <Card>
         <Space direction='vertical'>
           <Link
-            href={`${Links?.MY_PROFILE?.href}${Links?.PROFILE?.href}${Links?.INFO?.href}`}
+            href={`${Links?.MY_CABINET?.href}${Links?.PROFILE?.href}${Links?.INFO?.href}`}
           >
             <Button type='text' icon={<UserOutlined />}>
               Профиль

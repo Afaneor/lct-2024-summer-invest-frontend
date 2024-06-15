@@ -291,11 +291,15 @@ export const useExtraActionsPut = (qKey: string, options?: UseQueryOptions) => {
  * @param extraUrl
  * @param options
  */
-export const useExtraActionsGet = (
-  qKey: string,
-  extraUrl: string,
+export const useExtraActionsGet = ({
+  qKey,
+  extraUrl,
+  options,
+}: {
+  qKey: string
+  extraUrl: string
   options?: UseQueryOptions
-) => {
+}) => {
   return useQuery([qKey] as QueryKey, () => BaseServices.fetchExtra(extraUrl), {
     ...options,
   })

@@ -9,7 +9,7 @@ import type { FCC } from '@/types'
 import LinkedTabs from '../components/LinkedTabs/LinkedTabs'
 
 const MyProfileLayout: FCC = ({ children }) => {
-  const commonHref = `${Links?.MY_PROFILE?.href}${Links?.PROFILE?.href}`
+  const commonHref = `${Links?.MY_CABINET?.href}${Links?.PROFILE?.href}`
   const tabs = [
     {
       title: Links?.INFO?.title || '',

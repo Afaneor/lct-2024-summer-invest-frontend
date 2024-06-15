@@ -5,6 +5,7 @@ import type { FCC } from 'src/types'
 
 import { BebasNeueTitle, FormItem } from '@/components'
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
+import { Links } from '@/components/Header/Links'
 import { type FormErrorsHook, useFormErrors } from '@/hooks/useFormErrors'
 import type { LoginValuesTypes } from '@/services/auth'
 import { useLogin } from '@/services/auth/hooks'
@@ -24,7 +25,7 @@ const AuthCardComponent: FCC = () => {
         if (data.data.is_need_add_info) {
           // если пользователь не заполнил о бизнесе данные,
           // то переходим на страницу заполнения
-          window.location.href = '/my-cabinet/profile/business/'
+          window.location.href = `${Links.MY_CABINET.href}${Links.PROFILE.href}${Links.BUSINESS.href}/`
         } else {
           window.location.reload()
         }

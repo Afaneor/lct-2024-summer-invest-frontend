@@ -1,18 +1,44 @@
-import { Card, Col, Divider, Form, Input, Row, Typography } from 'antd'
+import { Button, Card, Col, Divider, Form, Row, Select, Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components'
-
-const { Text } = Typography
+import type { SupportModelProps } from '@/models'
+import { SupportModel } from '@/models'
+import { useExtraActionsGet } from '@/services/base/hooks'
 
 interface SupportFiltersCardProps {
-  prop?: any
+  support_type?: string
+  support_level?: string
+  msp_roster?: string
+  economic_activity_name?: string
+  onChange?: (obj: Record<string, string>) => void
+  onReset?: () => void
 }
 
-const SupportFiltersCard: FCC<SupportFiltersCardProps> = () => {
-  const handleChangeFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value) // здесь вы можете обработать изменение фильтра
+const Model = SupportModel
+
+const SupportFiltersCard: FCC<SupportFiltersCardProps> = ({
+  onChange,
+  msp_roster,
+  support_level,
+  support_type,
+  economic_activity_name,
+}) => {
+  const {
+    data,
+  }: {
+    data: Record<'data', SupportModelProps[]> | any
+  } = useExtraActionsGet({
+    qKey: 'supports',
+    extraUrl: Model.dataForFiltersUrl(),
+  })
+  const handleFormChange = (filterObj: Record<string, string>) => {
+    onChange?.(filterObj) // здесь вы можете обработать изменение фильтра
+  }
+
+  const onChangeMspRoster = (filterObj: Record<string, string>) => {
+    onChange?.(filterObj) // здесь вы можете обработать изменение фильтра
   }
 
   return (
@@ -21,20 +47,81 @@ const SupportFiltersCard: FCC<SupportFiltersCardProps> = () => {
         <Col span={24}>
           <BebasNeueTitle level={4} title='Фильтр' />
         </Col>
-        <Divider />
+        <Divider
+          style={{
+            margin: '0 0 15px 0',
+          }}
+        />
         <Col span={24}>
-          <Form>
-            <Form.Item>
-              <Text>Фильтр 1</Text>
-              <Input onChange={handleChangeFilter} />
+          <Form onValuesChange={handleFormChange} layout='vertical'>
+            <Form.Item name='support_type' label='Тип поддержки'>
+              <Select
+                value={support_type}
+                mode='multiple'
+                size='large'
+                placeholder='Выберите тип поддержки'
+                aria-multiline
+                allowClear
+              >
+                {data?.data?.support_type?.map((type: string) => (
+                  <Select.Option key={type} value={type}>
+                    {type}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
-            <Form.Item>
-              <Text>Фильтр 2</Text>
-              <Input onChange={handleChangeFilter} />
+
+            <Form.Item name='support_level' label='Уровень поддержки'>
+              <Select
+                value={support_level}
+                mode='multiple'
+                size='large'
+                placeholder='Выберите уровень поддержки'
+                allowClear
+              >
+                {data?.data?.support_level?.map((level: string) => (
+                  <Select.Option key={level} value={level}>
+                    {level}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
-            <Form.Item>
-              <Text>Фильтр 3</Text>
-              <Input onChange={handleChangeFilter} />
+
+            <Form.Item name='msp_roster' label='Реестр МСП'>
+              <Space direction='horizontal'>
+                {data?.data?.msp_roster?.map((roster: string) => (
+                  <Button
+                    danger={roster === msp_roster}
+                    key={roster}
+                    onClick={() => {
+                      onChangeMspRoster({
+                        msp_roster: roster !== msp_roster ? roster : '',
+                      })
+                    }}
+                  >
+                    {roster}
+                  </Button>
+                ))}
+              </Space>
+            </Form.Item>
+
+            <Form.Item
+              name='economic_activity_name'
+              label='Экономическая деятельность'
+            >
+              <Select
+                value={economic_activity_name}
+                mode='multiple'
+                placeholder='Выберите экономическую деятельность'
+                allowClear
+                size='large'
+              >
+                {data?.data?.economic_activity_name?.map((name: string) => (
+                  <Select.Option key={name} value={name}>
+                    {name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
           </Form>
         </Col>
