@@ -19,6 +19,11 @@ export const Links = [
     icon: <CalculatorOutlined />,
   },
   {
+    text: 'Умный помощник',
+    href: '/smart-assistant',
+    icon: <UsergroupAddOutlined />,
+  },
+  {
     text: 'Предложения от партнеров',
     href: '/offers',
     icon: <UsergroupAddOutlined />,
@@ -33,11 +38,11 @@ export const Links = [
     href: '/areas',
     icon: <SketchOutlined />,
   },
-  {
-    text: 'Аналитика',
-    href: '/analytics',
-    icon: <SketchOutlined />,
-  },
+  // {
+  //   text: 'Аналитика',
+  //   href: '/analytics',
+  //   icon: <SketchOutlined />,
+  // },
   {
     text: 'Блог',
     href: '/blog',

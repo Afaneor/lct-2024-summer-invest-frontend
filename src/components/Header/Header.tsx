@@ -1,14 +1,12 @@
 import { Button, Col, Layout, Row } from 'antd'
+import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 // eslint-disable-next-line import/extensions
-import { Logo } from '@/components/_icons/logo/Logo'
-// eslint-disable-next-line import/extensions
-import { AuthComponent } from '@/components/AuthComponent'
-// eslint-disable-next-line import/extensions
 import { BurgerDropdownLinks } from '@/components/BurgerDropdownLinks/BurgerDropdownLinks'
+import { useWindowScroll } from '@/hooks/useWindowScroll'
 import type { FCC } from '@/types'
 
 import styles from './Header.module.scss'
@@ -16,20 +14,18 @@ import { Links } from './Links'
 
 const { Header: AntdHeader } = Layout
 
-const logoStyle = { display: 'flex', alignItems: 'center' }
-
 export const Header: FCC = () => {
   const router = useRouter()
+  const isScrolled = useWindowScroll(50)
   return (
-    <AntdHeader className={styles.headerContainer}>
-      <Row justify='space-between' style={{ width: '100%' }} gutter={[5, 10]}>
-        <Col flex='auto' style={logoStyle}>
-          <Link href='/calculator' style={logoStyle}>
-            <Logo />
-          </Link>
-        </Col>
-
-        <Col flex='auto' xs={0} md={0} xl={24}>
+    <AntdHeader
+      className={clsx(
+        styles.headerContainer,
+        isScrolled ? styles.shadowClass : ''
+      )}
+    >
+      <Row justify='center' style={{ width: '100%' }}>
+        <Col flex='auto' xs={0} md={0} lg={16}>
           <Row>
             {Links.map((link) => (
               <div
@@ -49,9 +45,9 @@ export const Header: FCC = () => {
             ))}
           </Row>
         </Col>
-        <Col flex='auto' className={styles.authSection}>
-          <AuthComponent />
-        </Col>
+        {/* <Col flex='auto' className={styles.authSection}> */}
+        {/*  <AuthComponent /> */}
+        {/* </Col> */}
         <Col xl={0}>
           <BurgerDropdownLinks />
         </Col>
