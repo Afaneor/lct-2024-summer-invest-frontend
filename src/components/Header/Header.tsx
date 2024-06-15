@@ -45,6 +45,7 @@ export const Header: FCC = () => {
             {FirstLineLinks.map((link) => (
               <Link
                 key={link.href}
+                target='_blank'
                 className={styles.firstLineLink}
                 href={link.href}
               >
@@ -54,7 +55,7 @@ export const Header: FCC = () => {
           </Row>
         </Col>
 
-        <Col xl={0} xs={24}>
+        <Col xl={0} xs={24} md={24} lg={0}>
           <Row justify='end' align='middle'>
             <Space direction='horizontal' style={{ marginRight: 20 }}>
               <AuthComponent />

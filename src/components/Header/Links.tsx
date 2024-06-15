@@ -115,10 +115,10 @@ export const Links: LinksKeys = {
 export const FirstLineLinks = [
   {
     title: '+7 (495) 123-45-67',
-    href: '/phone-url',
+    href: 'tel:+74951234567',
   },
   {
     title: 'Единая линия поддержки',
-    href: '/@telegram',
+    href: 'https://t.me/pavlin_share',
   },
 ]
