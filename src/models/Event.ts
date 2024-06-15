@@ -18,6 +18,6 @@ export class EventModel extends BaseModel {
   static modelName = 'event'
 
   static url() {
-    return '/service-interactions/events'
+    return '/service-interaction/events'
   }
 }

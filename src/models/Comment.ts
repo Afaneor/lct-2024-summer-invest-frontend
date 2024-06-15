@@ -14,6 +14,6 @@ export class CommentModel extends BaseModel {
   static modelName = 'comment'
 
   static url() {
-    return '/service-interactions/comments'
+    return '/service-interaction/comments'
   }
 }
