@@ -126,10 +126,7 @@ const Registration: FCC = () => {
                     errors={errors.password}
                     hasFeedback
                   >
-                    <Input.Password
-                      placeholder='Введите ваш пароль'
-                      size='large'
-                    />
+                    <Input.Password size='large' />
                   </FormItem>
                 </Col>
                 <Col xs={24} md={12}>
@@ -151,10 +148,7 @@ const Registration: FCC = () => {
                     ]}
                     errors={errors.password}
                   >
-                    <Input.Password
-                      placeholder='Введите ваш пароль'
-                      size='large'
-                    />
+                    <Input.Password size='large' />
                   </FormItem>
                 </Col>
               </Row>
