@@ -2,7 +2,7 @@ import { Card, Col, Collapse, Divider, Form, Row, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { ButtonRounded } from '@/components/ButtonRounded'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import { useExtraActionsGet } from '@/services/base/hooks'

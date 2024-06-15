@@ -5,7 +5,7 @@ import Link from 'next/link'
 import React, { useMemo } from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/chat/components/BebasNeueTitle'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 
 interface BurgerDropdownLinksProps extends ButtonProps {
   dropdownRender?: React.ReactNode

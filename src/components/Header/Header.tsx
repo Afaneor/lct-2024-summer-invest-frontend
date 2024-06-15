@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 
-import { BebasNeueTitle } from '@/components'
 import { AuthComponent } from '@/components/AuthComponent'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 // eslint-disable-next-line import/extensions
 import { BurgerDropdownLinks } from '@/components/BurgerDropdownLinks/BurgerDropdownLinks'
 import { useWindowScroll } from '@/hooks/useWindowScroll'

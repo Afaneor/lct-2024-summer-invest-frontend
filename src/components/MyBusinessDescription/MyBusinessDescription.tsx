@@ -2,7 +2,7 @@ import { Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 
 interface MyBusinessDescriptionProps {
   value?: any

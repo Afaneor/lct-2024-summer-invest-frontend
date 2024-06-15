@@ -2,7 +2,7 @@ import { Card, Col, Divider, Form, Row, Select, Space } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { ButtonRounded } from '@/components/ButtonRounded'
 import { OkvedSelectModal } from '@/components/OkvedSelectModal'
 import type { SupportModelProps } from '@/models'

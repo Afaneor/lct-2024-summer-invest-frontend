@@ -2,7 +2,7 @@ import { MailOutlined } from '@ant-design/icons'
 import { Col, Row, Space } from 'antd'
 import React, { useContext } from 'react'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 import { PageCardContainer } from '@/components/PageCardContainer'
 import withAuth from '@/pages/HOC'

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { CompareButton } from '@/components/CompareButton'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 

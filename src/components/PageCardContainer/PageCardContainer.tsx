@@ -2,7 +2,7 @@ import { Card, Col, Row, Space, Spin } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 
 import ButtonRounded from '../ButtonRounded/ButtonRounded'
 import styles from './PageCardContainer.module.scss'

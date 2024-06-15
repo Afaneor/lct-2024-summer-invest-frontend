@@ -1,8 +1,8 @@
 import { Col, Form, notification, Row } from 'antd'
 import React from 'react'
 
-import { BebasNeueTitle } from '@/components'
 import { AddBusinessBiInn } from '@/components/AddBusinessBiInn'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { MyBusinessDescription } from '@/components/MyBusinessDescription'
 import { PageCardContainer } from '@/components/PageCardContainer'

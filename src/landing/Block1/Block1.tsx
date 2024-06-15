@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Block1.module.scss'
 import { Col, Row, Space, Typography } from 'antd'
 import Link from 'next/link'
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 import { Links } from '@/components/Header/Links'
 const { Title } = Typography

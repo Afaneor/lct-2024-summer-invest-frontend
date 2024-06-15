@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import type { FCC } from 'src/types'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import type { LinkProps } from '@/components/Header/Links'
 
 import styles from './LinkedTabs.module.scss'

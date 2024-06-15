@@ -13,7 +13,7 @@ import {
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-import { BebasNeueTitle } from '@/components'
+import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { Links } from '@/components/Header/Links'
 import { useGetDisplayName } from '@/hooks/useGetDisplayName'
 import { useMoneyFormat } from '@/hooks/useMoneyFormat'
