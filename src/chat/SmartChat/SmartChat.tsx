@@ -58,12 +58,6 @@ export const SmartChat: FCC<SmartChatProps> = ({
   useSessionId()
   const { fileDownload, isLoading } = useFileDownload()
   const [inputMessageForm] = Form.useForm()
-  // Инициализация формы со значением поле ввода
-  // если при открытии чата передано сообщение
-  // метод setIsOpenWithMessage(true, 'Сообщение пользователя')
-  inputMessageForm.setFieldsValue({
-    message: startUserMessage,
-  })
   const {
     data: selectionRequestData,
     isLoading: isLoadingActual,
@@ -81,6 +75,12 @@ export const SmartChat: FCC<SmartChatProps> = ({
     useCreateItem(messageModel)
 
   const handleCreateMessage = (text: string) => {
+    selectionRequestData?.data?.messages?.push({
+      text,
+      owner_type: OwnerTypeEnum.USER,
+      created_at: new Date().toISOString(),
+      id: new Date().toISOString(),
+    })
     const msg: NewMessageModelProps = {
       text,
       owner_type: OwnerTypeEnum.USER,
@@ -177,6 +177,7 @@ export const SmartChat: FCC<SmartChatProps> = ({
       actions={[
         <div key='infoMsg' className={styles.cardFooter}>
           <InputMessageContainer
+            message={startUserMessage}
             form={inputMessageForm}
             isAuthUser={!isEmpty(currentUser)}
             isSaving={isLoadingCompleChat}

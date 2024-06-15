@@ -11,6 +11,7 @@ const { TextArea } = Input
 const formStyle = { margin: '8px 24px 0' }
 
 interface InputMessageContainerProps {
+  message?: string
   isAuthUser?: boolean
   isDisabled?: boolean
   isLoading?: boolean
@@ -33,6 +34,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onNewChat,
   onDownloadPdf,
   isLoadingPdf,
+  message,
 }) => {
   const inputRef = React.useRef<any>(null)
   useEffect(() => {
@@ -52,6 +54,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       form={form}
       layout='horizontal'
       wrapperCol={{ span: 24 }}
+      initialValues={{ message }}
       disabled={isDisabled}
       onFinish={handleSendClick}
     >
