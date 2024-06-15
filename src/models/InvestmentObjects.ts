@@ -13,7 +13,6 @@ export enum ObjectTypes {
   READY_BUSINESS = 'object_type',
 }
 export interface InvestmentObjectsModelProps extends BaseModelProps {
-  id: number
   external_id?: number
   main_photo_url: string
   photo_urls?: string[]

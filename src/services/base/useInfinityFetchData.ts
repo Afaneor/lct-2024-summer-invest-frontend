@@ -6,6 +6,8 @@ import type { BaseModel } from 'src/models'
 import BaseServices from 'src/services/base/BaseServices'
 import { useChoices, useOptions } from 'src/services/base/hooks'
 
+import { useQueryParamsCleaner } from '@/hooks/useQueryParamsCleaner'
+
 let stagesCounter = {}
 
 interface FetchDataProps {
@@ -71,12 +73,13 @@ export const useInfinityFetchData = <ModelType>(
   dependOn?: string
 ) => {
   const url = model.url()
-
   // запрашиваем опции с бека, для прогрузки полей с чойсами
   const qKey = qKeyPrefix || model.modelName
   useChoices(qKey, url)
   useOptions(qKey, url)
   const [filters, setFilters] = useFilter({})
+  // очищаем фильтры от пустых значений
+  const cleanedParams = useQueryParamsCleaner({ ...defFilters, ...filters })
 
   const queryKey = qKeyPrefix
     ? `${qKeyPrefix}Infinity`
@@ -84,12 +87,13 @@ export const useInfinityFetchData = <ModelType>(
 
   const infinityData = useInfiniteQuery(
     [queryKey, filters, defFilters, dependOn] as QueryKey,
-    ({ pageParam }) =>
-      fetchData<ModelType>({
+    ({ pageParam }) => {
+      return fetchData<ModelType>({
         pageParam,
-        filters: { ...defFilters, ...filters },
+        filters: cleanedParams,
         url,
-      }),
+      })
+    },
     {
       getNextPageParam,
       refetchOnWindowFocus: false,

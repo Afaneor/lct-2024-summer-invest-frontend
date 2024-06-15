@@ -68,6 +68,7 @@ const SmartHelper = () => {
                   transaction_form_name={shortFilter?.transaction_form_name}
                   site_type={shortFilter?.site_type}
                   preferential_treatment={shortFilter?.preferential_treatment}
+                  economic_activity_code={shortFilter?.economic_activity_code}
                   onChange={handleSetFilter}
                 />
               </Col>
@@ -82,13 +83,7 @@ const SmartHelper = () => {
                 </Col>
               ) : null}
               {rowData?.map((investmentObject) => (
-                <Col
-                  key={investmentObject.id.value}
-                  xs={24}
-                  md={12}
-                  lg={12}
-                  xl={8}
-                >
+                <Col key={investmentObject.id.value} xs={24} md={12} xl={8}>
                   <InvestmentItemsCard
                     id={investmentObject.id.value}
                     href={`${Links.SMART_ASSISTANT.href}/${investmentObject.id.value}`}

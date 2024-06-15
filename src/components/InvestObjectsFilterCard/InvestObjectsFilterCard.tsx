@@ -4,6 +4,7 @@ import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components/BebasNeueTitle'
 import { ButtonRounded } from '@/components/ButtonRounded'
+import { OkvedSelectModal } from '@/components/OkvedSelectModal'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
 import { useExtraActionsGet } from '@/services/base/hooks'
 
@@ -14,6 +15,7 @@ interface InvestObjectsFilterCardProps {
   preferential_treatment?: string
   transaction_form_name?: string
   transaction_form_type?: string
+  economic_activity_code?: string
   location?: string
   site_type?: string
   specialized_site_is_free_customs_zone_regime?: string
@@ -36,6 +38,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
   isLoading,
   specialized_site_is_free_customs_zone_regime,
   real_estate_maip,
+  economic_activity_code,
 }) => {
   const [regimeC, setRegimeC] = useState<string | undefined>(
     specialized_site_is_free_customs_zone_regime
@@ -76,6 +79,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
       site_type,
       specialized_site_is_free_customs_zone_regime,
       real_estate_maip,
+      economic_activity_code,
     })
   }, [
     preferential_treatment,
@@ -86,6 +90,7 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
     site_type,
     specialized_site_is_free_customs_zone_regime,
     real_estate_maip,
+    economic_activity_code,
   ])
 
   return (
@@ -241,6 +246,13 @@ const InvestObjectsFilterCard: FCC<InvestObjectsFilterCardProps> = ({
                           </ButtonRounded>
                         ))}
                       </Space>
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} md={8}>
+                    <Form.Item name='economic_activity_code' label='ОКВЭД'>
+                      <OkvedSelectModal
+                        value={data?.data?.economic_activity_code}
+                      />
                     </Form.Item>
                   </Col>
                 </Row>
