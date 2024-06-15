@@ -1,4 +1,4 @@
-import { SaveOutlined, SendOutlined } from '@ant-design/icons'
+import { PlusOutlined, SaveOutlined, SendOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd'
 import { Button, Col, Form, Input, Row, Tooltip } from 'antd'
 import { isEmpty } from 'lodash'
@@ -17,6 +17,7 @@ interface InputMessageContainerProps {
   form: FormInstance
   onSend: (message: string) => void
   onSaveRequest?: () => void
+  onNewChat?: () => void
 }
 export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSend,
@@ -25,6 +26,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   isLoading,
   isSaving,
   onSaveRequest,
+  onNewChat,
 }) => {
   const inputRef = React.useRef<any>(null)
   const { currentUser } = useContext(CurrentUserContext)
@@ -48,9 +50,9 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       onFinish={handleSendClick}
     >
       <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
-        {!isEmpty(currentUser) ? (
-          <Col span={3}>
-            <Form.Item name='file'>
+        <Col span={3}>
+          <Form.Item name='save'>
+            {!isEmpty(currentUser) ? (
               <Tooltip title='Сохранить запрос и начать новый' placement='top'>
                 <Button
                   loading={isSaving}
@@ -61,15 +63,24 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
                   onClick={onSaveRequest}
                 />
               </Tooltip>
-            </Form.Item>
-          </Col>
-        ) : null}
+            ) : (
+              <Tooltip title='Начать новый чат' placement='top'>
+                <Button
+                  loading={isSaving}
+                  type='text'
+                  size='large'
+                  icon={<PlusOutlined />}
+                  onClick={onNewChat}
+                />
+              </Tooltip>
+            )}
+          </Form.Item>
+        </Col>
         <Col span={18}>
           <Form.Item name='message' required>
             <TextArea
               ref={inputRef}
               autoSize={{ minRows: 1, maxRows: 3 }}
-              // style={{ borderRadius: 50 }}
               autoFocus
               placeholder='Введите сообщение'
               onKeyDown={(e) => {

@@ -90,18 +90,20 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
       selectionRequestModel.completedUrl()
     )
 
-  const handleCompleteChat = () => {
+  const handleCompleteChat = (type: 'new' | 'save') => {
     completeChat(
       {},
       {
         onSuccess: () => {
-          notification.success({
-            message: 'Запрос успешно сохранен',
-            description:
-              'Вы можете посмотреть историю запросов в профиле, в разделе "Запросы"',
-            duration: 10,
-            closable: true,
-          })
+          if (type === 'save') {
+            notification.success({
+              message: 'Запрос успешно сохранен',
+              description:
+                'Вы можете посмотреть историю запросов в профиле, в разделе "Запросы"',
+              duration: 10,
+              closable: true,
+            })
+          }
           refetchActual()
         },
         onError: (error: any) => {
@@ -137,7 +139,8 @@ export const SmartChat: FCC<SmartChatProps> = ({ onApplyFilter }) => {
             isLoading={isLoadingCreateNewMessage}
             isDisabled={isLoadingCreateNewMessage}
             onSend={handleCreateMessage}
-            onSaveRequest={handleCompleteChat}
+            onSaveRequest={() => handleCompleteChat('save')}
+            onNewChat={() => handleCompleteChat('new')}
           />
         </div>,
       ]}

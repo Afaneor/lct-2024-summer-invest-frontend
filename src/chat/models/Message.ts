@@ -32,9 +32,9 @@ export const EntityKeyEnum = {
   investment_object: 'investment_object',
 }
 export const EntityTypeEnum = {
-  [EntityKeyEnum.service_support]: 'Меры поддержки',
-  [EntityKeyEnum.category_problem]: 'Категория проблемы',
-  [EntityKeyEnum.investment_object]: 'Объект инвестирования',
+  [EntityKeyEnum.service_support]: 'Посмотреть меры поддержки',
+  [EntityKeyEnum.category_problem]: 'Посмотреть вопросы и ответы',
+  [EntityKeyEnum.investment_object]: 'Посмотреть объекты инвестирования',
 }
 
 export type BotResponseFilterProps = {

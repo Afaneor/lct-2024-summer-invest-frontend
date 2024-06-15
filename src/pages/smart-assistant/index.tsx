@@ -19,7 +19,7 @@ import { Main } from '@/templates/Main'
 const Model = InvestmentObjectsModel
 const defFilters = { limit: 12 }
 
-const SmartHelper = () => {
+const SmartAssistant = () => {
   const { filter, setChatFilter } = useContext(ChatContext)
   const [divRef, scrollTo] = useScrollIntoViewOnCall()
 
@@ -111,4 +111,4 @@ const SmartHelper = () => {
   )
 }
 
-export default SmartHelper
+export default SmartAssistant
