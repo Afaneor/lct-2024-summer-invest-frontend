@@ -7,6 +7,12 @@ import { useDateTimePrettyStr } from '@/chat/hooks/useDateTimePrettyStr'
 
 const { Meta: CardMeta } = Card
 
+function getRandomImage(): string {
+  // Функция для генерации случайного пути к изображению
+  // если изображение не передано
+  const randomNumber = Math.floor(Math.random() * 5) + 1 // Генерируем случайное число от 1 до 5
+  return `/images/${randomNumber}.png` // Возвращаем путь к изображению с этим номером
+}
 interface EventCardProps {
   date: string
   name: string
@@ -34,9 +40,7 @@ const EventCard: FCC<EventCardProps> = ({ date, name, description, photo }) => {
         date,
       })}
       hoverable
-      cover={
-        <img alt={name} key={name} src={photo || 'https://picsum.photos/700'} />
-      }
+      cover={<img alt={name} key={name} src={photo || getRandomImage()} />}
     >
       <CardMeta
         title={name}
