@@ -3,7 +3,6 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import type { FCC } from 'src/types'
 
-import styles from '@/components/SelectDropdownListContent/style.module.scss'
 import type { BaseModel } from '@/models'
 import { useInfinityFetchData } from '@/services/base/useInfinityFetchData'
 
@@ -39,7 +38,7 @@ const InfinityListComponent: FCC<InfinityListComponentProps> = ({
         next={fetchedValues?.fetchNextPage}
         hasMore={!!fetchedValues?.hasNextPage}
         loader={
-          <Skeleton.Node active className={styles.skeletonNode}>
+          <Skeleton.Node active>
             <span>Загрузка...</span>
           </Skeleton.Node>
         }

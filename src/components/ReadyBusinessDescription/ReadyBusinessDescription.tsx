@@ -3,9 +3,8 @@ import React from 'react'
 import type { FCC } from 'src/types'
 
 import { MyBusinessDescription } from '@/components/MyBusinessDescription'
+import { TruncateText } from '@/components/TruncateText'
 import type { ReadyBusinessModelProps } from '@/models/ReadyBusiness'
-
-import TruncateText from '../TruncateText/TruncateText'
 
 const { Text } = Typography
 interface ReadyBusinessDescriptionProps {

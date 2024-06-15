@@ -21,6 +21,7 @@ export interface LinksKeys {
   COMPARE: LinkProps
   REQUESTS: LinkProps
   SUBSCRIPTIONS: LinkProps
+  EVENTS: LinkProps
 }
 
 export const Links: LinksKeys = {
@@ -102,6 +103,11 @@ export const Links: LinksKeys = {
   FAQ: {
     title: 'Вопросы и ответы',
     href: '/faq',
+    isTab: true,
+  },
+  EVENTS: {
+    title: 'Мероприятия',
+    href: '/events',
     isTab: true,
   },
 }
