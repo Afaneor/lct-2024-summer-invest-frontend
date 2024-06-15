@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import type { ButtonProps } from 'antd/es/button/button'
+import clsx from 'clsx'
 import React from 'react'
 import type { FCC } from 'src/types'
 
@@ -14,7 +15,14 @@ const ButtonPrimaryRed: FCC<ButtonPrimaryRedProps> = ({
   ...rest
 }) => {
   return (
-    <Button type='primary' className={styles.buttonPrimaryRed} {...rest}>
+    <Button
+      type='primary'
+      className={clsx(
+        styles.buttonPrimaryRed,
+        rest?.disabled && styles.disabled
+      )}
+      {...rest}
+    >
       {children}
     </Button>
   )

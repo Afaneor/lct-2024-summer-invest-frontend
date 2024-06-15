@@ -17,16 +17,6 @@ interface FetchMoreItemsComponentProps {
   lengthPostfixPlural?: string
 }
 
-const fakeRowData = Array.from({ length: 12 }, (_, i) => ({
-  id: i,
-  title: `Технопарк Красный пролетарий ${i}`,
-  address: `127473, г. Москва, ул. Краснопролетарская, дом 16, строение ${i}`,
-  text: `Text ${i}`,
-  amount: `Amount ${i}`,
-  is_actual: i % 2 === 0,
-  site: 'https://google.com',
-  preview_image: 'https://via.placeholder.com/200',
-}))
 const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
   model: Model,
   defFilters,
@@ -34,18 +24,18 @@ const FetchMoreItemsComponent: FCC<FetchMoreItemsComponentProps> = ({
   options,
   lengthPostfixPlural,
 }) => {
-  const { fetchNextPage, isLoading, isFetching, hasNextPage }: any =
+  const { rowData, fetchNextPage, isLoading, isFetching, hasNextPage }: any =
     useInfinityFetchData(Model, defFilters, { ...options })
 
   return (
     <>
       <Row gutter={40}>
         <Col span={24} className={styles.dataLengthContainer}>
-          <Text strong>Найдено {fakeRowData.length} </Text>
+          <Text strong>Найдено {rowData.length} </Text>
           {lengthPostfixPlural}
         </Col>
       </Row>
-      <Spin spinning={isLoading}>{renderItems(fakeRowData)}</Spin>
+      <Spin spinning={isLoading}>{renderItems(rowData)}</Spin>
       {hasNextPage ? (
         <Row justify='center' className={styles.fetchMoreBtnWrapper}>
           <Button type='dashed' loading={isFetching} onClick={fetchNextPage}>

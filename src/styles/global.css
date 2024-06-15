@@ -32,3 +32,14 @@ img,
 .ant-spin-dot-item {
   background-color: #ff0000 !important;
 }
+
+/*
+Переопределяем цвет input при наведении и фокусе
+ */
+.ant-input-outlined:hover {
+  border-color: #ff0000 !important;
+}
+.ant-input-outlined:focus-within {
+  border-color: #ff0000 !important;
+  box-shadow: none !important;
+}

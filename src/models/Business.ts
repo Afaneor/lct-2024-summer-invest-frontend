@@ -10,7 +10,7 @@ export enum BusinessType {
 
 export interface BusinessModelProps extends BaseModelProps {
   position: string // Должность пользователя в бизнесе
-  type: BusinessType // Тип бизнеса
+  type_business: BusinessType // Тип бизнеса
   inn: string // ИНН физического лица, ИП или компания
   sector?: number // Отрасль хозяйственной деятельности
   sub_sector?: number // Подотрасль хозяйственной деятельности
@@ -41,5 +41,9 @@ export class BusinessModel extends BaseModel {
 
   static url() {
     return '/personal-cabinet/businesses'
+  }
+
+  static createBusinessByInnUrl() {
+    return `${this.url()}/create-business-by-inn`
   }
 }

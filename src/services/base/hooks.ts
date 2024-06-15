@@ -28,6 +28,21 @@ export const useChoices = (
   )
 }
 
+export const useOptions = (
+  qKey: string,
+  url: string,
+  options?: UseQueryOptions
+) => {
+  return useQuery(
+    [`${qKey}Options`] as QueryKey,
+    () => ChoicesServices.getOptions(url),
+    {
+      refetchOnWindowFocus: false,
+      ...options,
+    }
+  )
+}
+
 /**
  * Хук получения объектов модели
  * @param model
@@ -172,25 +187,6 @@ export const useFetchExtraAction = (
 }
 
 /**
- * Хук для post запросов по экстра экшенам
- * @param qKey - ключ запроса для react-query
- * @param extraUrl
- * @param options
- */
-export const usePostExtraActions = <FieldsType = Record<string, any>>(
-  qKey: string,
-  extraUrl: string,
-  options?: UseQueryOptions
-) => {
-  return useMutation<unknown, unknown, any>({
-    ...options,
-    mutationFn: (fields: FieldsType) =>
-      BaseServices.postExtra(extraUrl, fields),
-    mutationKey: [qKey],
-  } as unknown as UseMutationOptions)
-}
-
-/**
  * Хук для patch запросов по экстра экшенам
  * @param qKey - ключ запроса для react-query
  * @param extraUrl
@@ -224,6 +220,25 @@ export const useExtraActionsPost = <FieldsType>(
       BaseServices.postExtra(url, record),
     mutationKey: qKey,
     ...options,
+  } as unknown as UseMutationOptions)
+}
+
+/**
+ * Хук для post запросов по экстра экшенам
+ * @param qKey - ключ запроса для react-query
+ * @param extraUrl
+ * @param options
+ */
+export const usePostExtraActions = <FieldsType = Record<string, any>>(
+  qKey: string,
+  extraUrl: string,
+  options?: UseQueryOptions
+) => {
+  return useMutation<unknown, unknown, any>({
+    ...options,
+    mutationFn: (fields: FieldsType) =>
+      BaseServices.postExtra(extraUrl, fields),
+    mutationKey: [qKey],
   } as unknown as UseMutationOptions)
 }
 /**

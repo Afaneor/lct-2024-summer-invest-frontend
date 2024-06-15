@@ -29,7 +29,7 @@ const InfinityListComponent: FCC<InfinityListComponentProps> = ({
     model,
     {},
     {},
-    `filter-${model.modelName}`
+    `${model.modelName}`
   )
 
   return (

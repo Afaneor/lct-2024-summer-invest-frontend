@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useFilter } from 'src/hooks/useFilter'
 import type { BaseModel } from 'src/models'
 import BaseServices from 'src/services/base/BaseServices'
-import { useChoices } from 'src/services/base/hooks'
+import { useChoices, useOptions } from 'src/services/base/hooks'
 
 let stagesCounter = {}
 
@@ -75,6 +75,7 @@ export const useInfinityFetchData = <ModelType>(
   // запрашиваем опции с бека, для прогрузки полей с чойсами
   const qKey = qKeyPrefix || model.modelName
   useChoices(qKey, url)
+  useOptions(qKey, url)
   const [filters, setFilters] = useFilter({})
 
   const queryKey = qKeyPrefix

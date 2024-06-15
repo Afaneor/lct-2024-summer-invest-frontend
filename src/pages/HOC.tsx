@@ -19,7 +19,7 @@ const withAuth = <P extends object>(
       }
     }, [currentUser])
 
-    if (!isLoading) {
+    if (!currentUser) {
       return null
     }
 

@@ -16,4 +16,14 @@ export default class ChoicesServices {
       return error.response
     }
   }
+
+  static async getOptions(url: string) {
+    try {
+      const response = await apiClient.options(`${url}/`)
+      const options: Record<string, any> = response.data.actions.POST
+      return options
+    } catch (error: any) {
+      return error.response
+    }
+  }
 }
