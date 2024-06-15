@@ -14,6 +14,9 @@ import styles from './RequestListItem.module.scss'
 
 const { Title } = Typography
 interface RequestListItemProps {
+  hasInvestmentObjectsFilter: boolean
+  hasSupportFilter: boolean
+  hasFAQFilter: boolean
   createdAt: string
   onShowInvestmentObjects: () => void
   onShowSupport: () => void
@@ -21,7 +24,7 @@ interface RequestListItemProps {
   onDownloadReport: () => void
   isLoadingDownloadReport?: boolean
 }
-
+const nodataText = 'Данные находятся в обработке. Ожидайте...'
 const RequestListItem: FCC<RequestListItemProps> = ({
   createdAt,
   onDownloadReport,
@@ -29,6 +32,9 @@ const RequestListItem: FCC<RequestListItemProps> = ({
   onShowFAQ,
   onShowSupport,
   isLoadingDownloadReport,
+  hasInvestmentObjectsFilter,
+  hasSupportFilter,
+  hasFAQFilter,
 }) => {
   const { dateFormatter } = useDateTimePrettyStr()
   return (
@@ -38,22 +44,54 @@ const RequestListItem: FCC<RequestListItemProps> = ({
         <Title level={5}>{dateFormatter({ date: createdAt })}</Title>
       </Space>
       <Space>
-        <Tooltip title='Посмотреть подобранные объекты'>
-          <Button icon={<ShopOutlined />} onClick={onShowInvestmentObjects} />
-        </Tooltip>
-        <Tooltip title='Посмотреть меры поддержки'>
-          <Button icon={<SolutionOutlined />} onClick={onShowSupport} />
-        </Tooltip>
-        <Tooltip title='Часто возникающие проблемы'>
-          <Button icon={<QuestionCircleOutlined />} onClick={onShowFAQ} />
-        </Tooltip>
-        <Tooltip title='Скачать отчет'>
+        <Tooltip
+          title={
+            hasInvestmentObjectsFilter
+              ? 'Посмотреть подобранные объекты'
+              : nodataText
+          }
+        >
           <Button
-            loading={isLoadingDownloadReport}
-            icon={<DownloadOutlined />}
-            onClick={onDownloadReport}
+            type='text'
+            shape='circle'
+            disabled={!hasInvestmentObjectsFilter}
+            icon={<ShopOutlined />}
+            onClick={onShowInvestmentObjects}
           />
         </Tooltip>
+        <Tooltip
+          title={hasSupportFilter ? 'Посмотреть меры поддержки' : nodataText}
+        >
+          <Button
+            type='text'
+            shape='circle'
+            disabled={!hasSupportFilter}
+            icon={<SolutionOutlined />}
+            onClick={onShowSupport}
+          />
+        </Tooltip>
+        <Tooltip
+          title={hasFAQFilter ? 'Часто возникающие вопросы' : nodataText}
+        >
+          <Button
+            type='text'
+            shape='circle'
+            disabled={!hasFAQFilter}
+            icon={<QuestionCircleOutlined />}
+            onClick={onShowFAQ}
+          />
+        </Tooltip>
+        {hasInvestmentObjectsFilter ? (
+          <Tooltip title='Скачать отчет'>
+            <Button
+              type='text'
+              shape='circle'
+              loading={isLoadingDownloadReport}
+              icon={<DownloadOutlined />}
+              onClick={onDownloadReport}
+            />
+          </Tooltip>
+        ) : null}
       </Space>
     </List.Item>
   )
