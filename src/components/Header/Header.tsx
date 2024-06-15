@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import { Col, Row, Space } from 'antd'
 import clsx from 'clsx'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
@@ -55,8 +55,11 @@ export const Header: FCC = () => {
         </Col>
 
         <Col xl={0} xs={24}>
-          <Row justify='end'>
-            <BurgerDropdownLinks links={filteredLInks} />
+          <Row justify='end' align='middle'>
+            <Space direction='horizontal'>
+              <AuthComponent />
+              <BurgerDropdownLinks links={filteredLInks} />
+            </Space>
           </Row>
         </Col>
       </Row>

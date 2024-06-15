@@ -1,6 +1,18 @@
 .tabsContainer {
   display: flex;
   width: 100%;
+
+  @media (max-width: 969px) {
+    display: none;
+  }
+}
+
+.burgerTabsContainer {
+  display: none;
+
+  @media (max-width: 969px) {
+    display: flex;
+  }
 }
 
 .tabLink {

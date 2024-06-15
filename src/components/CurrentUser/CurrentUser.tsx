@@ -75,7 +75,7 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
   )
   return (
     <Row>
-      <Col xs={0} md={24}>
+      <Col xs={24}>
         <Dropdown
           placement='bottom'
           trigger={['click']}
@@ -94,19 +94,6 @@ export const CurrentUser: React.FC<CurrentUserProps> = ({ currentUser }) => {
             />
             <UserName currentUser={currentUser} />
           </Space>
-        </Dropdown>
-      </Col>
-      <Col md={0}>
-        <Dropdown
-          placement='bottom'
-          trigger={['click']}
-          dropdownRender={DropdownRender}
-        >
-          <Button
-            shape='circle'
-            icon={<UserOutlined />}
-            onClick={(e) => e.stopPropagation()}
-          />
         </Dropdown>
       </Col>
     </Row>
