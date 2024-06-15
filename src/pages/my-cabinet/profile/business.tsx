@@ -1,8 +1,10 @@
 import { Col, Form, notification, Row } from 'antd'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { AddBusinessBiInn } from '@/components/AddBusinessBiInn'
+import { AlertWithButton } from '@/components/AlertWithButton'
 import { BebasNeueTitle } from '@/components/BebasNeueTitle'
+import { ChatContext } from '@/components/ChatContextProvider/ChatContextProvider'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
 import { MyBusinessDescription } from '@/components/MyBusinessDescription'
 import { PageCardContainer } from '@/components/PageCardContainer'
@@ -22,6 +24,7 @@ const blockStyle = {
 const Model = BusinessModel
 const MyProfileBusiness = () => {
   const { refetch } = useRefetchInvalidateQuery()
+  const { setIsOpen, isOpen } = useContext(ChatContext)
 
   const {
     errors,
@@ -118,6 +121,20 @@ const MyProfileBusiness = () => {
         optionsFieldList={Model.mappingFields}
         renderItems={({ data: fetchedValues, dataCount }) => (
           <>
+            <Row
+              style={{
+                marginBottom: '20px',
+              }}
+            >
+              <Col span={24}>
+                <AlertWithButton
+                  alertType='error'
+                  title='Хотите подобрать индивидуальные ивестиционные предложения на основе вашего бизнеса?'
+                  buttonText='Подобрать'
+                  onClick={() => setIsOpen(!isOpen)}
+                />
+              </Col>
+            </Row>
             <Row style={blockStyle}>
               <Col span={24}>
                 <AddBusinessBiInn

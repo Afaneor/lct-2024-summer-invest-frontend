@@ -46,12 +46,7 @@ const PageCardContainer: FCC<PageCardContainerProps> = ({
           ) : null}
           {isEditable ? (
             <Col span={24}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'end',
-                }}
-              >
+              <Row justify='end'>
                 <Space direction='horizontal'>
                   <ButtonRounded size='large' type='text' onClick={onUpdate}>
                     Обновить
@@ -65,7 +60,7 @@ const PageCardContainer: FCC<PageCardContainerProps> = ({
                     Удалить
                   </ButtonRounded>
                 </Space>
-              </div>
+              </Row>
             </Col>
           ) : null}
         </Row>
