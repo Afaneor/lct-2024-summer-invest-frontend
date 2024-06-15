@@ -47,7 +47,20 @@ const SmartHelper = () => {
         />
       }
     >
-      <SmartChat />
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 100,
+          right: 100,
+          zIndex: 9999,
+          width: 500,
+          height: 600,
+          backgroundColor: 'transparent',
+          borderRadius: 10,
+        }}
+      >
+        <SmartChat />
+      </div>
       <PageWrapper
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'

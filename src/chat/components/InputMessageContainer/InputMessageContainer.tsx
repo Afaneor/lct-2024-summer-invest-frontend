@@ -43,20 +43,15 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       disabled={isDisabled}
       onFinish={handleSendClick}
     >
-      <Row
-        gutter={10}
-        justify='space-between'
-        align='middle'
-        style={{ marginTop: 8 }}
-      >
-        <Col span={2}>
+      <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
+        <Col span={3}>
           <Form.Item name='file'>
             <Upload beforeUpload={handleUpload} showUploadList={false}>
               <IconAsButton icon={PaperClipOutlined} />
             </Upload>
           </Form.Item>
         </Col>
-        <Col span={19}>
+        <Col span={18}>
           <Form.Item name='message' required>
             <TextArea
               ref={inputRef}
@@ -89,7 +84,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
             />
           </Form.Item>
         </Col>
-        <Col span={2}>
+        <Col span={3}>
           <Form.Item shouldUpdate>
             {() => (
               <Button
