@@ -10,6 +10,7 @@ import { InvestmentItemsCard } from '@/components/InvestmentItemsCard'
 import { InvestObjectsFilterCard } from '@/components/InvestObjectsFilterCard'
 import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/'
 import { PageWrapper } from '@/components/PageWrapper'
+import { WantToTakeSmartAssistant } from '@/components/WantToTakeSmartAssistant'
 import { useEntityTypeFilter } from '@/hooks/useEntityTypeFilter'
 import { Meta } from '@/layouts/Meta'
 import { InvestmentObjectsModel } from '@/models/InvestmentObjects'
@@ -54,6 +55,9 @@ const SmartHelper = () => {
             isLoading,
           }) => (
             <Row gutter={[40, 20]}>
+              <Col span={24}>
+                <WantToTakeSmartAssistant />
+              </Col>
               <Col span={24}>
                 <InvestObjectsFilterCard
                   isLoading={isLoading || isFetching}

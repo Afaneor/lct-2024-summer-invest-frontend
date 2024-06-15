@@ -1,7 +1,10 @@
 import { SaveOutlined, SendOutlined } from '@ant-design/icons'
 import type { FormInstance } from 'antd'
 import { Button, Col, Form, Input, Row, Tooltip } from 'antd'
-import React, { useEffect } from 'react'
+import { isEmpty } from 'lodash'
+import React, { useContext, useEffect } from 'react'
+
+import { CurrentUserContext } from '@/components/CurrentUserProvider/CurrentUserProvider'
 
 import type { FCC } from '../../types'
 
@@ -24,7 +27,7 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
   onSaveRequest,
 }) => {
   const inputRef = React.useRef<any>(null)
-
+  const { currentUser } = useContext(CurrentUserContext)
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus() // Устанавливаем фокус на поле ввода
@@ -45,20 +48,22 @@ export const InputMessageContainer: FCC<InputMessageContainerProps> = ({
       onFinish={handleSendClick}
     >
       <Row justify='space-around' align='middle' style={{ marginTop: 8 }}>
-        <Col span={3}>
-          <Form.Item name='file'>
-            <Tooltip title='Сохранить запрос и начать новый' placement='top'>
-              <Button
-                loading={isSaving}
-                type='text'
-                shape='circle'
-                size='large'
-                icon={<SaveOutlined />}
-                onClick={onSaveRequest}
-              />
-            </Tooltip>
-          </Form.Item>
-        </Col>
+        {!isEmpty(currentUser) ? (
+          <Col span={3}>
+            <Form.Item name='file'>
+              <Tooltip title='Сохранить запрос и начать новый' placement='top'>
+                <Button
+                  loading={isSaving}
+                  type='text'
+                  shape='circle'
+                  size='large'
+                  icon={<SaveOutlined />}
+                  onClick={onSaveRequest}
+                />
+              </Tooltip>
+            </Form.Item>
+          </Col>
+        ) : null}
         <Col span={18}>
           <Form.Item name='message' required>
             <TextArea

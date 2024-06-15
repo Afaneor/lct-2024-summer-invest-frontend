@@ -32,7 +32,7 @@ export const Block1 = () => {
                   type={'primary'}
                   style={btnToSA}
                 >
-                  Воспользоваться ассистентом
+                  Воспользоваться помощником
                 </ButtonPrimaryRed>
               </Link>
             </Space>

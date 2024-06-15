@@ -33,6 +33,7 @@ export const InvestmentItemsCard: FCC<InvestmentItemsCardProps> = ({
     <Link target='_blank' href={href}>
       <Card
         hoverable={hoverable}
+        className='h100'
         cover={<img style={{ height: 300 }} alt={title} src={preview_image} />}
         {...rest}
         actions={[

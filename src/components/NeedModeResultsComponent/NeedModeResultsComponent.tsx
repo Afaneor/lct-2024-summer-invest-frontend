@@ -1,9 +1,8 @@
-import { Alert, Col, Row } from 'antd'
+import { Alert, Button, Col, Row } from 'antd'
 import React from 'react'
 import type { FCC } from 'src/types'
 
 import { BebasNeueTitle } from '@/components/BebasNeueTitle'
-import { ButtonPrimaryRed } from '@/components/ButtonPrimaryRed'
 
 interface NeedModeResultsComponentProps {
   onClick?: () => void
@@ -25,11 +24,11 @@ const NeedModeResultsComponent: FCC<NeedModeResultsComponentProps> = ({
               level={3}
             />
           }
-          type='error'
+          type='info'
           action={
-            <ButtonPrimaryRed size='large' onClick={onClick}>
+            <Button size='large' onClick={onClick}>
               Нужно больше вариантов
-            </ButtonPrimaryRed>
+            </Button>
           }
         />
       </Col>
