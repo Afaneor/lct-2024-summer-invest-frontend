@@ -1,13 +1,14 @@
 import { Card, Col, Descriptions, Row } from 'antd'
 import Link from 'next/link'
 import type { BaseSyntheticEvent } from 'react'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useScrollIntoView } from '@/chat/hooks/useScrollIntoView'
+import { useScrollIntoViewOnCall } from '@/chat/hooks/useScrollIntoView'
 import { BebasNeueTitle } from '@/components'
 import { CardSearchFilters } from '@/components/CardSearchFilters/'
 import { ChatComponent } from '@/components/ChatComponent'
 import { FetchMoreItemsComponent } from '@/components/FetchMoreItemsComponent'
+import { Links } from '@/components/Header/Links'
 import { NeedModeResultsComponent } from '@/components/NeedModeResultsComponent/'
 import { PageWrapper } from '@/components/PageWrapper'
 import { useFilter } from '@/hooks/useFilter'
@@ -35,8 +36,7 @@ const defFilters = { limit: 12 }
 
 const SmartHelper = () => {
   const [filter, setFilter] = useFilter(defFilters)
-  const [goTo, setGoTo] = useState(new Date())
-  const messagesEndRef = useScrollIntoView([goTo])
+  const [divRef, scrollTo] = useScrollIntoViewOnCall()
 
   return (
     <Main
@@ -52,6 +52,8 @@ const SmartHelper = () => {
         title='Умный помощник'
         subTitle='Поможем найти то, что вам нужно'
       >
+        тип объекта / ОКВЭД \ Преференциальный режим \ Форма сделки \ Стоимость
+        от до \ Муниципальное образование \ Площадь объекта от до
         <CardSearchFilters
           onChange={(evt: BaseSyntheticEvent) => {
             setFilter({ territorial_location: evt?.target?.value?.id })
@@ -69,14 +71,16 @@ const SmartHelper = () => {
               <Col span={24}>
                 <NeedModeResultsComponent
                   onClick={() => {
-                    setGoTo(new Date())
                     fetchNextPage?.()
+                    scrollTo()
                   }}
                 />
               </Col>
               {rowData?.map((investmentObject) => (
                 <Col key={investmentObject.id.value} xs={24} md={12} lg={8}>
-                  <Link target='_blank' href={investmentObject.url.value}>
+                  <Link
+                    href={`${Links.SMART_ASSISTANT.href}/${investmentObject.id.value}`}
+                  >
                     <ItemsCard
                       key={investmentObject.id.value}
                       hoverable
@@ -87,7 +91,7 @@ const SmartHelper = () => {
                   </Link>
                 </Col>
               ))}
-              <div ref={messagesEndRef} />
+              <div ref={divRef} />
             </Row>
           )}
         />

@@ -99,10 +99,10 @@ export const Links: LinksKeys = {
 export const FirstLineLinks = [
   {
     title: '+7 (495) 123-45-67',
-    href: '/',
+    href: '/phone-url',
   },
   {
     title: 'Единая линия поддержки',
-    href: '/',
+    href: '/@telegram',
   },
 ]

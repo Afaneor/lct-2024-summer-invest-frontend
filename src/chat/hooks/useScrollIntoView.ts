@@ -1,12 +1,30 @@
 import { useEffect, useRef } from 'react'
 
+/**
+ * Хук для скролла вниз при изменении зависимостей
+ * @param dependencies
+ */
 export const useScrollIntoView = (dependencies: any[]) => {
-  const messagesEndRef = useRef<null | HTMLDivElement>(null)
+  const ref = useRef<null | HTMLDivElement>(null)
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [...dependencies])
+  }, dependencies)
 
-  return messagesEndRef
+  return ref
+}
+
+/**
+ * Хук для скролла вниз при вызове функции
+ */
+export const useScrollIntoViewOnCall = () => {
+  const ref = useRef<null | HTMLDivElement>(null)
+  const scroll = () => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return [ref, scroll] as const
 }

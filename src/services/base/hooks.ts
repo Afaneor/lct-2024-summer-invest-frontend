@@ -85,7 +85,7 @@ export const useFetchItems = <T = any>(
  */
 export const useFetchOneItem = (
   model: typeof BaseModel,
-  id: string | number | undefined,
+  id: string | string[] | number | undefined,
   options?: UseQueryOptions,
   qKey?: string
 ) => {
